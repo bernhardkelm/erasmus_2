@@ -12,6 +12,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p>{{ $post->body }}</p>
+                                @can('update', $post)
+                                    <a>Edit</a>
+                                @endcan
                                 @foreach ($post->comments as $comment)
                                     <div class="row">
                                         <div class="col-md-11 col-md-offset-1">
@@ -19,6 +22,9 @@
                                             <p>{{ $comment->body }}</p>
                                             @can('update', $comment)
                                                 <a>Edit</a>
+                                            @endcan
+                                            @can('delete', [$comment, $post])
+                                                <a>Delete</a>
                                             @endcan
                                         </div>
                                     </div>
