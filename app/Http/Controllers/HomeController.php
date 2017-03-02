@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\PostService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PostService $service, Request $request)
     {
-        return view('home');
+        $posts = $service->index($request->user()->id);
+        return view('home', [
+            'posts' => $posts
+        ]);
     }
 }

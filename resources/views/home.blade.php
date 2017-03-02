@@ -5,10 +5,28 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Your Posts</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    @foreach ($posts as $post)
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>{{ $post->body }}</p>
+                                @foreach ($post->comments as $comment)
+                                    <div class="row">
+                                        <div class="col-md-11 col-md-offset-1">
+                                            <h6>{{ $comment->user->name }}</h6>
+                                            <p>{{ $comment->body }}</p>
+                                            @can('update', $comment)
+                                                <a>Edit</a>
+                                            @endcan
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <hr />
+                    @endforeach
                 </div>
             </div>
         </div>
