@@ -36,7 +36,10 @@ class CommentService
     public function get($id)
     {
         try {
-            $comment = $this->comment->where('id', $id)->firstOrFail();
+            $comment = $this->comment
+                ->where('id', $id)
+                ->with('user')
+                ->firstOrFail();
             return $comment;
         } catch (ModelNotFoundException $e) {
             return false;

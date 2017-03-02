@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // Comments
 Route::get('/posts/{id}/comments', 'CommentController@index')->name('comments.index');
+Route::get('/comments/{id}', 'CommentController@show')->name('comments.show');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/comments', 'CommentController@store')->name('comments.store');
     Route::put('/comments/{id}', 'CommentController@update')->name('comments.update');
