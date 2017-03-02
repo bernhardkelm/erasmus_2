@@ -15,6 +15,9 @@
                                 @can('update', $post)
                                     <a>Edit</a>
                                 @endcan
+                                @can('delete', $post)
+                                    <a>Delete</a>
+                                @endcan
                                 @foreach ($post->comments as $comment)
                                     <div class="row">
                                         <div class="col-md-11 col-md-offset-1">
