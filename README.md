@@ -9,14 +9,14 @@
        ```yaml
        ....
        sites:
-         - map: itcab.dev
+         - map: pluggedin.dev
          	# Change the following to match your folder structure
          	to: /home/vagrant/Code/erasmus/public
          
        databases:
-         - itcab
+         - pluggedin
        ```
-  -    If not using Homestead, create a MySQL database called `itcab` with username `homestead` and password `secret` for the development.
+  -    If not using Homestead, create a MySQL database called `pluggedin` with username `homestead` and password `secret` for the development.
 
 - Run `npm install` (Requires Node & NPM installed)
 
