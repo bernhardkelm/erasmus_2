@@ -17,7 +17,7 @@ class CommentController extends Controller
     public function index(CommentService $service, $id)
     {
         $comments = $service->index($id);
-        return response()->json($comments);
+        return response()->json($comments, 200);
     }
 
     /**
@@ -38,7 +38,8 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request, CommentService $service, $postId)
     {
-        $service->store($postId, $request->getComment());
+        $comment = $service->store($postId, $request->getComment());
+        return response()->json($comment, 201);
     }
 
     /**
@@ -51,7 +52,7 @@ class CommentController extends Controller
     {
         $comment = $service->get($id);
         if (!$comment) return response()->json(['error' => 'Comment could not be found'], 404);
-        return response()->json($comment);
+        return response()->json($comment, 200);
     }
 
     /**
@@ -80,7 +81,7 @@ class CommentController extends Controller
         if (!$request->user()->can('update', $comment))
             return response()->json(['error' => 'Unauthorized.'], 401);
         $comment = $service->update($comment, $request->all());
-        return $comment;
+        return response()->json($comment, 200);
     }
 
     /**

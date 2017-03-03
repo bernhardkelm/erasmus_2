@@ -40,6 +40,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/comments/{id}', 'CommentController@destroy')->name('comments.destroy');
 });
 
+// Conversations
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard/messages', 'ConversationController@index')->name('conversations.index');
+    Route::get('/dashboard/messages/{id}', 'ConversationController@show')->name('conversations.show');
+    Route::delete('/dashboard/messages/{id}', 'ConversationController@detroy')->name('conversations.destroy');
+});
+
+// Messages
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/messages', 'MessageController@store')->name('messages.store');
+});
 
 
 // Authentication Views

@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'email'
     ];
 
     public function posts()
@@ -35,5 +35,15 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    public function sentMessages()
+    {
+        return $this->hasMany('App\Message', 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany('App\Message', 'recipient_id');
     }
 }

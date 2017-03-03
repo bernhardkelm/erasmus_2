@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index(PostService $service, $id)
     {
-        return response()->json($service->index($id));
+        return response()->json($service->index($id), 200);
     }
 
     /**
@@ -37,7 +37,7 @@ class PostController extends Controller
     public function store(PostRequest $request, PostService $service)
     {
         $post = $service->store($request->getPost());
-        return response()->json($post);
+        return response()->json($post, 201);
     }
 
     /**
@@ -50,7 +50,7 @@ class PostController extends Controller
     {
         $post = $service->get($id);
         if (!$post) return response()->json(['error' => 'Post could not be found'], 404);
-        return response()->json($post);
+        return response()->json($post, 200);
     }
 
     /**
@@ -79,7 +79,7 @@ class PostController extends Controller
         if (!$request->user()->can('update', $post))
             return response()->json(['error' => 'Unauthorized.'], 401);
         $post = $service->update($post, $request->all());
-        return $post;
+        return response()->json($post, 200);
     }
 
     /**
