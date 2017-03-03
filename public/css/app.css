@@ -183,6 +183,7 @@ select:-webkit-autofill:focus {
 	margin: 0px 5px;
 	display: inline-block;
 	position: relative;
+	cursor: pointer;
 }
 
 #form_center .radio_wrapper input[type=radio] {
@@ -243,6 +244,7 @@ select:-webkit-autofill:focus {
 
 #form_center .checkbox label {
 	vertical-align: middle;
+	cursor: pointer;
 }
 
 #form_center .checkbox label:before {

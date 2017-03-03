@@ -14,8 +14,8 @@
                 </span>
             @endif
             <div class="radio_wrapper">
-                <input type="radio" name="role" value="professional"><label>Professional</label>
-                <input type="radio" name="role" value="company"><label>Company</label>
+                <input type="radio" name="role" id="professional" value="professional"><label for="professional">Professional</label>
+                <input type="radio" name="role" id="company" value="company"><label for="company">Company</label>
             </div>
             <input placeholder="Email" type="email" name="email" value="{{ old('email') }}" required>
             @if ($errors->has('email'))
