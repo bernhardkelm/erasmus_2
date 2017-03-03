@@ -20,12 +20,22 @@ class ConversationService
      */
     public function index($user)
     {
-        return $this->conversation
+        $conversations = $this->conversation
             ->where('user_one', $user)
             ->orWhere('user_two', $user)
             ->with('userOne', 'userTwo')
             ->orderBy('updated_at', 'DESC')
             ->get();
+        // @TODO Improve this inefficient shit
+        $filteredConversations = $conversations->filter(function($value, $key) use ($user) {
+            $userNumber = ($value->user_one === $user) ? 'one' : 'two';
+            if ($userNumber === 'one') {
+                return $value->deleted_from_user_one !== 1;
+            } else {
+                return $value->deleted_from_user_two !== 1;
+            }
+        });
+        return $filteredConversations;
     }
 
     /**
@@ -99,6 +109,7 @@ class ConversationService
     {
         $userNumber = ($conversation->user_one === $userId) ? 'one' : 'two';
         $conversation->softDelete($userNumber);
+        $conversation->save();
         return true;
     }
 }
