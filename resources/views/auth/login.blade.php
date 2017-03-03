@@ -3,7 +3,7 @@
 @section('content')
 <div id="form_center_wrapper">
     <div id="form_center">
-        <h2>{{ config('app.name', 'Laravel') }}</h2>
+        <h2>Login</h2>
         <form role="form" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
             <input type="email" placeholder="Email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>

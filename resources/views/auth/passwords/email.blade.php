@@ -3,7 +3,7 @@
 @section('content')
 <div id="form_center_wrapper">
     <div id="form_center">
-        <h2>{{ config('app.name', 'Laravel') }}</h2>
+        <h2>Reset password</h2>
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}

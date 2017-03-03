@@ -3,7 +3,7 @@
 @section('content')
 <div id="form_center_wrapper">
     <div id="form_center">
-        <h2>{{ config('app.name', 'Laravel') }}</h2>
+        <h2>Register</h2>
         <form role="form" id="register" method="POST" action="{{ route('register') }}">
             {{ csrf_field() }}
             <span>Sign up! It's free.</span>
