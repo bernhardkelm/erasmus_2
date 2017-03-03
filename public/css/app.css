@@ -31,7 +31,7 @@ header {
 	top: 0;
 	left: 0;
 	border-top: 6px solid #7f94cf;
-	box-shadow:0 8px 6px -6px #333;
+	box-shadow: 6px -9px 6px 10px #333;
 	padding: 20px 60px;
 	overflow: hidden;
 	z-index: 5;
@@ -215,17 +215,64 @@ select:-webkit-autofill:focus {
   position: absolute;
   left: 0;
   border-radius: 5px;
-}
-
-#form_center .radio_wrapper input[type=radio]:checked + label:before {
-  color: #98A4A1;
-  font-size: 29px;
-  text-align: center;
-  line-height: 15px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  margin: 5px;
 }
 
 #form_center .radio_wrapper input[type=radio]:checked + label:after {
   background-color: #98A4A1;
-  bottom: 5px;
-  left: 5px;
+}
+
+#form_center .checkbox {
+	margin: 10px 0px;
+}
+
+#form_center .checkbox * {
+	display: inline-block;;
+}
+
+#form_center .checkbox input {
+	position: absolute;
+	left: 28%;
+  margin-top: 7px;
+  z-index: 10;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#form_center .checkbox label {
+	vertical-align: middle;
+}
+
+#form_center .checkbox label:before {
+	content: "";
+	height: 12px;
+	width: 12px;
+  position: absolute;
+  left: 28%;
+  margin-top: 3px;
+  border: 1px solid #98A4A1;
+  cursor: pointer;
+}
+
+#form_center .checkbox label:after {
+	content: "";
+	height: 8px;
+	width: 8px;
+  position: absolute;
+  left: 28%;
+  margin: 6px 3px;
+  cursor: pointer;
+  backgrond: transparent;
+  transition: all 0.3s ease;
+}
+
+#form_center .checkbox input:checked + label:after {
+	background: #98A4A1;
+}
+
+#form_center a {
+	margin-top: 10px;
+	font-size: 0.8em;
 }
