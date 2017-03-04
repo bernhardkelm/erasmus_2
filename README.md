@@ -18,6 +18,7 @@
        ```
   -    If not using Homestead, create a MySQL database called `pluggedin` with username `homestead` and password `secret` for the development.
 
+- If you wish, you add add `192.168.10.10     pluggedin.dev` to your Hosts file (on Windows C:\Windows\System32\drivers\etc\hosts, on Mac/Linux \etc\hosts)
 - Run `npm install` (Requires Node & NPM installed)
 
 - Run `composer install` (Requires Composer installed)
