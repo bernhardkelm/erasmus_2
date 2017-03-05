@@ -372,16 +372,22 @@ select:-webkit-autofill:focus {
 	transition: opacity 0.3s ease;
 }
 
-.left_head > .profile_img > .landscape {
-	width: 100%;
-	height: auto;
-	opacity: 1;
+.left_head > #profile_name {
+	text-align: center;
+	color: white;
+	margin-top: 10px;
 }
 
-.left_head > .profile_img > .portrait {
+.landscape {
+	width: 100%;
+	height: auto;
+	opacity: 1 !important;
+}
+
+.portrait {
 	height: 100%;
 	width: auto;
-	opacity: 1;
+	opacity: 1 !important;
 }
 
 .social_cotainer {
@@ -412,6 +418,20 @@ select:-webkit-autofill:focus {
 	-ms-transform: translate(-50%, -50%);
 }
 
+.profile_docs {
+	margin-top: 40px;
+	display: inline-block;
+}
+
+.profile_docs > a {
+	margin: 0px 5px;
+}
+
+.profile_docs > a > img {
+	vertical-align: sub;
+	display: inline-block;
+}
+
 .left_body {
 	padding: 40px 20px;
 }
@@ -432,6 +452,8 @@ form[name="store_post"] > textarea {
 	padding: 5px 10px;
 	border: 1px solid #afaaac;
   border-radius: 3px;
+  margin-bottom: 10px;
+  background: #f6f7f7;
 }
 
 form[name="store_post"] > button[type="submit"] {
@@ -456,4 +478,31 @@ border: 1px solid #7f94cf;
 
 .feed {
 	margin-top: 40px;
+}
+
+.post > div > p {
+	margin-bottom: 5px;
+}
+
+.post > div > a:first-of-type {
+	margin-left: 58px;
+}
+
+.post > div {
+	margin-bottom: 20px;
+}
+
+.post_img {
+	height: 48px;
+	width: 48px;
+	overflow: hidden;
+	border-radius: 50%;
+	border: 3px solid #7f94cf;
+	float: left;
+  margin-right: 10px;
+}
+
+.post_img img {
+	opacity: 0;
+	transition: opacity 0.3s ease;
 }

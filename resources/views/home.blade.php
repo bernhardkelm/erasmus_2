@@ -7,6 +7,7 @@
             <div class="profile_img">
                 <img class="img" src="src/plug_blue.png">
             </div>
+            <h2 id="profile_name"></h2>
             <div class="social_cotainer">
                 <div id="message"><a href="#"><img src="src/icons/message.png"></a></div>
                 <div id="twitter"><a href="#"><img src="src/icons/twitter.png"></a></div>
@@ -43,29 +44,32 @@
         <div class="feed">
             <h4>USER FEED</h4>            
             @foreach ($posts as $post)
-                    <div class="post">
-                        <div class="main">
-                            <p>{{ $post->body }}</p>
-                            @can('update', $post)
-                                <a>Edit</a>
-                            @endcan
-                            @can('delete', $post)
-                                <a>Delete</a>
-                            @endcan
+                <div class="post">
+                    <div class="main">
+                        <div class="post_img">
+                            <img class="img" src="src/plug_blue.png">
                         </div>
-                        @foreach ($post->comments as $comment)
-                        <div class="comment">
-                            <h6>{{ $comment->user->name }}</h6>
-                            <p>{{ $comment->body }}</p>
-                            @can('update', $comment)
-                                <a>Edit</a>
-                            @endcan
-                            @can('delete', [$comment, $post])
-                                <a>Delete</a>
-                            @endcan
-                        </div>
-                        @endforeach
+                        <p>{{ $post->body }}</p>
+                        @can('update', $post)
+                            <a>Edit</a>
+                        @endcan
+                        @can('delete', $post)
+                            <a>Delete</a>
+                        @endcan
                     </div>
+                    @foreach ($post->comments as $comment)
+                    <div class="comment">
+                        <h6>{{ $comment->user->name }}</h6>
+                        <p>{{ $comment->body }}</p>
+                        @can('update', $comment)
+                            <a>Edit</a>
+                        @endcan
+                        @can('delete', [$comment, $post])
+                            <a>Delete</a>
+                        @endcan
+                    </div>
+                    @endforeach
+                </div>
             @endforeach
         </div>
     </div>

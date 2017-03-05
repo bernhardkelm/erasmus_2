@@ -23,7 +23,7 @@
 <body>
     <header>
         <a id="logo" href="{{ url('/') }}">
-            <img src="src/plug_blue.png">
+            <img src="{{ asset('src/plug_blue.png') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
         <nav>
