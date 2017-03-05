@@ -1,0 +1,48 @@
+footer {
+  background-color: #fff;
+  min-height: 270px;
+  display: flex;
+  align-items: center;
+}
+
+.footer__left {
+
+  .column:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  p {
+    font-weight: bold;
+    
+    span {
+      font-weight: 300;
+    }
+  }
+
+  img {
+    height: 100px;
+    width: auto;
+  }
+}
+
+.footer__social {
+  font-size: 3rem;
+  color: #686868;
+}
+
+.footer__right {
+  ul {
+    list-style: none;
+    margin-bottom: 0;
+
+    li {
+      color: $color-text-light;
+      padding: 5px 0;
+      text-align: right;
+
+      &:first-child {
+        padding-top: 0;
+      }
+    }
+  }
+}

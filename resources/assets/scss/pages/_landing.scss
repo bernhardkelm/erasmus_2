@@ -1,0 +1,30 @@
+.home__wrapper {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-image: url('images/landing_bg.jpg');
+  background-size: cover;
+}
+
+.home__teaser {
+  margin-top: 10%;
+
+  h1 {
+    color: #fff;
+    font-size: 7.2rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: -1.5rem;
+  }
+  a.button.is-outline.is-primary {
+    color: #fff;
+    border-color: #fff;
+    margin-top: 2rem;
+  }
+}

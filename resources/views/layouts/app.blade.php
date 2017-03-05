@@ -11,7 +11,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="{{ asset('pluggedin.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -21,52 +24,19 @@
     </script>
 </head>
 <body>
-    <header>
-        <a id="logo" href="{{ url('/') }}">
-            <img src="{{ asset('src/plug_blue.png') }}">
-            {{ config('app.name', 'Laravel') }}
-        </a>
-        <nav>
-            <!-- Authentication Links -->
-            @if (Auth::guest())
-                <ul>
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
-                </ul>
-            @else
-                <ul class="dropdown">
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </li>
-                </ul>
-            @endif
-        </nav>
-    </header>
+
+    @if (Auth::check())
+        @include('modules/navigation-private')
+    @else
+        @include('modules/navigation-public')
+    @endif
+
     <main>
         @yield('content')
     </main>
-    <footer>
-        <img src="{{ asset('src/plug_blue_text.png') }}">
-        <span>© 2017</span>
-        <div class="footer_social">
-            <a href="#"><img src="{{ asset('src/footer/fb_logo.png') }}"></a>
-            <a href="#"><img src="{{ asset('src/footer/twitter_logo.png') }}"></a>
-            <a href="#"><img src="{{ asset('src/footer/insta_logo.png') }}"></a>
-            <a href="#"><img src="{{ asset('src/footer/yt_logo.png') }}"></a>
-        </div>
-    </footer>
+
+    @include('modules/footer')
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

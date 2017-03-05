@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
-
 /*CSS Normalizers*/
 html, body, * {
 	margin: 0;
@@ -12,7 +10,7 @@ html, body, * {
 html, body {
 	height: 100%;
 	width: 100%;
-	background: #f6f7f7;
+	background: #f0f4f6;
 }
 
 a {
@@ -53,9 +51,9 @@ header {
 	max-height: 1em;
 }
 
-nav {
+/*nav {
 	float: right;
-}
+}*/
 
 nav > ul {
 	list-style-type: none;
@@ -103,14 +101,11 @@ nav > .dropdown > li:hover + li {
 main {
 	min-width: 100%;
 	min-height: 100%;
-	/*Offset for the header*/
-	padding-top: 75px;
 }
 
 /*Login and register*/
-#form_center_wrapper,
-#home_wrapper {
-	position: absolute;
+#form_center_wrapper{
+	/*position: absolute;*/
 	width: 100%;
 	height: 100%;
 	top: 0;
@@ -120,24 +115,6 @@ main {
 	background-position: center top;
 	background-size: 100% auto;
 	color: #333;
-}
-
-#home_wrapper {
-	background-image: url('/src/home_bg.jpeg');
-}
-
-#home_wrapper > h1 {
-	position: relative;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	text-align: center;
-	font-size: 4em;
-	font-weight: 400;
 }
 
 #form_center {
@@ -530,7 +507,7 @@ border: 1px solid #7f94cf;
 	transition: opacity 0.3s ease;
 }
 
-/*Footer styles*/
+/*Footer styles
 footer {
 	padding: 10px 60px;
 	background: #f6f7f7;
@@ -562,4 +539,4 @@ footer > .footer_social {
 footer img {
 	max-width: 29px;
 	height: auto;
-}
+}*/

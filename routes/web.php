@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@welcome')->name('welcome');
 
 // @TODO: For testing purposes:
 Route::get('/home', 'HomeController@index')->name('home');

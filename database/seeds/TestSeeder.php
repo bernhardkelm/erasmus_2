@@ -17,6 +17,7 @@ class TestSeeder extends Seeder
             'email' => 'example@dev.com',
             'type' => \App\Enumerators\UserType::PROFESSIONAL,
             'password' => app('hash')->make('devtest'),
+            'picture' => '/images/allaire.jpg',
         ]);
 
         $user2 = $user->create([
