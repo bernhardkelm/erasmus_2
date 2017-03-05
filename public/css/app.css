@@ -24,6 +24,11 @@ a:hover {
 	color: #666;
 }
 
+h4 {
+	font-weight: 400;
+	margin-bottom: 5px;
+}
+
 /*Header styles*/
 header {
 	position: absolute;
@@ -161,8 +166,9 @@ main {
   color: white;
 }
 
-/*Removing the clue outline in chrome*/
-#form_center form input{
+/*Removing the blue outline in chrome*/
+form input,
+form textarea{
 	outline: 0 !important;
 }
 
@@ -328,6 +334,7 @@ select:-webkit-autofill:focus {
 .col_left {
 	width: 300px;
 	display: inline-block;
+	float: left;
 	/*Removing the margin bug*/
 	margin: 0px -4px -4px 0px;
 }
@@ -409,11 +416,44 @@ select:-webkit-autofill:focus {
 	padding: 40px 20px;
 }
 
-.left_body h4 {
-	font-weight: 400;
-	margin-bottom: 5px;
-}
-
 .left_body > div {
 	margin-bottom: 20px;
+}
+
+.col_right {
+	padding: 40px 40px 40px 20px;
+}
+
+form[name="store_post"] > textarea {
+	resize: none;
+	width: 100%;
+	min-height: 80px;
+	font-size: 14px;
+	padding: 5px 10px;
+	border: 1px solid #afaaac;
+  border-radius: 3px;
+}
+
+form[name="store_post"] > button[type="submit"] {
+	background: transparent;
+	border: 1px solid #afaaac;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+
+form[name="store_post"] > button[type="submit"]:hover,
+form[name="store_post"] > button[type="submit"]:focus {
+border: 1px solid #7f94cf;
+  background-color: #7f94cf;
+  color: white;
+  cursor: pointer;
+  outline: 0 !important;
+}
+
+.feed {
+	margin-top: 40px;
 }

@@ -38,7 +38,7 @@
             <button type="submit" class="btn btn-primary">
                 Register
             </button>
-            </form>
+        </form>
     </div>
 </div>
 @endsection
