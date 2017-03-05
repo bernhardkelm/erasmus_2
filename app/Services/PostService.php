@@ -22,7 +22,7 @@ class PostService
     {
         return $this->post
             ->where('user_id', $user)
-            ->with('comments')
+            ->with('comments.user')
             ->orderBy('created_at', 'DESC')
             ->get();
     }
