@@ -18,9 +18,20 @@ Route::get('/', function () {
 // @TODO: For testing purposes:
 Route::get('/home', 'HomeController@index')->name('home');
 
-/**
+// Users
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/users/{id}', 'UserController@show')->name('users.show');
+Route::group(['middleware' => 'auth'], function () {
+    Route::put('/users/{id}', 'UserController@update')->name('users.update');
+    Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
+});
+
+// Dashboard
+Route::get('/dashboard/edit-profile', 'UserController@edit')->name('dashboard.edit::profile');
+
+/** ------------------------------------------------------------
  * User Wall
- */
+ ---------------------------------------------------------------*/
 
 // Posts
 Route::get('/users/{id}/posts', 'PostController@index')->name('posts.index');
@@ -39,6 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/comments/{id}', 'CommentController@update')->name('comments.update');
     Route::delete('/comments/{id}', 'CommentController@destroy')->name('comments.destroy');
 });
+
+
+/** ------------------------------------------------------------
+ * User Messages
+---------------------------------------------------------------*/
 
 // Conversations
 Route::group(['middleware' => 'auth'], function () {

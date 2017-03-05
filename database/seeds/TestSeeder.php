@@ -15,12 +15,14 @@ class TestSeeder extends Seeder
         $user1 = $user->create([
             'name' => 'Peter',
             'email' => 'example@dev.com',
+            'type' => \App\Enumerators\UserType::PROFESSIONAL,
             'password' => app('hash')->make('devtest'),
         ]);
 
         $user2 = $user->create([
             'name' => 'Alex',
             'email' => 'example@dumb.com',
+            'type' => \App\Enumerators\UserType::COMPANY,
             'password' => app('hash')->make('devtest'),
         ]);
 
