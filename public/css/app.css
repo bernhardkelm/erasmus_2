@@ -32,16 +32,20 @@ header {
 	left: 0;
 	border-top: 6px solid #7f94cf;
 	box-shadow: 6px -9px 6px 10px #333;
+	-webkit-box-shadow: 6px -9px 6px 10px #333;
 	padding: 20px 60px;
-	overflow: hidden;
 	z-index: 5;
-	background-color: #f6f7f7;
+	background: #f6f7f7;
 }
 
 #logo {
-	color: black;
+	color: #afaaac;
 	font-size: 1.5em;
-	font-weight: 400;
+	font-weight: 300;
+}
+
+#logo > img {
+	max-height: 1em;
 }
 
 nav {
@@ -67,10 +71,35 @@ nav > ul > li > a {
 	vertical-align: sub;
 }
 
+nav > .dropdown {
+	background: #f6f7f7;
+}
+
+nav > .dropdown > li {
+	display: block;
+	background: inherit;
+}
+
+nav > .dropdown > li:not(:first-child) {
+	display: none;
+	position: absolute;
+	padding: 10px;
+	margin-left: 0px;
+	box-shadow: 1px 5px 8px -3px #333;
+	-webkit-box-shadow: 1px 5px 8px -3px #333;
+}
+
+nav > .dropdown:hover li,
+nav > .dropdown > li:hover + li {
+	display: block;
+}
+
 /*Main styles*/
 main {
-	width: 100%;
-	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	/*Offset for the header*/
+	padding-top: 75px;
 }
 
 /*Login and register*/
@@ -277,4 +306,114 @@ select:-webkit-autofill:focus {
 #form_center a {
 	margin-top: 10px;
 	font-size: 0.8em;
+}
+
+/*User profile*/
+#col_wrapper {
+	max-width: 1280px;
+	margin: 40px 0px;
+	transform: translate(-50%);
+	position: relative;
+	left: 50%;
+	-webkit-transform: translate(-50%);
+	-moz-transform: translate(-50%);
+	-o-transform: translate(-50%);
+	-ms-transform: translate(-50%);
+}
+
+#col_wrapper > div {
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.col_left {
+	width: 300px;
+	display: inline-block;
+	/*Removing the margin bug*/
+	margin: 0px -4px -4px 0px;
+}
+
+.col_right {
+	width: calc(100% - 340px);
+	display: inline-block;
+	/*Removing the margin bug*/
+	margin: 0px -4px -4px 40px;
+}
+
+.left_head {
+	width: 100%;
+	background: #7F94D0;
+	padding: 40px;
+}
+
+.left_head > .profile_img {
+	width: 220px;
+	height: 220px;
+	background: white;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 3px solid white;
+	position: relative;
+	left: 50%;
+	-webkit-transform: translate(-50%);
+	-moz-transform: translate(-50%);
+	-o-transform: translate(-50%);
+	-ms-transform: translate(-50%);
+}
+
+.left_head > .profile_img > img {
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.left_head > .profile_img > .landscape {
+	width: 100%;
+	height: auto;
+	opacity: 1;
+}
+
+.left_head > .profile_img > .portrait {
+	height: 100%;
+	width: auto;
+	opacity: 1;
+}
+
+.social_cotainer {
+	padding-top: 20px;
+	display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.social_cotainer > div {
+	display: inline-block;
+	background: white;
+	height: 36px;
+	min-width: 36px;
+	border-radius: 50%;
+	margin: 0px 10px;
+}
+
+.social_cotainer > div img {
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+
+.left_body {
+	padding: 40px 20px;
+}
+
+.left_body h4 {
+	font-weight: 400;
+	margin-bottom: 5px;
+}
+
+.left_body > div {
+	margin-bottom: 20px;
 }

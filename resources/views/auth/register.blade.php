@@ -14,9 +14,14 @@
                 </span>
             @endif
             <div class="radio_wrapper">
-                <input type="radio" name="role" id="professional" value="professional"><label for="professional">Professional</label>
-                <input type="radio" name="role" id="company" value="company"><label for="company">Company</label>
+                <input type="radio" name="type" id="professional" value="1"><label for="professional">Professional</label>
+                <input type="radio" name="type" id="company" value="2"><label for="company">Company</label>
             </div>
+            @if ($errors->has('type'))
+                <span class="help-block">
+                    {{ $errors->first('type') }}
+                </span>
+            @endif
             <input placeholder="Email" type="email" name="email" value="{{ old('email') }}" required>
             @if ($errors->has('email'))
                 <span class="help-block">
@@ -29,7 +34,7 @@
                     {{ $errors->first('password') }}
                 </span>
             @endif
-            <input type="password" placeholder="Confirm passowrd" name="password_confirmation" required>
+            <input type="password" placeholder="Confirm password" name="password_confirmation" required>
             <button type="submit" class="btn btn-primary">
                 Register
             </button>

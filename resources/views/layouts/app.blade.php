@@ -23,34 +23,35 @@
 <body>
     <header>
         <a id="logo" href="{{ url('/') }}">
+            <img src="src/plug_blue.png">
             {{ config('app.name', 'Laravel') }}
         </a>
         <nav>
-            <ul>
-                <!-- Authentication Links -->
-                @if (Auth::guest())
+            <!-- Authentication Links -->
+            @if (Auth::guest())
+                <ul>
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
-                @else
-                    <li class="dropdown">
+                </ul>
+            @else
+                <ul class="dropdown">
+                    <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
                     </li>
-                @endif
-            </ul>
+                </ul>
+            @endif
         </nav>
     </header>
     <main>
