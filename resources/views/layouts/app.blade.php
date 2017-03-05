@@ -58,7 +58,14 @@
         @yield('content')
     </main>
     <footer>
-        
+        <img src="{{ asset('src/plug_blue_text.png') }}">
+        <span>© 2017</span>
+        <div class="footer_social">
+            <a href="#"><img src="{{ asset('src/footer/fb_logo.png') }}"></a>
+            <a href="#"><img src="{{ asset('src/footer/twitter_logo.png') }}"></a>
+            <a href="#"><img src="{{ asset('src/footer/insta_logo.png') }}"></a>
+            <a href="#"><img src="{{ asset('src/footer/yt_logo.png') }}"></a>
+        </div>
     </footer>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
