@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Services\PostService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -25,10 +26,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(UserService $service, $id)
+    public function show(UserService $userService, PostService $postService, $id)
     {
-        $user = $service->get($id);
-        return response()->json($user, 200);
+        $user = $userService->get($id);
+        $posts = $postService->index($id);
+        return view('profile', [
+            'user' => $user,
+            'posts' => $posts
+        ]);
     }
 
     /**
