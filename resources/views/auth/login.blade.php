@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="form_center_wrapper">
-    <div id="form_center">
-        <h2>Login</h2>
-        <form role="form" method="POST" action="{{ route('login') }}">
+<div class="form__wrapper">
+    <div class="form__center">
+        <form role="form" method="POST" id="login" action="{{ route('login') }}">
+            <h2>Login</h2>
             {{ csrf_field() }}
             <input type="email" placeholder="Email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
             @if ($errors->has('email'))
@@ -22,10 +22,14 @@
                 <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                 <label for="remember">Remember Me</label>
             </div>
-            <button type="submit" class="btn btn-primary">
-                Login
-            </button>
-            <a class="btn btn-link" href="{{ route('password.request') }}">
+            <a class="button is-outline is-animated"
+               href="javascript:{}" onclick="document.getElementById('login').submit();">
+                <span>Login</span>
+                <span class="icon">
+                    <i class="mdi mdi-chevron-right"></i>
+                </span>
+            </a>
+            <a href="{{ route('password.request') }}">
                 Forgot Your Password?
             </a>
         </form>

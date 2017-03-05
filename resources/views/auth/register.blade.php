@@ -1,25 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="form_center_wrapper">
-    <div id="form_center">
-        <h2>Register</h2>
+<div class="form__wrapper">
+    <div class="form__center">
         <form role="form" id="register" method="POST" action="{{ route('register') }}">
             {{ csrf_field() }}
-            <span>Sign up! It's free.</span>
+            <h2>Sign up! It's free.</h2>
             <input placeholder="Name" type="text" name="name" value="{{ old('name') }}" required autofocus>
             @if ($errors->has('name'))
                 <span class="help-block">
                     {{ $errors->first('name') }}
-                </span>
-            @endif
-            <div class="radio_wrapper">
-                <input type="radio" name="type" id="professional" value="1"><label for="professional">Professional</label>
-                <input type="radio" name="type" id="company" value="2"><label for="company">Company</label>
-            </div>
-            @if ($errors->has('type'))
-                <span class="help-block">
-                    {{ $errors->first('type') }}
                 </span>
             @endif
             <input placeholder="Email" type="email" name="email" value="{{ old('email') }}" required>
@@ -35,9 +25,24 @@
                 </span>
             @endif
             <input type="password" placeholder="Confirm password" name="password_confirmation" required>
-            <button type="submit" class="btn btn-primary">
-                Register
-            </button>
+
+            <div class="form__radios">
+                <input type="radio" name="type" id="professional" value="1"><label for="professional">Professional</label>
+                <input type="radio" name="type" id="company" value="2"><label for="company">Company</label>
+            </div>
+            @if ($errors->has('type'))
+                <span class="help-block">
+                    {{ $errors->first('type') }}
+                </span>
+            @endif
+            
+            <a class="button is-outline is-animated"
+               href="javascript:{}" onclick="document.getElementById('register').submit();">
+                <span>Register</span>
+                <span class="icon">
+                    <i class="mdi mdi-chevron-right"></i>
+                </span>
+            </a>
         </form>
     </div>
 </div>

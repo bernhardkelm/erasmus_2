@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="clearfix"></div>
 <div class="home__wrapper">
     <div class="home__teaser">
         <h1>Connect to your future</h1>

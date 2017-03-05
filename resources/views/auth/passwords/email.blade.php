@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="form_center_wrapper">
-    <div id="form_center">
-        <h2>Reset password</h2>
+<div class="form__wrapper">
+    <div class="form__center">
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
         @endif
-        <form role="form" method="POST" action="{{ route('password.email') }}">
+        <form role="form" method="POST" id="email" action="{{ route('password.email') }}">
+            <h2>Reset password</h2>
+            <p>To reset your password, enter your email below</p>
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <input id="email" type="email" placeholder="Email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -20,9 +21,13 @@
                     </span>
                 @endif
             </div>
-                <button type="submit" class="btn btn-primary">
-                    Send Password Reset Link
-                </button>
+            <a class="button is-outline is-animated"
+               href="javascript:{}" onclick="document.getElementById('email').submit();">
+                <span>Submit</span>
+                <span class="icon">
+                    <i class="mdi mdi-chevron-right"></i>
+                </span>
+            </a>
         </form>
     </div>
 </div>
