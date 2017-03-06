@@ -49,7 +49,7 @@ class ConversationService
         try {
             $conversation = $this->conversation
                 ->where('id', $id)
-                ->with(['messages', 'userOne', 'userTwo'])
+                ->with(['messages.sender', 'userOne', 'userTwo'])
                 ->firstOrFail();
             return $conversation;
         } catch (ModelNotFoundException $e) {

@@ -52,7 +52,6 @@ class ConversationController extends Controller
         foreach($unreadMessages as $message) {
             $messageService->markAsRead($message);
         }
-
         return view('dashboard.conversations.show', [
             'conversation' => $conversation
         ]);
