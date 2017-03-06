@@ -361,7 +361,6 @@ select:-webkit-autofill:focus {
 	margin-bottom: 20px;
 }
 
-
 form[name="store_post"] > button[type="submit"] {
 	background: transparent;
 	border: 1px solid #afaaac;
@@ -420,6 +419,7 @@ border: 1px solid #7f94cf;
 	display: block;
 	font-size: 18px;
 	padding: 5px 20px;
+	margin-bottom: 5px;
 	border-radius: 3px;
 	transition: all 0.3s ease;
 }
@@ -427,6 +427,7 @@ border: 1px solid #7f94cf;
 .dash_options a i {
 	font-size: 24px;
 	transition: all 0.3s ease;
+	margin-right: 10px;
 }
 
 .mdi.red {
@@ -455,6 +456,15 @@ border: 1px solid #7f94cf;
 }
 
 .dash_options a:hover .mdi {
+	color: white;
+}
+
+.dash_options .active {
+	background-color: #2F88F6;
+	color: white;
+}
+
+.dash_options .active .mdi {
 	color: white;
 }
 
@@ -509,4 +519,13 @@ border: 1px solid #7f94cf;
 	background: #7f94cf;
 	color: white;
 	border: 1px solid #7f94cf;
+}
+
+.dash_right .request {
+	padding: 0px 20px;
+}
+
+.request h3 {
+	padding-left: 0px;
+	padding-top: 40px;
 }

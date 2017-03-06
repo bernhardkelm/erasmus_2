@@ -51,3 +51,11 @@ var someImg = $(this);
 		$(this).addClass('landscape');
 	}
 });
+
+/*Setting the dashboard view*/
+$('.dash_options > a').on('click', function(e) {
+	$('.dash_right > div').hide();
+	$('.active').removeClass('active');
+	$('div[name="' + this.name + '"]').show();
+	$(this).addClass('active');
+});
