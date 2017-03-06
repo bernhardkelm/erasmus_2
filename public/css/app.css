@@ -547,3 +547,31 @@ border: 1px solid #7f94cf;
 	display: block;
 	margin-bottom: 40px;
 }
+
+.convo {
+	border-radius: 3px;
+	padding: 20px 40px;
+	background-color: white;
+}
+
+.convo.unread {
+	border-left: 5px solid #2F88F6;
+}
+
+.convo .convo_img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	overflow: hidden;
+	display: inline-block;
+	float: left;
+	margin-right: 20px;
+}
+
+.convo .convo_body {
+	display: inline-block;
+}
+
+.convo_body h4 {
+	margin-bottom: 0px;
+}

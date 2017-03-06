@@ -31,21 +31,39 @@
 					<span>{{ $conversations->count()}} conversation in total</span>
 				@endif
 				@foreach ($conversations as $conversation)
-					<div class="convo">
+					@if($conversation->lastMessage->recipient_id == $user->id && !$conversation->lastMessage->is_seen)
+						<div class="convo unread">
+					@else
+						<div class="convo">
+					@endif
 						@if ($conversation->user_one == $user->id)
-							@if($conversation->userOne->picture)
-								<img class="img" src="{{ $conversation->userTwo->picture }}">
+							<div class="convo_img">
+							@if($conversation->userTwo->picture)
+									<img class="img" src="{{ $conversation->userTwo->picture }}">
 							@else
-								<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
+									<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
 							@endif
+							</div>
+							<div class="convo_body">
+								<h4>{{ $conversation->userTwo->name}}</h4>
+								<span>{{ $conversation->latestMessage->message }}</span>
+							</div>
 						@else
+							<div class="msg_img">
 							@if($conversation->userOne->picture)
 								<img class="img" src="{{ $conversation->userOne->picture }}">
 							@else
 								<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
 							@endif
+							</div>
+							<div class="convo_body">
+								<h4>{{ $conversation->userOne->name}}</h4>
+								<span>{{ $conversation->latestMessage->message }}</span>
+							</div>
 						@endif
 					</div>
+
+
 	      @endforeach
 			</div>
 		<!--End inbox-->
