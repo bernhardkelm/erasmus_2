@@ -76,4 +76,14 @@ class CompanyService
         $company->delete();
         return true;
     }
+
+    public function syncEmployees($company, $users)
+    {
+        $company->employees()->sync($users);
+    }
+
+    public function removeEmployee($company, $userId)
+    {
+        $company->employees()->detach($userId);
+    }
 }

@@ -10,7 +10,7 @@ class Company extends Model
         'name', 'description', 'logo', 'creator_id',
     ];
 
-    public function users()
+    public function employees()
     {
         return $this->hasMany('App\User');
     }

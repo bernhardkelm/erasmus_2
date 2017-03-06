@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enumerators\UserType;
 use App\Http\Requests\CompanyRequest;
 use App\Services\CompanyService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -104,5 +105,13 @@ class CompanyController extends Controller
         if (!$request->user()->can('delete', $company)) abort(403);
         $service->destroy($company);
         return response()->json($company, 200);
+    }
+
+    public function addEmployee(Request $request, CompanyService $companyService, UserService $userService, $id)
+    {
+        $company = $companyService->get($id);
+        if (!$company) abort(404);
+        if (!$request->user()->can('update', $company)) abort(403);
+        $user = $userService->find($request->get('email'));
     }
 }

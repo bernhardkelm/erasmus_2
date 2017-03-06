@@ -66,6 +66,18 @@ class UserService
         }
     }
 
+    public function find($email)
+    {
+        try {
+            $user = $this->user
+                ->where('email', $email)
+                ->firstOrFail();
+            return $user;
+        } catch (ModelNotFoundException $e) {
+            return false;
+        }
+    }
+
     /**
      * Store a new user in the database
      * @param $request

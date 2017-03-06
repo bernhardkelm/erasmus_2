@@ -6,6 +6,7 @@ use App\Comment;
 use App\Conversation;
 use App\JobRequest;
 use App\Policies\CommentPolicy;
+use App\Policies\CompanyPolicy;
 use App\Policies\ConversationPolicy;
 use App\Policies\JobRequestPolicy;
 use App\Policies\PostPolicy;
@@ -27,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Conversation::class => ConversationPolicy::class,
         JobRequest::class => JobRequestPolicy::class,
+        Company::class => CompanyPolicy::class,
     ];
 
     /**
