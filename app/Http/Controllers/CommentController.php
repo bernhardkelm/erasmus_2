@@ -39,7 +39,7 @@ class CommentController extends Controller
     public function store(CommentRequest $request, CommentService $service, $postId)
     {
         $comment = $service->store($postId, $request->getComment());
-        return response()->json($comment, 201);
+        return redirect()->back();
     }
 
     /**
@@ -98,6 +98,6 @@ class CommentController extends Controller
         if (!$request->user()->can('delete', [$comment, $post]))
             return response()->json(['error' => 'Unauthorized.'], 401);
         $commentService->destroy($comment);
-        return response()->json("{}", 200);
+        return redirect()->back();
     }
 }

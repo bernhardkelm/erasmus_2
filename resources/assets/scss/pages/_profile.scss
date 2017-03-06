@@ -143,3 +143,17 @@ form[name="store_post"] > textarea {
   }
 }
 
+.post__controls,
+.comment__controls {
+  input[type="submit"] {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+
+    &:hover {
+      color: lighten(#0f1219, 10%);
+    }
+  }
+
+} 
+

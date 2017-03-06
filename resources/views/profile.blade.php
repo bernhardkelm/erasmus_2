@@ -85,8 +85,9 @@
     <div class="col_right has-depth">
         <form role="form" id="store_post" name="store_post" method="POST" action="{{ route('posts.store') }}">
             {{ csrf_field() }}
-            <textarea name="post" placeholder="Write a message..."></textarea>
-            <a class="button is-outline is-animated">
+            <textarea name="body" placeholder="Write a message..."></textarea>
+            <a class="button is-outline is-animated"
+               href="javascript:{}" onclick="document.getElementById('store_post').submit();">
                 <span>Submit</span>
                 <span class="icon">
                     <i class="mdi mdi-chevron-right"></i>
@@ -118,7 +119,11 @@
                                     <li><a href="#">Edit</a></li>
                                 @endcan
                                 @can('delete', $post)
-                                    <li><a href="#">Delete</a></li>
+                                    <li><form role="form" method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <input type="submit" value="Delete">
+                                        </form></li>
                                 @endcan
                             </ul>
                         </div>
@@ -147,7 +152,11 @@
                                         <li><a href="#">Edit</a></li>
                                     @endcan
                                     @can('delete', [$comment, $post])
-                                        <li><a href="#">Delete</a></li>
+                                        <li><form role="form" method="POST" action="{{ route('comments.destroy', ['id' => $comment->id]) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <input type="submit" value="Delete">
+                                        </form></li>
                                     @endcan
                                 </ul>
                                 </div>
@@ -160,7 +169,7 @@
                     <div class="commentbox column is-offset-1">
                         <form role="form" method="POST" action="{{ route('comments.store', ['id' => $post->id]) }}">
                             {{ csrf_field() }}
-                            <textarea name="post" placeholder="Write a comment..."></textarea>
+                            <textarea name="body" placeholder="Write a comment..."></textarea>
                             <button type="submit" class="button is-outline">
                                 <span>Submit</span>
                             </button>

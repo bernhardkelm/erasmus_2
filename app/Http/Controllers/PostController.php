@@ -37,7 +37,7 @@ class PostController extends Controller
     public function store(PostRequest $request, PostService $service)
     {
         $post = $service->store($request->getPost());
-        return response()->json($post, 201);
+        return redirect()->back();
     }
 
     /**
@@ -95,6 +95,6 @@ class PostController extends Controller
         if (!$request->user()->can('delete', $post))
             return response()->json(['error' => 'Unauthorized.'], 401);
         $service->destroy($post);
-        return response()->json("{}", 200);
+        return redirect()->back();
     }
 }

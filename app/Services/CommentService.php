@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class CommentService
 {
     protected $comment;
+    protected $postService;
 
-    public function __construct(Comment $comment)
+    public function __construct(Comment $comment, PostService $postService)
     {
         $this->comment = $comment;
+        $this->postService = $postService;
     }
 
     /**
@@ -53,9 +55,9 @@ class CommentService
      * @param $comment
      * @return mixed
      */
-    public function store(PostService $service, $id, $comment)
+    public function store($id, $comment)
     {
-        $post = $service->get($id);
+        $post = $this->postService->get($id);
         $post->comments()->save($comment);
         $comment->save();
         return $comment;
