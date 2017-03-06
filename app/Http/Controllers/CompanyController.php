@@ -113,5 +113,15 @@ class CompanyController extends Controller
         if (!$company) abort(404);
         if (!$request->user()->can('update', $company)) abort(403);
         $user = $userService->find($request->get('email'));
+        $companyService->addEmployee($company, $user);
+        return response()->json($company, 200);
+    }
+
+    public function removeEmployee(Request $request, CompanyService $companyService, $id)
+    {
+        $company = $companyService->get($id);
+        if (!$company) abort(404);
+        if (!$request->user()->can('update', $company)) abort(403);
+        $user = $user
     }
 }

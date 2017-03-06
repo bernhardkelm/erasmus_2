@@ -77,9 +77,9 @@ class CompanyService
         return true;
     }
 
-    public function syncEmployees($company, $users)
+    public function addEmployee($company, $user)
     {
-        $company->employees()->sync($users);
+        $company->employees()->attach($user->id);
     }
 
     public function removeEmployee($company, $userId)

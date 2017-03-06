@@ -26,9 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('picture')->nullable();
             $table->string('resume')->nullable();
             $table->string('email')->unique();
-            $table->integer('company_id')->unsigned()->nullabe();
             $table->string('password');
-            $table->foreign('company_id')->references('id')->on('companies');
             $table->rememberToken();
             $table->timestamps();
         });
