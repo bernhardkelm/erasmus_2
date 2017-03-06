@@ -52,9 +52,41 @@ var someImg = $(this);
 	}
 });
 
+/*Getting the query string*/
+function GetQueryStringParams(sParam) {
+  var sPageURL = window.location.search.substring(1);
+  var sURLVariables = sPageURL.split('&');
+  for (var i = 0; i < sURLVariables.length; i++) {
+    var sParameterName = sURLVariables[i].split('=');
+    if (sParameterName[0] == sParam) {
+      return sParameterName[1];
+    }
+	}
+}
+
+/*Query checking*/
+$(document).ready(function() {
+	var sub_url = $(location).attr('pathname');
+	sub_url.indexOf(1);
+	sub_url = sub_url.split("/")[1];
+	if(sub_url == 'dashboard') {
+		var query = GetQueryStringParams('page');
+		if(query) {
+			$('.dash_right > div').hide();
+			$('.active').removeClass('active');
+			$('div[name="' + query + '"]').show();
+			$('.dash_options > a[name="' + query + '"]').addClass('active');
+		}
+	}
+}); 
+
 /*Setting the dashboard view*/
+<<<<<<< HEAD
+$('.dash_options > a').on('click', function() {
+=======
 $('.dash_options > a').on('click', function(e) {
 	console.log("LALAL");
+>>>>>>> 779accbb4990e7fd45bc6719269d5bd1dc99230f
 	$('.dash_right > div').hide();
 	$('.active').removeClass('active');
 	$('div[name="' + this.name + '"]').show();
