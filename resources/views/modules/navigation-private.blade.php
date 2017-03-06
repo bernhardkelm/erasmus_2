@@ -19,7 +19,7 @@
         <img src="{{ Auth::user()->picture }}" />
       @endif
       <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Profile</a></li>
+      <li><a href="{{ route('users.show', ['id' => Auth::id()]) }}">Profile</a></li>
       <li class="no-separator">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Logout

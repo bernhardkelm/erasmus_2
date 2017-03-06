@@ -48,9 +48,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UserService $service, Request $request)
     {
-        // @TODO Show edit user profile
+        $user = $service->get($request->user()->id);
+        return view('dashboard.profile.edit', [
+            'user' => $user
+        ]);
     }
 
     /**

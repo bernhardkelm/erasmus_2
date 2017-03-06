@@ -16,9 +16,10 @@ class ConversationController extends Controller
      */
     public function index(ConversationService $service, MessageService $messageService, Request $request)
     {
-        $conversation = $service->index($request->user()->id);
-        $unread = $messageService->numberOfUnreadMessages($request->user()->id);
-        return response()->json([$conversation, $unread], 200);
+        $conversations = $service->index($request->user()->id);
+        return view('dashboard.conversations.index', [
+            'conversations' => $conversations
+        ]);
     }
 
     /**
@@ -52,7 +53,9 @@ class ConversationController extends Controller
             $messageService->markAsRead($message);
         }
 
-        return response()->json($conversation, 200);
+        return view('dashboard.conversations.show', [
+            'conversation' => $conversation
+        ]);
     }
 
     /**

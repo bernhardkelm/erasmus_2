@@ -18,6 +18,14 @@ Route::get('/profile', function() {
     return redirect()->route('users.show', ['id' => Auth::id()]);
 })->name('profile');
 Route::get('/users/{id}', 'UserController@show')->name('users.show');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', function() {
+        return redirect()->route('dashboard.conversations::index');
+    });
+    Route::get('/dashboard/messages', 'ConversationController@index')->name('dashboard.conversations::index');
+    Route::get('/dashboard/messages/{id}', 'ConversationController@show')->name('dashboard.conversations::show');
+    Route::get('/dashboard/edit-profile', 'UserController@edit')->name('dashboard.profile::edit');
+});
 
 
 // Users
@@ -29,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Dashboard
-Route::get('/dashboard/edit-profile', 'UserController@edit')->name('dashboard.edit::profile');
+
 
 /** ------------------------------------------------------------
  * User Wall
@@ -60,8 +68,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 // Conversations
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard/messages', 'ConversationController@index')->name('conversations.index');
-    Route::get('/dashboard/messages/{id}', 'ConversationController@show')->name('conversations.show');
     Route::delete('/dashboard/messages/{id}', 'ConversationController@detroy')->name('conversations.destroy');
 });
 
