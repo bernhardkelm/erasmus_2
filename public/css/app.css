@@ -135,7 +135,7 @@ select:-webkit-autofill:focus {
   border-radius: 3px;
   background-color: transparent;
   padding: 10px 20px;
-  transition: all 0.2s ease-in;
+  transition: all 0.3s ease-in;
 }
 
 #form_center form button[type="submit"]:focus,
@@ -384,4 +384,129 @@ border: 1px solid #7f94cf;
 
 .feed {
 	margin-top: 40px;
+}
+
+/*Dashobard*/
+.dash_left {
+	width: 300px;
+	display: inline-block;
+	float: left;
+	/*Removing the margin bug*/
+	margin: 0px -4px -4px 0px;
+}
+
+.dash_right {
+	width: calc(100% - 300px);
+	display: inline-block;
+	/*Removing the margin bug*/
+	margin: 0px -4px -4px 0px;
+	padding: 40px 60px;
+}
+
+.dash_left > .left_head {
+	background: none;
+}
+
+.dash_left .profile_img {
+	border: none;
+}
+
+.dash_left #profile_name {
+	color: black;
+	font-weight: 400;
+}
+
+.dash_options a {
+	display: block;
+	font-size: 18px;
+	padding: 5px 20px;
+	border-radius: 3px;
+	transition: all 0.3s ease;
+}
+
+.dash_options a i {
+	font-size: 24px;
+	transition: all 0.3s ease;
+}
+
+.mdi.red {
+	color: #c16767;
+}
+
+.mdi.blue {
+	color: #3B67AA;
+}
+
+.mdi.purple {
+	color: #674BAE;
+}
+
+.mdi.green {
+	color: #4899A5;
+}
+
+.mdi.pink {
+	color: #BE5D89;
+}
+
+.dash_options a:hover {
+	background-color: #2F88F6;
+	color: white;
+}
+
+.dash_options a:hover .mdi {
+	color: white;
+}
+
+.dash_right h2 {
+	font-size: 30px;
+	font-weight: 400;
+	color: black;
+	margin-bottom: 40px;
+}
+
+.dash_right h3 {
+	font-weight: 400;
+	margin-bottom: 20px;
+	color: black;
+	padding-left: 20px;
+}
+
+.dash_right form > div {
+	width: 50%;
+	display: inline-block;
+  margin-left: -4px;
+	padding: 0px 20px 20px 20px;
+}
+
+.dash_right form > div.full {
+	width: 100%;
+}
+
+.dash_right label {
+	font-weight: 300;
+}
+
+.dash_right input[type="file"] {
+	display: none;
+}
+
+.dash_right input[type="file"] + label {
+	cursor: pointer;
+	border: 1px solid rgba(34,36,38,.15);
+  border-radius: .3rem;
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 20px;
+  transition: all 0.3s ease;
+}
+
+.dash_right input[type="file"] + label i {
+	padding-left: 10px;
+}
+
+.dash_right input[type="file"] + label:hover {
+	background: #7f94cf;
+	color: white;
+	border: 1px solid #7f94cf;
 }
