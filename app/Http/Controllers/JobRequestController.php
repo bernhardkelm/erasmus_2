@@ -50,7 +50,7 @@ class JobRequestController extends Controller
     public function show(UserService $service, $id)
     {
         $jobRequest = $service->getJobRequest($id);
-        if (!jobRequest) abort(404);
+        if (!$jobRequest) abort(404);
         return view('dashboard.job_requests.show', [
             'jobRequest' => $jobRequest
         ]);
@@ -65,7 +65,7 @@ class JobRequestController extends Controller
     public function edit(UserService $service, Request $request, $id)
     {
         $jobRequest = $service->getJobRequest($id);
-        if (!jobRequest) abort(404);
+        if (!$jobRequest) abort(404);
         if (!$request->user()->can('update', $jobRequest)) abort(403);
         return view('dashboard.job_requests.edit', [
             'jobRequest' => $jobRequest
@@ -98,7 +98,7 @@ class JobRequestController extends Controller
     public function destroy(Request $request, UserService $service, $id)
     {
         $jobRequest = $service->getJobRequest($id);
-        if (!jobRequest) abort(404);
+        if (!$jobRequest) abort(404);
         if (!$request->user()->can('delete', $jobRequest)) abort(403);
         $service->destroyJobRequest($jobRequest);
         return response()->json("{}", 200);

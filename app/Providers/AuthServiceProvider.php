@@ -4,10 +4,16 @@ namespace App\Providers;
 
 use App\Comment;
 use App\Conversation;
+use App\ForumPost;
+use App\ForumThread;
+use App\ForumTopic;
 use App\JobRequest;
 use App\Policies\CommentPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\ConversationPolicy;
+use App\Policies\ForumPostPolicy;
+use App\Policies\ForumThreadPolicy;
+use App\Policies\ForumTopicPolicy;
 use App\Policies\JobRequestPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\UserPolicy;
@@ -29,6 +35,9 @@ class AuthServiceProvider extends ServiceProvider
         Conversation::class => ConversationPolicy::class,
         JobRequest::class => JobRequestPolicy::class,
         Company::class => CompanyPolicy::class,
+        ForumTopic::class => ForumTopicPolicy::class,
+        ForumThread::class => ForumThreadPolicy::class,
+        ForumPost::class => ForumPostPolicy::class,
     ];
 
     /**

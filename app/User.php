@@ -76,5 +76,12 @@ class User extends Authenticatable
         });
     }
 
+    public function isModerator()
+    {
+        return $this->roles->contains(function ($value, $key) {
+            return $value->id === UserRoles::MODERATOR;
+        });
+    }
+
 
 }
