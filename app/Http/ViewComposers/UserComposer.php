@@ -4,6 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Services\MessageService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 /**
  * Created by PhpStorm.
