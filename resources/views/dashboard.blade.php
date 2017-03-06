@@ -126,12 +126,24 @@
 			<hr>
 			<!--TODO: Add all job requests and make them editable-->
 			<h3>Active Requests</h3>
-			@foreach ($user->jobRequests as $request)
+			@foreach ($jobRequests as $request)
 				<div class="request">
+					<meta name="id" content="{{ $request->id }}">
 					<h3>{{ $request->title }}</h3>
 					<p>{{ $request->body }}</p>
+					<a class="button is-outline edit_request" href="#">
+              <span>Edit</span><span class="icon"><i class="mdi mdi-pencil"></i></span>
+          </a>
+          <form id="delete_request" name="delete_request" method="post" action="{{ route('job_requests.destroy', ['id' => $request->id]) }}">
+          	{{ csrf_field() }}
+          	{{ method_field('DELETE') }}
+          	<a class="button is-outline"
+               href="javascript:{}" onclick="document.getElementById('delete_request').submit();">
+              <span>Delete</span>
+            </a>
+          </form>
 				</div>
-            @endforeach
+      @endforeach
 		</div>
 		<!--End job requests-->
 	</div>

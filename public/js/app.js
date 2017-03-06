@@ -74,14 +74,50 @@ $(document).ready(function() {
 		if(query) {
 			$('div[name="' + query + '"]').show();
 			$('.dash_options > a[name="' + query + '"]').addClass('active');
+		} else {
+			$('div[name="inbox"]').show();
+			$('.dash_options > a[name="inbox"]').addClass('active');
 		}
 	}
-}); 
+});
 
+/*Preventing the browser from scrolling to the top*/
+function preventScroll() {
+	var x = window.pageXOffset,
+      y = window.pageYOffset;
+  $(window).one('scroll', function () {
+      window.scrollTo(x, y);
+  });
+}
+
+/*TODO: Animate scroll, change URL*/
 /*Setting the dashboard view*/
 $('.dash_options > a').on('click', function() {
-	$('.dash_right > div').hide();
+  $('.dash_right > div').hide();
 	$('.active').removeClass('active');
 	$('div[name="' + this.name + '"]').show();
 	$(this).addClass('active');
+	preventScroll();
+});
+
+/*Generating the job request edit form*/
+$('.edit_request').on('click', function(e) {
+	var token = $('meta[name="_token"]').attr('content');
+	var id = $(this).siblings('meta[name="id"]').attr('content');
+	var title = $(this).siblings('h3').html();
+	var body = $(this).siblings('p').html();
+	$(this).closest('.request').replaceWith('<form id="edit_request" name="edit_request" method="post" action="/job_requests/' + id + '">\
+		<input type="hidden" name="_token" value="' + token + '">\
+		<input type="hidden" name="_method" value="PUT">\
+			<div>\
+				<label for="request_title">Title</label>\
+				<input type="text" name="title" id="request_title" value="' + title + '">\
+			</div>\
+			<div class="full">\
+				<label for="request_body">Description</label>\
+				<textarea id="request_body" name="body">' + body + '</textarea>\
+			</div>\
+			<div><input class="button is-outline is-info" type="submit" name="save" value="Save"></div>\
+		</form>');
+	preventScroll();
 });

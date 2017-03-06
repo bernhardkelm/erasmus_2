@@ -529,3 +529,12 @@ border: 1px solid #7f94cf;
 	padding-left: 0px;
 	padding-top: 40px;
 }
+
+.request p {
+	margin-bottom: 10px;
+}
+
+.dash_right #delete_request {
+	display: inline-block;
+	margin-left: 20px;
+}
