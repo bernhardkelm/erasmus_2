@@ -72,8 +72,6 @@ $(document).ready(function() {
 	if(sub_url == 'dashboard') {
 		var query = GetQueryStringParams('page');
 		if(query) {
-			$('.dash_right > div').hide();
-			$('.active').removeClass('active');
 			$('div[name="' + query + '"]').show();
 			$('.dash_options > a[name="' + query + '"]').addClass('active');
 		}
@@ -81,12 +79,7 @@ $(document).ready(function() {
 }); 
 
 /*Setting the dashboard view*/
-<<<<<<< HEAD
 $('.dash_options > a').on('click', function() {
-=======
-$('.dash_options > a').on('click', function(e) {
-	console.log("LALAL");
->>>>>>> 779accbb4990e7fd45bc6719269d5bd1dc99230f
 	$('.dash_right > div').hide();
 	$('.active').removeClass('active');
 	$('div[name="' + this.name + '"]').show();
