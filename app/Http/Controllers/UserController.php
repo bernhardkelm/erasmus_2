@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Services\MessageService;
 use App\Services\PostService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -26,11 +27,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(UserService $userService, PostService $postService, $id)
+    public function show(UserService $userService, PostService $postService, MessageService $messageService,
+                         Request $request, $id)
     {
+        $authUser = $request->user();
+        $unreadMessages = $messageService->numberOfUnreadMessages($authUser->id);
         $user = $userService->get($id);
         $posts = $postService->index($id);
         return view('profile', [
+            'authUser' => $authUser,
+            'unreadMessages' => $unreadMessages,
             'user' => $user,
             'posts' => $posts
         ]);

@@ -14,6 +14,14 @@ class Post extends Model
         'user_id',
     ];
 
+    public function getDiffTimeForHumans()
+    {
+        $date = $this->created_at;
+        $now = $date->now();
+
+        return $date->diffForHumans($now, true);
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

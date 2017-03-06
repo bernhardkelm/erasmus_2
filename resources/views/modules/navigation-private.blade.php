@@ -10,17 +10,17 @@
 
     <ul class="navigation__right">
       @if($unreadMessages > 0)
-        <li><a href="#"><i class="mdi mdi-email-open"></i></a></li>
-        <li><span class="label is-primary">{{ $unreadMessages }}</span></li>
+        <li class="no-separator"><a href="#"><i class="mdi mdi-email-open"></i></a></li>
+        <li class="no-separator"><span class="label is-primary">{{ $unreadMessages }}</span></li>
       @else
-        <li><a href="#"><i class="mdi mdi-email"></i></a></li>
+        <li class="no-separator"><a href="#"><i class="mdi mdi-email"></i></a></li>
       @endif
-      @if($user->picture)
-        <img src="{{ $user->picture }}" />
+      @if(Auth::user()->picture)
+        <img src="{{ Auth::user()->picture }}" />
       @endif
       <li><a href="#">Dashboard</a></li>
       <li><a href="#">Profile</a></li>
-      <li>
+      <li class="no-separator">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Logout
         </a>
@@ -31,4 +31,4 @@
     </ul>
   </div>
 </nav>
-<div class="clearfix"></div>
+<div class="clearfix navcf"></div>

@@ -266,17 +266,11 @@ select:-webkit-autofill:focus {
 	-ms-transform: translate(-50%);
 }
 
-#col_wrapper > div {
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
 .col_left {
 	width: 300px;
 	display: inline-block;
 	float: left;
 	border-radius: 3px;
-	/*Removing the margin bug*/
-	margin: 0px -4px -4px 0px;
 }
 
 .col_right {
@@ -287,12 +281,6 @@ select:-webkit-autofill:focus {
 	margin: 0px -4px -4px 40px;
 }
 
-.left_head {
-	width: 100%;
-	background: #7F94D0;
-	padding: 40px;
-	border-radius: 3px 3px 0px 0px;
-}
 
 .left_head > .profile_img {
 	width: 220px;
@@ -365,15 +353,6 @@ select:-webkit-autofill:focus {
 	display: inline-block;
 }
 
-.profile_docs > a {
-	margin: 0px 5px;
-}
-
-.profile_docs > a > img {
-	vertical-align: sub;
-	display: inline-block;
-}
-
 .left_body {
 	padding: 40px 20px;
 }
@@ -382,21 +361,6 @@ select:-webkit-autofill:focus {
 	margin-bottom: 20px;
 }
 
-.col_right {
-	padding: 40px 40px 40px 20px;
-}
-
-form[name="store_post"] > textarea {
-	resize: none;
-	width: 100%;
-	min-height: 80px;
-	font-size: 14px;
-	padding: 5px 10px;
-	border: 1px solid #afaaac;
-  border-radius: 3px;
-  margin-bottom: 10px;
-  background: #f6f7f7;
-}
 
 form[name="store_post"] > button[type="submit"] {
 	background: transparent;
@@ -421,64 +385,3 @@ border: 1px solid #7f94cf;
 .feed {
 	margin-top: 40px;
 }
-
-.post > div > p {
-	margin-bottom: 5px;
-}
-
-.post > div > a:first-of-type {
-	margin-left: 58px;
-}
-
-.post > div {
-	margin-bottom: 20px;
-}
-
-.post_img {
-	height: 48px;
-	width: 48px;
-	overflow: hidden;
-	border-radius: 50%;
-	border: 3px solid #7f94cf;
-	float: left;
-  margin-right: 10px;
-}
-
-.post_img img {
-	opacity: 0;
-	transition: opacity 0.3s ease;
-}
-
-/*Footer styles
-footer {
-	padding: 10px 60px;
-	background: #f6f7f7;
-}
-
-footer * {
-	display: inline-block;
-}
-
-footer > span {
-	position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 10px;
-}
-
-footer > .footer_social {
-	margin: 0px 40px;
-}
-
-.footer_social > a {
-	padding: 0px 10px;
-}
-
-.footer_social > a:last-child img {
-	padding-bottom: 3px;
-}
-
-footer img {
-	max-width: 29px;
-	height: auto;
-}*/

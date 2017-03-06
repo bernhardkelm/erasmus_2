@@ -1,0 +1,145 @@
+.profile {
+  margin-bottom: 200px;
+}
+
+.profile__header {
+  height: 300px;
+  background-position: top center;
+}
+
+.col_left {
+  margin-top: -250px;
+}
+.col_right {
+  margin-top: -120px !important;
+}
+
+.left_head {
+	width: 100%;
+	background: #0f1219;
+	padding: 40px;
+	border-radius: 3px 3px 0px 0px;
+}
+
+.button_social {
+  border-radius: 50%;
+  background-color: #fff;
+  color: #0f1219;
+}
+
+.left_body{
+  background-color: #fff;
+  
+  h4 {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #888888;
+  }
+}
+
+.col_right {
+  padding: 40px 60px;
+  background-color: #fff;
+
+  hr {
+    border-color: #e4e4e4;
+  }
+}
+
+form[name="store_post"] > textarea {
+	width: 100%;
+	min-height: 100px;
+	font-size: 14px;
+	padding: 10px;
+	border: 1px solid #e8e9ea;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background: lighten(#f6f8f9, 2%);
+}
+
+.feed {
+  h4 {
+    text-transform: uppercase;
+    color: #0f1219;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+}
+
+.post,
+.comment {
+  background-color: #f5f7f9;
+  min-height: 120px;
+  border-radius: .3rem;
+}
+
+.post__image,
+.comment__image {
+  float: left;
+  
+  img {
+    border-radius: 50%;
+    margin: 25px 0 0 15px;
+  }
+}
+
+.post__image {
+  width: 12%;
+}
+
+.comment__image {
+  width: 8%;
+
+  img {
+    margin: 25px 0 0 30px;
+  }
+}
+
+.post__content,
+.comment__content {
+  float: right;
+  width: 80%;
+  padding: 20px 10px 20px 0;
+}
+
+.post__user {
+  font-weight: 600;
+}
+
+.post__date,
+.comment_date {
+  font-style: italic;
+  margin-left: 15px;
+  font-size: 1.4rem;
+}
+
+.post__controls,
+.comment__controls {
+  list-style-type: none;
+  li {
+    display: inline-block;
+    padding-right: 10px;
+  }
+}
+
+.comment {
+  margin-top: 15px;
+}
+
+.comment__user {
+  font-weight: 400;
+}
+
+.commentbox {
+  margin-top: 20px;
+
+  textarea {
+    min-height: 50px;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #e8e9ea;
+    border-radius: 3px;
+    background: lighten(#f6f8f9, 2%);
+  }
+}
+

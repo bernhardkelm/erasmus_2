@@ -37,7 +37,7 @@
 .navigation__right {
   float: right;
 
-  li:not(:last-child):not(:first-child)::after {
+  li:not(.no-separator)::after {
     content: '|';
     color: #898989;
     padding-left: 5px;

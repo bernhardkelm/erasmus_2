@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,10 +12,13 @@
 |
 */
 
+// Pages
 Route::get('/', 'PagesController@welcome')->name('welcome');
+Route::get('/profile', function() {
+    return redirect()->route('users.show', ['id' => Auth::id()]);
+})->name('profile');
+Route::get('/users/{id}', 'UserController@show')->name('users.show');
 
-// @TODO: For testing purposes:
-Route::get('/home', 'HomeController@index')->name('home');
 
 // Users
 Route::get('/users', 'UserController@index')->name('users.index');
@@ -44,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/posts/{id}/comments', 'CommentController@index')->name('comments.index');
 Route::get('/comments/{id}', 'CommentController@show')->name('comments.show');
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/comments', 'CommentController@store')->name('comments.store');
+    Route::post('/posts/{id}/comments', 'CommentController@store')->name('comments.store');
     Route::put('/comments/{id}', 'CommentController@update')->name('comments.update');
     Route::delete('/comments/{id}', 'CommentController@destroy')->name('comments.destroy');
 });

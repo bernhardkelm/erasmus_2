@@ -1,24 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="profile">
+<div class="profile__header"
+    style="background-image: url('/images/user_header.jpg')"></div>
+<div class="container">
 <div id="col_wrapper">
-    <div class="col_left">
+    <div class="col_left has-depth">
         <div class="left_head">
             <div class="profile_img">
                 @if ($user->picture)
-                    {{ $user->picture }}
+                    <img class="img" src="{{ $user->picture }}">
                 @else 
                     <img class="img" src="{{ asset('src/plug_blue.png') }}">
                 @endif
             </div>
             <h2 id="profile_name">{{ $user->name }}</h2>
             <div class="social_cotainer">
-                <div id="message"><a href="#"><img src="{{ asset('src/icons/message.png') }}"></a></div>
+                <a href="#" class="button is-primary">
+                    <span class="icon">
+                        <i class="mdi mdi-email"></i>
+                    </span>
+                    <span>Message</span>
+                </a>
                 @if ($user->twitter)
-                    <div id="twitter"><a href="#"><img src="{{ asset('src/icons/twitter.png') }}"></a></div>
+                    <a href="#" class="social_button"><i class="mdi mdi-twitter"></i></a>
                 @endif
                 @if ($user->facebook)
-                    <div id="facebook"><a href="#"><img src="{{ asset('src/icons/facebook.png') }}"></a></div>
+                    <a href="#" class="social_button"><i class="mdi mdi-facebook"></i></a>
                 @endif
             </div>
         </div>
@@ -32,7 +41,7 @@
                 @endif
             </div>
             <div class="profile_data">
-                <h4>COUNTRY</h4>
+                <h4>Country</h4>
                 @if ($user->country)
                     <p>{{ $user->country }}</p>
                 @else 
@@ -40,7 +49,7 @@
                 @endif
             </div>
             <div class="profile_data">
-                <h4>MAJOR</h4>
+                <h4>Major</h4>
                 @if ($user->major)
                     <p>{{ $user->major }}</p>
                 @else 
@@ -48,7 +57,7 @@
                 @endif
             </div>
             <div class="profile_data">
-                <h4>LANGUAGES</h4>
+                <h4>Languages</h4>
                 @if ($user->languages)
                     <p>{{ $user->languages }}</p>
                 @else 
@@ -56,62 +65,113 @@
                 @endif
             </div>
             <div class="profile_docs">
-                <a href="#"><img src="{{ asset('src/icons/resume.png') }}">Resume</a>
-                <a href="#"><img src="{{ asset('src/icons/requests.png') }}">Job Requests</a>
+                @if ($user->resume)
+                    <a href="{{ $user->resume }}" class="button is-outline">
+                        <span class="icon">
+                            <i class="mdi mdi-file-pdf"></i>
+                        </span>
+                        <span> Resume</span>
+                    </a>
+                @endif
+                <a href="#" class="button is-outline">
+                    <span class="icon">
+                        <i class="mdi mdi-book-open"></i>
+                    </span>
+                    <span>Job Requests</span>
+                </a>
             </div>
         </div>
     </div>
-    <div class="col_right">
+    <div class="col_right has-depth">
         <form role="form" id="store_post" name="store_post" method="POST" action="{{ route('posts.store') }}">
             {{ csrf_field() }}
             <textarea name="post" placeholder="Write a message..."></textarea>
-            <button type="submit">
-                Submit
-            </button>
+            <a class="button is-outline is-animated">
+                <span>Submit</span>
+                <span class="icon">
+                    <i class="mdi mdi-chevron-right"></i>
+                </span>
+            </a>
         </form>
+
+        <hr />
         <div class="feed">
-            <h4>USER FEED</h4>            
+            <h4>User Feed</h4>            
             @foreach ($posts as $post)
-                <div class="post">
-                    <div class="main">
-                        <div class="post_img">
-                            @if ($user->picture)
-                                {{ $user->picture }}
+                <div class="row">
+                    <div class="column">
+                    <div class="post">
+                        <div class="post__image">
+                            @if($user->picture)
+                                <img class="img" src="{{ $user->picture }}">
                             @else 
-                                <img class="img" src="{{ asset('src/plug_blue.png') }}">
+                                <img class="img" src="{{ asset('images/default_avatar.jpg') }}">
                             @endif
                         </div>
-                        <h4>{{ $user->name }}</h4>
-                        <p>{{ $post->body }}</p>
-                        @can('update', $post)
-                            <a>Edit</a>
-                        @endcan
-                        @can('delete', $post)
-                            <a>Delete</a>
-                        @endcan
-                    </div>
-                    @foreach ($post->comments as $comment)
-                    <div class="comment">
-                        <div class="post_img">
-                            @if ($comment->user->picture)
-                                {{ $comment->user->picture }}
-                            @else 
-                                <img class="img" src="{{ asset('src/plug_blue.png') }}">
-                            @endif
+                        <div class="post__content">
+                            <p class="post__user">{{ $user->name }} 
+                                <span class="post__date">{{ $post->getDiffTimeForHumans() }} ago</span>
+                            </p>
+                            <p>{{ $post->body }}</p>
+                            <ul class="post__controls">
+                                @can('update', $post)
+                                    <li><a href="#">Edit</a></li>
+                                @endcan
+                                @can('delete', $post)
+                                    <li><a href="#">Delete</a></li>
+                                @endcan
+                            </ul>
                         </div>
-                        <h4>{{ $comment->user->name }}</h4>
-                        <p>{{ $comment->body }}</p>
-                        @can('update', $comment)
-                            <a>Edit</a>
-                        @endcan
-                        @can('delete', [$comment, $post])
-                            <a>Delete</a>
-                        @endcan
+                        <div class="clearfix"></div>
                     </div>
-                    @endforeach
+                    </div>
+                </div>
+                @foreach ($post->comments as $comment)
+                    <div class="row">
+                        <div class="column is-offset-1">
+                            <div class="comment">
+                                <div class="comment__image">
+                                    @if($comment->user->picture)
+                                        <img class="img" src="{{ $comment->user->picture }}">
+                                    @else 
+                                        <img class="img" src="{{ asset('images/default_avatar.jpg') }}">
+                                    @endif
+                                </div>
+                                <div class="comment__content">
+                                    <p class="comment__user">{{ $comment->user->name }}
+                                        <span class="comment_date">{{ $comment->getDiffTimeForHumans() }} ago</span>
+                                    </p>
+                                    <p>{{ $comment->body }}</p>
+                                    <ul class="comment__controls">
+                                    @can('update', $comment)
+                                        <li><a href="#">Edit</a></li>
+                                    @endcan
+                                    @can('delete', [$comment, $post])
+                                        <li><a href="#">Delete</a></li>
+                                    @endcan
+                                </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="row">
+                    <div class="commentbox column is-offset-1">
+                        <form role="form" method="POST" action="{{ route('comments.store', ['id' => $post->id]) }}">
+                            {{ csrf_field() }}
+                            <textarea name="post" placeholder="Write a comment..."></textarea>
+                            <button type="submit" class="button is-outline">
+                                <span>Submit</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>
     </div>
+</div>
+</div>
+<div class="clearfix"></div>
 </div>
 @endsection

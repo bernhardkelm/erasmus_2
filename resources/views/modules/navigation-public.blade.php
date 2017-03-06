@@ -24,4 +24,4 @@
     </ul>
   </div>
 </nav>
-<div class="clearfix"></div>
+<div class="clearfix navcf"></div>

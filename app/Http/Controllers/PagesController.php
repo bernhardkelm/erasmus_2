@@ -15,7 +15,7 @@ class PagesController extends Controller
             $user = $request->user();
             $unreadMessages = $service->numberOfUnreadMessages($user->id);
             return view('welcome', [
-                'user' => $user,
+                'authUser' => $user,
                 'unreadMessages' => $unreadMessages
             ]);
         }
