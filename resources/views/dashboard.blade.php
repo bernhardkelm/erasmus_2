@@ -24,7 +24,29 @@
 	<div class="dash_right">
 		<!--Inbox-->
 			<div name="inbox" class="dash_container" style="display: none">
-
+				<h2 class="bottomless">Inbox</h2>
+				@if ($conversations->count() == 1)
+					<span>{{ $conversations->count()}} conversation in total</span>
+				@else 
+					<span>{{ $conversations->count()}} conversation in total</span>
+				@endif
+				@foreach ($conversations as $conversation)
+					<div class="convo">
+						@if ($conversation->user_one == $user->id)
+							@if($conversation->userOne->picture)
+								<img class="img" src="{{ $conversation->userTwo->picture }}">
+							@else
+								<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
+							@endif
+						@else
+							@if($conversation->userOne->picture)
+								<img class="img" src="{{ $conversation->userOne->picture }}">
+							@else
+								<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
+							@endif
+						@endif
+					</div>
+	      @endforeach
 			</div>
 		<!--End inbox-->
 		<!--Edit profile-->
@@ -96,7 +118,7 @@
 	            <div>
 		            <a class="button is-outline is-info"
 		               href="javascript:{}" onclick="document.getElementById('edit_profile').submit();">
-		                <span>Save</span>
+		              <span>Save</span>
 		            </a>
 	            </div>
 			</form>
@@ -118,10 +140,10 @@
 				</div>
 				<div>
 					<a class="button is-outline is-info"
-		               href="javascript:{}" onclick="document.getElementById('add_request').submit();">
-		                <span>Save</span>
-		            </a>
-	            </div>
+		          href="javascript:{}" onclick="document.getElementById('add_request').submit();">
+            <span>Save</span>
+          </a>
+          </div>
 			</form>
 			<hr>
 			<!--TODO: Add all job requests and make them editable-->

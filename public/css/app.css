@@ -538,3 +538,12 @@ border: 1px solid #7f94cf;
 	display: inline-block;
 	margin-left: 20px;
 }
+
+.dash_right .bottomless {
+	margin-bottom: 0px;
+}
+
+.bottomless + span {
+	display: block;
+	margin-bottom: 40px;
+}
