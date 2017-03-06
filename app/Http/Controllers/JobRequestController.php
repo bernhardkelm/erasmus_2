@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobRequestRequest;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class JobRequestController extends Controller
@@ -11,9 +13,10 @@ class JobRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserService $service, Request $request)
     {
-        //
+        $jobRequests = $service->indexJobRequests($request->user()->id);
+        return response()->json($jobRequests, 200);
     }
 
     /**
@@ -23,7 +26,7 @@ class JobRequestController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.job_requests.create');
     }
 
     /**
@@ -32,9 +35,10 @@ class JobRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobRequestRequest $request, UserService $service)
     {
-        //
+        $jobRequest = $service->storeJobRequest($request->getJobRequest());
+        return response()->json($jobRequest, 201);
     }
 
     /**
@@ -43,9 +47,13 @@ class JobRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(UserService $service, $id)
     {
-        //
+        $jobRequest = $service->getJobRequest($id);
+        if (!jobRequest) abort(404);
+        return view('dashboard.job_requests.show', [
+            'jobRequest' => $jobRequest
+        ]);
     }
 
     /**
@@ -54,9 +62,14 @@ class JobRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UserService $service, Request $request, $id)
     {
-        //
+        $jobRequest = $service->getJobRequest($id);
+        if (!jobRequest) abort(404);
+        if (!$request->user()->can('update', $jobRequest)) abort(403);
+        return view('dashboard.job_requests.show', [
+            'jobRequest' => $jobRequest
+        ]);
     }
 
     /**
@@ -66,9 +79,14 @@ class JobRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(JobRequestRequest $request, UserService $service, $id)
     {
-        //
+        $jobRequest = $service->getJobRequest($id);
+        if (!jobRequest) abort(404);
+        if (!$request->user()->can('update', $jobRequest)) abort(403);
+        $jobRequest = $service->updateJobRequest($jobRequest, $request->all());
+        return response()->json($jobRequest, 200);
+
     }
 
     /**
@@ -77,8 +95,12 @@ class JobRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, UserService $service, $id)
     {
-        //
+        $jobRequest = $service->getJobRequest($id);
+        if (!jobRequest) abort(404);
+        if (!$request->user()->can('delete', $jobRequest)) abort(403);
+        $service->destroyJobRequest($jobRequest);
+        return response()->json("{}", 200);
     }
 }

@@ -3,16 +3,19 @@
 namespace App\Services;
 
 use App\Enumerators\UserType;
+use App\JobRequest;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserService
 {
     protected $user;
+    protected $jobRequest;
 
-    public function __construct(User $user)
+    public function __construct(User $user, JobRequest $jobRequest)
     {
         $this->user = $user;
+        $this->jobRequest = $jobRequest;
     }
 
     /**
@@ -124,6 +127,44 @@ class UserService
     public function destroy($user)
     {
         $user->delete();
+        return true;
+    }
+
+    public function indexJobRequests($userId)
+    {
+        return $this->jobRequest
+            ->where('user_id', $userId)
+            ->get();
+    }
+
+    public function getJobRequest($id)
+    {
+        try {
+            $jobRequest = $this->jobRequest
+                ->where('id', '=', $id)
+                ->firstOrFail();
+            return $jobRequest;
+        } catch (ModelNotFoundException $e) {
+            return false;
+        }
+    }
+
+    public function storeJobRequest($jobRequest)
+    {
+        $jobRequest->save();
+        return $jobRequest;
+    }
+
+    public function updateJobRequest($jobRequest, Array $newData)
+    {
+        $jobRequest->fill($newData);
+        $jobRequest->save();
+        return $jobRequest;
+    }
+
+    public function destroyJobRequest($jobRequest)
+    {
+        $jobRequest->delete();
         return true;
     }
 }

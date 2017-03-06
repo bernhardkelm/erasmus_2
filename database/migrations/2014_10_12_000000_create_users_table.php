@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('type');
+            $table->integer('type')->nullable();
             $table->string('country')->nullable();
             $table->string('major')->nullable();
             $table->string('languages')->nullable();
@@ -26,7 +26,9 @@ class CreateUsersTable extends Migration
             $table->string('picture')->nullable();
             $table->string('resume')->nullable();
             $table->string('email')->unique();
+            $table->integer('company_id')->unsigned()->nullabe();
             $table->string('password');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->rememberToken();
             $table->timestamps();
         });

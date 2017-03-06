@@ -18,6 +18,8 @@ Route::get('/profile', function() {
     return redirect()->route('users.show', ['id' => Auth::id()]);
 })->name('profile');
 Route::get('/users/{id}', 'UserController@show')->name('users.show');
+
+// Dashboard
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function() {
         return redirect()->route('dashboard.conversations::index');
@@ -25,6 +27,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard/messages', 'ConversationController@index')->name('dashboard.conversations::index');
     Route::get('/dashboard/messages/{id}', 'ConversationController@show')->name('dashboard.conversations::show');
     Route::get('/dashboard/edit-profile', 'UserController@edit')->name('dashboard.profile::edit');
+    Route::get('/dashboard/job-requests', 'JobRequestController@index')->name('dashboard.job_requests::index');
+    Route::get('/dashboard/job-requests/{id}', 'JobRequestController@show')->name('dashboard.job_requests::show');
+    Route::get('/dashboard/job-requests/create', 'JobRequestController@show')->name('dashboard.job_requests::create');
 });
 
 
@@ -36,7 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
 });
 
-// Dashboard
+// Job Requests
+Route::group(['middleware' => 'auth'], function () {
+    Route::put('/job_requests/{id}', 'JobRequestController@update')->name('job_requests.update');
+    Route::delete('/job_requests/{id}', 'JobRequestController@destroy')->name('job_requests.destroy');
+});
 
 
 /** ------------------------------------------------------------
@@ -68,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // Conversations
 Route::group(['middleware' => 'auth'], function () {
-    Route::delete('/dashboard/messages/{id}', 'ConversationController@detroy')->name('conversations.destroy');
+    Route::delete('/messages/{id}', 'ConversationController@detroy')->name('conversations.destroy');
 });
 
 // Messages

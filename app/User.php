@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enumerators\UserRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -47,4 +48,28 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Message', 'recipient_id');
     }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Company', 'company_id');
+    }
+
+    public function companiesCreated()
+    {
+        return $this->hasMany('App\Company', 'creator_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->roles->contains(function ($value, $key) {
+            return $value->id === UserRoles::ADMIN;
+        });
+    }
+
+
 }

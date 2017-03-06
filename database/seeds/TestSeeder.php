@@ -10,8 +10,12 @@ class TestSeeder extends Seeder
      * @return void
      */
     public function run(\App\Post $post, \App\Comment $comment, \App\User $user, \App\Conversation $conversation,
-                        \App\Message $message)
+                        \App\Message $message, \App\Role $role)
     {
+        $role->create(['role' => \App\Enumerators\UserRoles::ADMIN]);
+        $role->create(['role' => \App\Enumerators\UserRoles::MODERATOR]);
+        $role->create(['role' => \App\Enumerators\UserRoles::USER]);
+
         $user1 = $user->create([
             'name' => 'Peter',
             'email' => 'example@dev.com',
@@ -20,12 +24,16 @@ class TestSeeder extends Seeder
             'picture' => '/images/allaire.jpg',
         ]);
 
+        $user1->roles()->attach(\App\Enumerators\UserRoles::ADMIN);
+
         $user2 = $user->create([
             'name' => 'Alex',
             'email' => 'example@dumb.com',
             'type' => \App\Enumerators\UserType::COMPANY,
             'password' => app('hash')->make('devtest'),
         ]);
+
+        $user2->roles()->attach(\App\Enumerators\UserRoles::USER);
 
         $post1 = $post->create([
             'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam necessitatibus iusto est repellendus soluta earum magnam, non at eum, incidunt, sint! Odio odit error dignissimos reiciendis eligendi, omnis culpa repudiandae!',
