@@ -34,7 +34,7 @@ class CompanyRequest extends FormRequest
     {
         $company = $this->container->make(Company::class);
         $company->name = $this->get('name');
-        $company->creator_id = ($$this->user()->id;
+        $company->creator_id = ($this->has('creator_id')) ? $this->get('creator_id') : $this->user()->id;
         // If a logo has been uploaded, store it and link it to company.
         // Rename it to uniqueId.extension, e.g. 3245325234.png
         if ($this->hasFile('logo')) {

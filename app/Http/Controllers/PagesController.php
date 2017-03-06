@@ -17,7 +17,7 @@ class PagesController extends Controller
     public function dashboard(Request $request, UserService $userService, ConversationService $conversationService)
     {
         $user = $request->user();
-        $conversations = $conversationService->index($user->id);
+        $conversations = $conversationService->indexComplete($user->id);
         $jobRequests = $userService->indexJobRequests($user->id);
 
         return view('dashboard', [
