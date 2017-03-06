@@ -54,8 +54,8 @@ var someImg = $(this);
 
 /*Getting the query string*/
 function GetQueryStringParams(sParam) {
-  var sPageURL = window.location.search.substring(1);
-  var sURLVariables = sPageURL.split('&');
+  var sPageURL = window.location.search.substring(1),
+  		sURLVariables = sPageURL.split('&');
   for (var i = 0; i < sURLVariables.length; i++) {
     var sParameterName = sURLVariables[i].split('=');
     if (sParameterName[0] == sParam) {
@@ -102,10 +102,11 @@ $('.dash_options > a').on('click', function() {
 
 /*Generating the job request edit form*/
 $('.edit_request').on('click', function(e) {
-	var token = $('meta[name="_token"]').attr('content');
-	var id = $(this).siblings('meta[name="id"]').attr('content');
-	var title = $(this).siblings('h3').html();
-	var body = $(this).siblings('p').html();
+	var token = $('meta[name="_token"]').attr('content'),
+			id = $(this).siblings('meta[name="id"]').attr('content'),
+			title = $(this).siblings('h3').html(),
+			body = $(this).siblings('p').html();
+
 	$(this).closest('.request').replaceWith('<form id="edit_request" name="edit_request" method="post" action="/job_requests/' + id + '">\
 		<input type="hidden" name="_token" value="' + token + '">\
 		<input type="hidden" name="_method" value="PUT">\
@@ -119,5 +120,18 @@ $('.edit_request').on('click', function(e) {
 			</div>\
 			<div><input class="button is-outline is-info" type="submit" name="save" value="Save"></div>\
 		</form>');
+	preventScroll();
+});
+
+/*Showing a singel conversation*/
+$('.convo').on('click', function() {
+	var name = $(this).attr('name');
+	$('.convo:not(".message")').hide();
+	$('.convo_deep[name="' + name + '"]').show();
+});
+
+$('.back').on('click', function() {
+	$('.convo_deep').hide();
+	$('.convo').show();
 	preventScroll();
 });
