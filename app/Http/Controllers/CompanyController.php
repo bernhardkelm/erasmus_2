@@ -114,7 +114,7 @@ class CompanyController extends Controller
         if (!$request->user()->can('update', $company)) abort(403);
         $user = $userService->find($request->get('email'));
         $companyService->addEmployee($company, $user);
-        return response()->json($company, 200);
+        return response()->json(['alert' => 'Successfully added employee.'], 200);
     }
 
     public function removeEmployee(Request $request, CompanyService $companyService, $id)
@@ -122,6 +122,7 @@ class CompanyController extends Controller
         $company = $companyService->get($id);
         if (!$company) abort(404);
         if (!$request->user()->can('update', $company)) abort(403);
-        $user = $user
+        $companyService->removeEmployee($company, $request->get('user'));
+        return response()->json(['alert' => 'Successfully removed employee.'], 200);
     }
 }

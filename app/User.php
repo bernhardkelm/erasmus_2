@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Message', 'recipient_id');
     }
 
+    public function jobRequests()
+    {
+        return $this->hasMany('App\JobRequest');
+    }
+
     public function company()
     {
         return $this->belongsTo('App\Company', 'company_id');
