@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Services\ConversationService;
-use App\Services\MessageService;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {

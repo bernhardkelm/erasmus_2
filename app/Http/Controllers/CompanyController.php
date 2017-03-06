@@ -125,12 +125,12 @@ class CompanyController extends Controller
         return response()->json(['alert' => 'Successfully added employee.'], 200);
     }
 
-    public function removeEmployee(Request $request, CompanyService $companyService, $id)
+    public function removeEmployee(Request $request, CompanyService $companyService, $companyId, $employeeId)
     {
-        $company = $companyService->get($id);
+        $company = $companyService->get($companyId);
         if (!$company) abort(404);
         if (!$request->user()->can('update', $company)) abort(403);
-        $companyService->removeEmployee($company, $request->get('user'));
+        $companyService->removeEmployee($company, $employeeId);
         return response()->json(['alert' => 'Successfully removed employee.'], 200);
     }
 }

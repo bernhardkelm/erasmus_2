@@ -56,7 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/companies', 'CompanyController@store')->name('companies.store');
     Route::post('/companies/{id}/employees', 'CompanyController@addEmployee')->name('companies.addEmployee');
-    Route::delete('/companies/{id}/employees', 'CompanyController@removeEmployee')->name('companies.removeEmployee');
+    Route::delete('/companies/{companyId}/employees/{employeeId}', 'CompanyController@removeEmployee')->name('companies.removeEmployee');
     Route::put('/companies/{id}', 'CompanyController@update')->name('companies.update');
     Route::delete('/companies/{id}', 'CompanyController@destroy')->name('companies.destroy');
 });
