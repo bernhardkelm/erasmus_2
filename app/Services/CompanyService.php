@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Company;
-use App\Post;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CompanyService
@@ -22,6 +21,13 @@ class CompanyService
     public function index()
     {
         return $this->company->get();
+    }
+
+    public function indexForUser($userId)
+    {
+        return $this->company
+            ->where('creator_id', $userId)
+            ->get();
     }
 
     /**
@@ -75,6 +81,13 @@ class CompanyService
     {
         $company->delete();
         return true;
+    }
+
+    public function setCreator($company, $user)
+    {
+        $company->creator_id = $user->id;
+        $company->save();
+        return $company;
     }
 
     public function addEmployee($company, $user)

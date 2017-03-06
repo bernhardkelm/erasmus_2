@@ -23,6 +23,14 @@ class CompanyController extends Controller
         ]);
     }
 
+    public function indexForUser(CompanyService $service, Request $request)
+    {
+        $companies = $service->indexForUser($request->user()->id);
+        return view('dashboard.companies.index', [
+            'companies' => $companies
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +39,7 @@ class CompanyController extends Controller
     public function create(Request $request)
     {
         if (!$request->user()->type === UserType::COMPANY) abort(403);
-        return view('dashboard.company.create');
+        return view('dashboard.companies.create');
     }
 
     /**
@@ -71,7 +79,7 @@ class CompanyController extends Controller
         $company = $service->get($id);
         if (!$company) abort(404);
         if (!$request->user()->can('update', $company)) abort(403);
-        return view('companies.edit', [
+        return view('dashboard.companies.edit', [
             'company' => $company
         ]);
     }

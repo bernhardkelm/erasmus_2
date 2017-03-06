@@ -39,6 +39,28 @@ class ConversationService
         return $filteredConversations;
     }
 
+    public function indexComplete($user)
+    {
+        $conversations = $this->conversation
+            ->where('user_one', $user)
+            ->orWhere('user_two', $user)
+            ->with('userOne', 'userTwo')
+            ->with('messages.sender')
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+        // @TODO Improve this inefficient shit
+        $filteredConversations = $conversations->filter(function($value, $key) use ($user) {
+            $userNumber = ($value->user_one === $user) ? 'one' : 'two';
+            if ($userNumber === 'one') {
+                return $value->deleted_from_user_one !== 1;
+            } else {
+                return $value->deleted_from_user_two !== 1;
+            }
+        });
+        return $filteredConversations;
+
+    }
+
     /**
      * Get a specific conversation by its ID
      * @param $id

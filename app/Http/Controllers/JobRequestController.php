@@ -67,7 +67,7 @@ class JobRequestController extends Controller
         $jobRequest = $service->getJobRequest($id);
         if (!jobRequest) abort(404);
         if (!$request->user()->can('update', $jobRequest)) abort(403);
-        return view('dashboard.job_requests.show', [
+        return view('dashboard.job_requests.edit', [
             'jobRequest' => $jobRequest
         ]);
     }

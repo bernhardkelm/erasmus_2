@@ -54,6 +54,7 @@ var someImg = $(this);
 
 /*Setting the dashboard view*/
 $('.dash_options > a').on('click', function(e) {
+	console.log("LALAL");
 	$('.dash_right > div').hide();
 	$('.active').removeClass('active');
 	$('div[name="' + this.name + '"]').show();
