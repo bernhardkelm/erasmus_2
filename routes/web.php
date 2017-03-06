@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Companies
+Route::get('/companies', 'CompanyController@index')->name('companies.index');
+Route::get('/companies/{id}', 'CompanyController@show')->name('companies.show');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/companies', 'CompanyController@store')->name('companies.store');
     Route::post('/companies/{id}/employees', 'CompanyController@addEmployee')->name('companies.addEmployee');

@@ -82,7 +82,7 @@ class JobRequestController extends Controller
     public function update(JobRequestRequest $request, UserService $service, $id)
     {
         $jobRequest = $service->getJobRequest($id);
-        if (!jobRequest) abort(404);
+        if (!$jobRequest) abort(404);
         if (!$request->user()->can('update', $jobRequest)) abort(403);
         $jobRequest = $service->updateJobRequest($jobRequest, $request->all());
         return response()->json($jobRequest, 200);
