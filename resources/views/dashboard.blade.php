@@ -31,7 +31,7 @@
 					<span>{{ $conversations->count()}} conversation in total</span>
 				@endif
 				@foreach ($conversations as $conversation)
-					@if($conversation->lastMessage->recipient_id == $user->id && !$conversation->lastMessage->is_seen)
+					@if($conversation->latestMessage->recipient_id == $user->id && !$conversation->latestMessage->is_seen)
 						<div class="convo unread">
 					@else
 						<div class="convo">
