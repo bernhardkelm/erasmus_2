@@ -46,7 +46,7 @@ class UserService
     {
         return $this->user
                 ->where('type', UserType::COMPANY)
-                ->get();
+                ->paginate(15);
     }
 
     /**
