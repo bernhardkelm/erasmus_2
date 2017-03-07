@@ -606,3 +606,47 @@ border: 1px solid #7f94cf;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+.info_img {
+	height: 750px;
+	background-size: cover;
+	color: white;
+	font-weight: 400;
+}
+
+.info_img * {
+	font-weight: 600;
+	text-align: center;
+}
+
+.info_img > .container {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+}
+
+.info_img h1 {
+	font-size: 4em;
+}
+
+.container.info {
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.container.info h3 {
+	font-weight: 600;
+	text-align: center;
+	font-size: 3em;
+	margin-bottom: 40px;
+}
+
+.container.info p {
+	font-size: 1.1em;
+	column-count: 2;
+	column-gap: 60px;
+}
