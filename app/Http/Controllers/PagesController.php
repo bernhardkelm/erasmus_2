@@ -16,6 +16,10 @@ class PagesController extends Controller
         return view('welcome');
     }
 
+    public function information() {
+        return view('information');
+    }
+
     public function dashboard(Request $request, UserService $userService, ConversationService $conversationService,
         MessageService $messageService)
     {

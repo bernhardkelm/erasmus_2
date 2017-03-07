@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 // Pages
 Route::get('/', 'PagesController@welcome')->name('welcome');
+Route::get('/information', 'PagesController@information')->name('information');
 
 // Private Section
 Route::group(['middleware' => 'auth'], function () {
