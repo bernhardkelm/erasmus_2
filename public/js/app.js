@@ -147,7 +147,7 @@ $('.tab').on('click', function() {
 				var user_id = $('meta[name="user_id"]').attr('content');
 				$.getJSON('/users/' + user_id + '/job_requests', function(data) {
 					$('.col_right > div:not(.tab_wrapper)').hide();
-					$('.col_right').append('<div class="job_wrapper"><h3>Job Requests</h3></div>');
+					$('.col_right').append('<div class="job_wrapper has-depth"><h3>Job Requests</h3></div>');
 					for(var i = 0; i < data.length; i++) {
 						if(i != 0) {
 							$('.job_wrapper').append('<hr>');
@@ -160,7 +160,7 @@ $('.tab').on('click', function() {
 				$('.job_wrapper').show();
 			}
 		} else if($(this).attr('name') == 'profile_tab') {
-			$('#job_wrapper').hide();
+			$('.job_wrapper').hide();
 			$('.profile_wrapper').show();
 		}
 	}
