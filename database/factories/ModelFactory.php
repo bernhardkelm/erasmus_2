@@ -254,9 +254,9 @@ $factory->defineAs(App\User::class, 'company', function (Faker\Generator $faker)
     $number = $faker->numberBetween(1, 99);
     $logo = '001c.png';
     if ($number < 10) {
-        $avatar = '00'.$number.'c.png';
+        $logo = '00'.$number.'c.png';
     } elseif ($number >= 10 && $number < 100) {
-        $avatar = '0'.$number.'c.png';
+        $logo = '0'.$number.'c.png';
     }
 
     return [
