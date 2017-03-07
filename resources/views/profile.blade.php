@@ -5,7 +5,6 @@
 <div class="profile__header"
     style="background-image: url('/images/user_header.jpg')"></div>
 <div class="container">
-<div id="col_wrapper">
     <div class="col_left has-depth">
         <div class="left_head">
             <meta name="user_id" content="{{ $user->id }}">
@@ -184,7 +183,6 @@
         </div>
 
     </div>
-</div>
 </div>
 <div class="clearfix"></div>
 </div>

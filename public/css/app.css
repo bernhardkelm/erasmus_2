@@ -276,6 +276,7 @@ select:-webkit-autofill:focus {
 .col_right {
 	width: calc(100% - 340px);
 	display: inline-block;
+	float: right;
 	border-radius: 3px;
 	/*Removing the margin bug*/
 	margin: 0px -4px -4px 40px;
@@ -583,15 +584,15 @@ border: 1px solid #7f94cf;
 	margin-bottom: 40px;
 }
 
-#job_data h3 {
+.job_wrapper h3 {
 	font-weight: 400;
 	margin-bottom: 40px;
 }
 
 .tab_wrapper {
-	position: absolute;
   margin-top: -70px;
   z-index: -10;
+  margin-left: -40px;
 }
 
 .tab_wrapper .tab {

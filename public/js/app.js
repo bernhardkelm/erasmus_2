@@ -139,24 +139,28 @@ $('.back').on('click', function() {
 /*Showing a users job requests*/
 $('.tab').on('click', function() {
 	preventScroll();
-	console.log($(this).attr('name'))
 	if(!$(this).hasClass('active')) {
 		$('.tab').removeClass('active');
 		$(this).addClass('active');
 		if($(this).attr('name') == 'requests_tab') {
-			var user_id = $('meta[name="user_id"]').attr('content');
-			$.getJSON('/users/' + user_id + '/job_requests', function(data) {
-				$('.profile_wrapper').hide();
-				$('.col_right').append('<div id="job_wrapper"><h3 style="font-weight: 400">Job Requests<h3></div>');
-				for(var i = 0; i < data.length; i++) {
-					if(i != 0) {
-						$('#job_wrapper').append('<hr>');
+			if(!$('.job_wrapper').length) {
+				var user_id = $('meta[name="user_id"]').attr('content');
+				$.getJSON('/users/' + user_id + '/job_requests', function(data) {
+					$('.col_right > div:not(.tab_wrapper)').hide();
+					$('.col_right').append('<div class="job_wrapper"><h3>Job Requests</h3></div>');
+					for(var i = 0; i < data.length; i++) {
+						if(i != 0) {
+							$('.job_wrapper').append('<hr>');
+						}
+						$('.job_wrapper').append('<h4>' + data[i].title + '</h4><p>' + data[i].body + '</p>');
 					}
-					$('#job_wrapper').append('<h4>' + data[i].title + '</h4><p>' + data[i].body + '</p>');
-				}
-			});
+				});
+			} else {
+				$('.profile_wrapper').hide();
+				$('.job_wrapper').show();
+			}
 		} else if($(this).attr('name') == 'profile_tab') {
-			$('#job_wrapper').remove();
+			$('#job_wrapper').hide();
 			$('.profile_wrapper').show();
 		}
 	}
