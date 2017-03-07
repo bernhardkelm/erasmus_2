@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
                 return [
                     'name' => 'required|max:255',
                     'email' => 'required|email|max:255|unique:users',
-                    'password' => 'required|min:6|confirmed'
+                    'password' => 'required|min:6|confirmed',
                 ];
             case 'PUT':
                 /**
@@ -42,6 +42,9 @@ class UserRequest extends FormRequest
                     'languages' => 'max:255',
                     'twitter' => 'url|max:255',
                     'facebook' => 'url|max:255',
+                    'website' => 'url|max:255',
+                    'location' => 'max:255',
+                    'header' => 'image|mimes:jpeg,png,jpg:max:2000',
                     'picture' => 'image|mimes:jpeg,png,jpg|max:300',
                     'resume' => 'file|mimes:pdf|max:5000',
                     'email' => 'required|email|unique:users,email,'.$this->route('id'),

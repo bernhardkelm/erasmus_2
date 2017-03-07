@@ -2,9 +2,9 @@
   <div class="container">
     <ul class="navigation__left">
       <li><a href="/">PluggedIN</a></li>
-      <li><a href="#">Information</a></li>
+      <li><a href="{{ route('information') }}">Information</a></li>
       <li><a href="{{ route('users.index') }}">Users</a></li>
-      <li><a href="#">Companies</a></li>
+      <li><a href="{{ route('companies.index') }}">Companies</a></li>
       <li><a href="#">Forums</a></li>
     </ul>
 

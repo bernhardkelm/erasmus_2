@@ -117,6 +117,14 @@ class UserService
             $user->picture = '/images/' . $filename;
         }
 
+        if ($request->hasFile('header')) {
+            $filename = uniqid() . '.' . $request->header->extension();
+            $request->header->move(public_path('images/headers'), $filename);
+            $oldheader = public_path() . $user->header;
+            if (file_exists($oldheader)) unlink($oldheader);
+            $user->picture = '/images/headers/' . $filename;
+        }
+
         // If a resume has been uploaded, store it and link it to user.
         // Rename it to resume_uniqueId.extension, e.g. resume3245325234.pdf
         if ($request->hasFile('resume')) {
@@ -127,7 +135,7 @@ class UserService
             $user->resume = '/resumes/' . $filename;
         }
         // Update all other properties
-        $input = $request->except(['picture', 'resume', 'password']);
+        $input = $request->except(['picture', 'resume', 'header', 'password']);
         $user->fill($input);
         // Save new user object to DB
         $user->save();

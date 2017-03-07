@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="navigation__left">
       <li><a href="/">PluggedIN</a></li>
-      <li><a href="#">Information</a></li>
+      <li><a href="{{ route('information') }}">Information</a></li>
     </ul>
 
     <ul class="navigation__right">
