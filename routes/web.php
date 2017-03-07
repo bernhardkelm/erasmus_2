@@ -56,6 +56,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/job_requests/{id}', 'JobRequestController@destroy')->name('job_requests.destroy');
 });
 
+// Job Offers
+Route::get('/company/{id}/job_offers', 'JobOfferController@index')->name('job_offers.index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/job_offers', 'JobOfferController@store')->name('job_offers.store');
+    Route::put('/job_offers/{id}', 'JobOfferController@update')->name('job_offers.update');
+    Route::delete('/job_offers/{id}', 'JobOfferController@destroy')->name('job_offers.destroy');
+});
+
 // Companies
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/companies', 'CompanyController@store')->name('companies.store');
