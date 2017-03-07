@@ -7,10 +7,23 @@
   background-position: top center;
 }
 
+#col_wrapper {
+  margin: 40px 0;
+}
+
+.profile_wrapper, .job_wrapper {
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  padding: 40px 60px;
+  background-color: #fff;
+  min-height: 500px;
+}
+
 .col_left {
   margin-top: -250px;
 }
 .col_right {
+  width: calc(100% - 340px);
   margin-top: -120px !important;
 }
 
@@ -38,13 +51,31 @@
 }
 
 .col_right {
-  padding: 40px 60px;
-  background-color: #fff;
-
   hr {
     border-color: #e4e4e4;
   }
 }
+
+.tab_wrapper  {
+  .tab {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #747474;
+    display: inline-block;
+    background: white;
+    padding: 3px 30px 5px 30px;
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
+    box-shadow: inset 0px -2px 7px rgba(0,0,0,.10);
+    transition: all 0.3s ease;
+
+    &.active {
+      box-shadow: none;
+    }
+  }
+}
+
 
 form[name="store_post"] > textarea {
 	width: 100%;
