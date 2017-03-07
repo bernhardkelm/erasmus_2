@@ -297,7 +297,8 @@ select:-webkit-autofill:focus {
 	-ms-transform: translate(-50%);
 }
 
-.left_head > .profile_img > img {
+.left_head > .profile_img > img,
+.comment__image > img {
 	opacity: 0;
 	transition: opacity 0.3s ease;
 }

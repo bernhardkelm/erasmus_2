@@ -135,3 +135,10 @@ $('.back').on('click', function() {
 	$('.convo').show();
 	preventScroll();
 });
+
+/*Showing a users job requests*/
+$('#job_requests').on('click', function() {
+	preventScroll();
+	$('.col_right').children().hide();
+	console.log('test');
+});

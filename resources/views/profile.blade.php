@@ -73,7 +73,7 @@
                         <span> Resume</span>
                     </a>
                 @endif
-                <a href="#" class="button is-outline">
+                <a href="#" id="job_requests" class="button is-outline">
                     <span class="icon">
                         <i class="mdi mdi-book-open"></i>
                     </span>
