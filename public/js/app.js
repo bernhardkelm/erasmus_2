@@ -137,18 +137,27 @@ $('.back').on('click', function() {
 });
 
 /*Showing a users job requests*/
-$('#job_requests').on('click', function() {
+$('.tab').on('click', function() {
 	preventScroll();
-	var user_id = $('meta[name="user_id"]').attr('content');
-	$.getJSON('/users/' + user_id + '/job_requests', function(data) {
-		console.log(data);
-		$('.col_right').children().hide();
-		$('.col_right').append('<div id="job_data"><h3 style="font-weight: 400">Job Requests<h3></div>');
-		for(var i = 0; i < data.length; i++) {
-			if(i != 0) {
-				$('#job_data').append('<hr>');
-			}
-			$('#job_data').append('<h4>' + data[i].title + '</h4><p>' + data[i].body + '</p>');
+	console.log($(this).attr('name'))
+	if(!$(this).hasClass('active')) {
+		$('.tab').removeClass('active');
+		$(this).addClass('active');
+		if($(this).attr('name') == 'requests_tab') {
+			var user_id = $('meta[name="user_id"]').attr('content');
+			$.getJSON('/users/' + user_id + '/job_requests', function(data) {
+				$('.profile_wrapper').hide();
+				$('.col_right').append('<div id="job_wrapper"><h3 style="font-weight: 400">Job Requests<h3></div>');
+				for(var i = 0; i < data.length; i++) {
+					if(i != 0) {
+						$('#job_wrapper').append('<hr>');
+					}
+					$('#job_wrapper').append('<h4>' + data[i].title + '</h4><p>' + data[i].body + '</p>');
+				}
+			});
+		} else if($(this).attr('name') == 'profile_tab') {
+			$('#job_wrapper').remove();
+			$('.profile_wrapper').show();
 		}
-	});
+	}
 });

@@ -74,16 +74,17 @@
                         <span> Resume</span>
                     </a>
                 @endif
-                <a href="#" id="job_requests" class="button is-outline">
-                    <span class="icon">
-                        <i class="mdi mdi-book-open"></i>
-                    </span>
-                    <span>Job Requests</span>
-                </a>
             </div>
         </div>
     </div>
     <div class="col_right has-depth">
+        <div class="tab_wrapper">
+            <div name="profile_tab" class="tab active">Profil</div>
+            <div name="requests_tab" class="tab right">Job Requests</div>
+        </div>
+
+        <div class="profile_wrapper">
+
         <form role="form" id="store_post" name="store_post" method="POST" action="{{ route('posts.store') }}">
             {{ csrf_field() }}
             <textarea name="body" placeholder="Write a message..."></textarea>
@@ -179,6 +180,9 @@
                 </div>
             @endforeach
         </div>
+
+        </div>
+
     </div>
 </div>
 </div>
