@@ -82,7 +82,7 @@
             <div name="requests_tab" class="tab right">Job Requests</div>
         </div>
 
-        <div class="profile_wrapper">
+        <div class="profile_wrapper has-depth">
             <form role="form" id="store_post" name="store_post" method="POST" action="{{ route('posts.store') }}">
                 {{ csrf_field() }}
                 <textarea name="body" placeholder="Write a message..."></textarea>
