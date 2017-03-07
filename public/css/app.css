@@ -621,3 +621,58 @@ border: 1px solid #7f94cf;
 	column-count: 2;
 	column-gap: 60px;
 }
+
+.users_wrapper {
+	padding-top: 40px;
+	overflow: hidden;
+}
+
+.users_wrapper > h2 {
+	font-weight: 600;
+	margin-bottom: 40px;
+}
+
+.usercard {
+	float: left;
+	width: calc(100% / 3 - 40px);
+	margin: 20px;
+	border-radius: 3px;
+	overflow: hidden;
+	max-height: 205px;
+}
+
+.usercard .left,
+.usercard .right {
+	padding: 20px;
+	float: left;
+	width: 50%;
+	min-height: 100%;
+}
+
+.usercard .left {
+	background: #0f1219;
+	text-align: center;
+	border-radius: 3px;
+}
+
+.usercard .left > * {
+	display: inline-block;
+}
+
+.usercard .left .card_img {
+	overflow: hidden;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+.usercard .left h3 {
+	width: 100%;
+	font-weight: 400;
+	color: white;
+	font-size: 16px;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
