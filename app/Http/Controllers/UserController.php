@@ -27,15 +27,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(UserService $userService, PostService $postService, MessageService $messageService,
-                         Request $request, $id)
+    public function show(UserService $userService, PostService $postService, $id)
     {
         $user = $userService->get($id);
         $posts = $postService->index($id);
-        return view('profile', [
-            'user' => $user,
-            'posts' => $posts
-        ]);
+        if ($user->isUser()) {
+            return view('user.profile', [
+                'user' => $user,
+                'posts' => $posts
+            ]);
+        } else {
+            return redirect()->route('companies.show', ['id' => $id]);
+        }
     }
 
     /**
@@ -66,7 +69,7 @@ class UserController extends Controller
         if (!$request->user()->can('update', $user))
             return response()->json(['error' => 'Unauthorized.'], 401);
         $user = $service->update($user, $request);
-        if (!user) return response()->json(['error' => 'Your passwords didn\'t match.']);
+        if (!$user) return response()->json(['error' => "Your passwords didn't match."]);
         return response()->json($user, 200);
     }
 

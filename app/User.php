@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Enumerators\UserRoles;
+use App\Enumerators\UserType;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -16,8 +17,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'type', 'country', 'major', 'languages', 'twitter', 'facebook', 'about',
-        'picture', 'resume'
+        // General information
+        'name', 'email', 'password', 'type', 'twitter', 'facebook', 'header', 'picture',
+        // User specific information
+        'major', 'country', 'languages', 'about', 'resume',
+        // Company specific information
+        'description', 'location', 'website',
     ];
 
     /**
@@ -54,19 +59,19 @@ class User extends Authenticatable
         return $this->hasMany('App\JobRequest');
     }
 
-    public function company()
-    {
-        return $this->belongsTo('App\Company', 'company_id');
-    }
-
-    public function companiesCreated()
-    {
-        return $this->hasMany('App\Company', 'creator_id');
-    }
-
     public function roles()
     {
         return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id');
+    }
+
+    public function isCompany()
+    {
+        return $this->type === UserType::COMPANY;
+    }
+
+    public function isUser()
+    {
+        return $this->type === UserType::PROFESSIONAL;
     }
 
     public function isAdmin()

@@ -16,17 +16,24 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('type')->nullable();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->integer('type')->default(\App\Enumerators\UserType::PROFESSIONAL);
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('header')->nullable();
+            $table->string('picture')->nullable();
+
             $table->string('country')->nullable();
             $table->string('major')->nullable();
             $table->string('languages')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('facebook')->nullable();
             $table->text('about')->nullable();
-            $table->string('picture')->nullable();
             $table->string('resume')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
+
+            $table->string('location')->nullable();
+            $table->string('website')->nullable();
+            $table->text('description')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

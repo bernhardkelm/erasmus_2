@@ -22,7 +22,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', function() {
         return redirect()->route('users.show', ['id' => Auth::id()]);
     })->name('profile');
-    Route::get('/users/{id}', 'UserController@show')->name('users.show');
+    Route::get('/users/{id}', 'PagesController@showUser')->name('users.show');
+    Route::get('/companies/{id]', 'PagesController@showCompany')->name('companies.show');
     Route::get('/users', 'PagesController@users')->name('users.index');
     Route::get('/companies', 'PagesController@companies')->name('companies.index');
 //    Route::get('/dashboard', function() {
@@ -56,7 +57,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Companies
-Route::get('/companies/{id}', 'CompanyController@show')->name('companies.show');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/companies', 'CompanyController@store')->name('companies.store');
     Route::post('/companies/{id}/employees', 'CompanyController@addEmployee')->name('companies.addEmployee');

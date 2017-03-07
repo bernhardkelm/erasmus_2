@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Services\CompanyService;
 use App\Services\ConversationService;
 use App\Services\MessageService;
+use App\Services\PostService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -51,11 +52,37 @@ class PagesController extends Controller
         ]);
     }
 
-    public function companies(CompanyService $companyService)
+    public function companies(UserService $userService)
     {
-        $companies = $companyService->index();
+        $companies = $userService->indexCompanies();
         return view('companies.index', [
             'companies' => $companies
+        ]);
+    }
+
+    public function showUser(UserService $userService, PostService $postService, $id)
+    {
+        $user = $userService->get($id);
+        $posts = $postService->index($id);
+        if (!$user->isUser()) {
+            return redirect()->route('companies.show', ['id' => $id]);
+        }
+        return view('user.profile', [
+            'user' => $user,
+            'posts' => $posts
+        ]);
+    }
+
+    public function showCompany(UserService $userService, PostService $postService, $id)
+    {
+        $company = $userService->get($id);
+        $posts = $postService->index($id);
+        if (!$company->isCompany()) {
+            return redirect()->route('users.show', ['id' => $id]);
+        }
+        return view('companies.profile', [
+            'company' => $company,
+            'posts' => $posts
         ]);
     }
 
