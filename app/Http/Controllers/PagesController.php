@@ -67,7 +67,7 @@ class PagesController extends Controller
         if (!$user->isUser()) {
             return redirect()->route('companies.show', ['id' => $id]);
         }
-        return view('user.profile', [
+        return view('users.profile', [
             'user' => $user,
             'posts' => $posts
         ]);
