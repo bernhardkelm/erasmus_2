@@ -8,6 +8,7 @@
 <div id="col_wrapper">
     <div class="col_left has-depth">
         <div class="left_head">
+            <meta name="user_id" content="{{ $user->id }}">
             <div class="profile_img">
                 @if ($user->picture)
                     <img class="img" src="{{ $user->picture }}">
