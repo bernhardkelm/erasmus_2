@@ -31,43 +31,29 @@
 					<span>{{ $conversations->count()}} conversation in total</span>
 				@endif
 				@foreach ($conversations as $conversation)
-					@if($conversation->latestMessage->recipient_id == $user->id && !$conversation->latestMessage->is_seen)
+					@if($conversation->latestMessage->recipient_id === $user->id && $conversation->latestMessage->is_seen === 0)
 						<div class="convo unread" name="convo_{{ $conversation->id }}">
 					@else
 						<div class="convo" name="convo_{{ $conversation->id }}">
 					@endif
-						@if ($conversation->user_one == $user->id)
-							<div class="msg_img">
-								@if($conversation->userTwo->picture)
-										<img class="img" src="{{ $conversation->userTwo->picture }}">
-								@else
-										<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
-								@endif
-							</div>
-							<div class="convo_body">
-								<h4>{{ $conversation->userTwo->name}}</h4>
-								<span>{{ $conversation->latestMessage->message }}</span>
-							</div>
-						@else
-							<div class="msg_img">
-								@if($conversation->userOne->picture)
-									<img class="img" src="{{ $conversation->userOne->picture }}">
-								@else
-									<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
-								@endif
-							</div>
-							<div class="convo_body">
-								<h4>{{ $conversation->userOne->name}}</h4>
-								<span>{{ $conversation->latestMessage->message }}</span>
-							</div>
-						@endif
+						<div class="msg_img">
+							@if($conversation->latestMessage->sender->picture)
+								<img class="img" src="{{ $conversation->latestMessage->sender->picture }}">
+							@else
+								<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
+							@endif
+						</div>
+						<div class="convo_body">
+							<h4>{{ $conversation->latestMessage->sender->name}}</h4>
+							<span>{{ $conversation->latestMessage->message }}</span>
+						</div>
 					</div>
 					<div class="convo_deep" name="convo_{{ $conversation->id }}" style="display: none">
 						<form method="post" action="{{ route('messages.store') }}">
 							{{ csrf_field() }}
 							<textarea name="message" placeholder="New message..."></textarea>
 							<input type="hidden" name="conversation_id" value="{{ $conversation->id }}">
-							@if ($conversation->user_one == $user->id)
+							@if ($conversation->user_one === $user->id)
 								<input type="hidden" name="recipient_id" value="{{ $conversation->userTwo->id }}">
 							@else
 								<input type="hidden" name="recipient_id" value="{{ $conversation->userOne->id }}">
@@ -79,7 +65,7 @@
 							<div class="convo message">
 								<div class="msg_img">
 									@if($message->sender->picture)
-										<img class="img" src="{{ $conversation->userOne->picture }}">
+										<img class="img" src="{{ $message->sender->picture }}">
 									@else
 										<img class="img" src="{{ asset('images/default_avatar.jpg') }}">
 									@endif
@@ -93,7 +79,7 @@
 						<!--TODO: Place button correctly and format header on convo change, also convo post over ajax-->
 						<form name="convo_destroy" action="{{ route('conversations.destroy', ['id' => $conversation->id]) }}">
 							{{ csrf_field() }}
-							{{ method_field('PUT') }}
+							{{ method_field('DELETE') }}
 							<input type="submit" class="button has-depth is-danger" value="Delete">
 						</form>
 					</div>

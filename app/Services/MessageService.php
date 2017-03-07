@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class MessageService
 {
     protected $message;
+    protected $conversationService;
 
-    public function __construct(Message $message)
+    public function __construct(Message $message, ConversationService $conversationService)
     {
         $this->message = $message;
+        $this->conversationService = $conversationService;
     }
 
     /**
@@ -49,20 +51,20 @@ class MessageService
      * @param $request
      * @return static
      */
-    public function store(ConversationService $conversationService, $message)
+    public function store($message)
     {
         // First check if a conversation is already present on model, if so fetch it
         if ($message->conversation_id) {
-            $conversation = $conversationService->get($message->conversation_id);
+            $conversation = $this->conversationService->get($message->conversation_id);
             if (!$conversation) return response()->json(['error' => 'Conversation could not be found'], 404);
         }
 
         // If not present, check if one already exists
-        $conversation = $conversationService->getByUsers($message->sender_id, $message->recipient_id);
+        $conversation = $this->conversationService->getByUsers($message->sender_id, $message->recipient_id);
 
         // If it doesn't yet exist, create new one
-        if (!conversation) {
-            $conversation = $conversationService->create([
+        if (!$conversation) {
+            $conversation = $this->conversationService->create([
                 'user_one' => $message->sender_id,
                 'user_two' => $message->recipient_id
             ]);

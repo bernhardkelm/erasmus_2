@@ -16,7 +16,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
-            '*', 'App\Http\ViewComposers\UserComposer'
+            'modules.navigation-private', 'App\Http\ViewComposers\UserComposer'
         );
     }
 

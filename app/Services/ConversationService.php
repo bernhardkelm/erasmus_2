@@ -44,8 +44,13 @@ class ConversationService
         $conversations = $this->conversation
             ->where('user_one', $user)
             ->orWhere('user_two', $user)
-            ->with('userOne', 'userTwo')
-            ->with('messages.sender')
+            ->with(['userOne', 'userTwo'])
+            ->with('latestMessage.sender')
+            ->with([
+                'messages' => function ($query) {
+                    $query->orderBy('created_at', 'DESC');
+                },
+                'messages.sender'])
             ->orderBy('updated_at', 'DESC')
             ->get();
         // @TODO Improve this inefficient shit

@@ -93,7 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // Conversations
 Route::group(['middleware' => 'auth'], function () {
-    Route::delete('/messages/{id}', 'ConversationController@detroy')->name('conversations.destroy');
+    Route::delete('/conversations/{id}', 'ConversationController@destroy')->name('conversations.destroy');
 });
 
 // Messages

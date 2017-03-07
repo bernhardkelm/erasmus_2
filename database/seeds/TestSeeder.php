@@ -33,6 +33,13 @@ class TestSeeder extends Seeder
             'password' => app('hash')->make('devtest'),
         ]);
 
+        $user3 = $user->create([
+            'name' => 'Fay',
+            'email' => 'fay@fay.com',
+            'type' => \App\Enumerators\UserType::PROFESSIONAL,
+            'password' => app('hash')->make('devtest'),
+        ]);
+
         $user2->roles()->attach(\App\Enumerators\UserRoles::USER);
 
         $post1 = $post->create([
@@ -64,10 +71,33 @@ class TestSeeder extends Seeder
             'recipient_id' => $user2->id
         ]);
 
+        sleep(1);
+
         $message2 = $message->create([
             'conversation_id' => $conversation1->id,
             'message' => 'Sure is!',
             'sender_id' => $user2->id,
+            'recipient_id' => $user1->id
+        ]);
+
+        $conversation2 = $conversation->create([
+            'user_one' => $user1->id,
+            'user_two' => $user3->id
+        ]);
+
+        $message3 = $message->create([
+            'conversation_id' => $conversation2->id,
+            'message' => 'Hey, what you up to?',
+            'sender_id' => $user1->id,
+            'recipient_id' => $user3->id
+        ]);
+
+        sleep(1);
+
+        $message4 = $message->create([
+            'conversation_id' => $conversation2->id,
+            'message' => 'Nothing much.',
+            'sender_id' => $user3->id,
             'recipient_id' => $user1->id
         ]);
 
