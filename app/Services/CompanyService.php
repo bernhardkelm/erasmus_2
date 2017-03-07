@@ -20,7 +20,7 @@ class CompanyService
      */
     public function index()
     {
-        return $this->company->get();
+        return $this->company->paginate(10);
     }
 
     public function indexForUser($userId)

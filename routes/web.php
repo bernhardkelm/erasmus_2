@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Auth;
 
 // Pages
 Route::get('/', 'PagesController@welcome')->name('welcome');
-Route::get('/profile', function() {
-    return redirect()->route('users.show', ['id' => Auth::id()]);
-})->name('profile');
-Route::get('/users/{id}', 'UserController@show')->name('users.show');
 
-// Dashboard
+// Private Section
 Route::group(['middleware' => 'auth'], function () {
-      Route::get('/dashboard', 'PagesController@dashboard');
+    Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
+    Route::get('/profile', function() {
+        return redirect()->route('users.show', ['id' => Auth::id()]);
+    })->name('profile');
+    Route::get('/users/{id}', 'UserController@show')->name('users.show');
+    Route::get('/users', 'PagesController@users')->name('users.index');
+    Route::get('/companies', 'PagesController@companies')->name('companies.index');
 //    Route::get('/dashboard', function() {
 //        return redirect()->route('dashboard.conversations::index');
 //    });
@@ -38,8 +40,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 // Users
-Route::get('/users', 'UserController@index')->name('users.index');
-Route::get('/users/{id}', 'UserController@show')->name('users.show');
 Route::group(['middleware' => 'auth'], function () {
     Route::put('/users/{id}', 'UserController@update')->name('users.update');
     Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
@@ -53,7 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Companies
-Route::get('/companies', 'CompanyController@index')->name('companies.index');
 Route::get('/companies/{id}', 'CompanyController@show')->name('companies.show');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/companies', 'CompanyController@store')->name('companies.store');

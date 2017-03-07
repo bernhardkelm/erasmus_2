@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Services\CompanyService;
 use App\Services\ConversationService;
 use App\Services\MessageService;
 use App\Services\UserService;
@@ -37,4 +38,21 @@ class PagesController extends Controller
             'jobRequests' => $jobRequests
         ]);
     }
+
+    public function users(UserService $userService)
+    {
+        $users = $userService->indexProfessionals();
+        return view('users.index', [
+            'users' => $users
+        ]);
+    }
+
+    public function companies(CompanyService $companyService)
+    {
+        $companies = $companyService->index();
+        return view('companies.index', [
+            'companies' => $companies
+        ]);
+    }
+
 }

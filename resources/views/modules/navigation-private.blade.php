@@ -3,7 +3,7 @@
     <ul class="navigation__left">
       <li><a href="/">PluggedIN</a></li>
       <li><a href="#">Information</a></li>
-      <li><a href="#">Users</a></li>
+      <li><a href="{{ route('users.index') }}">Users</a></li>
       <li><a href="#">Companies</a></li>
       <li><a href="#">Forums</a></li>
     </ul>
@@ -18,7 +18,7 @@
       @if(Auth::user()->picture)
         <img src="{{ Auth::user()->picture }}" />
       @endif
-      <li><a href="#">Dashboard</a></li>
+      <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
       <li><a href="{{ route('users.show', ['id' => Auth::id()]) }}">Profile</a></li>
       <li class="no-separator">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

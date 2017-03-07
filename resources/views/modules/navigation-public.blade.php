@@ -3,16 +3,14 @@
     <ul class="navigation__left">
       <li><a href="/">PluggedIN</a></li>
       <li><a href="#">Information</a></li>
-      <li><a href="#">Presentation</a></li>
-      <li><a href="#">Mobility</a></li>
     </ul>
 
     <ul class="navigation__right">
       @if (Auth::guest())
         <li><a href="{{ route('login') }}">Login</a></li>
-        <li><a href="{{ route('register') }}">Register</a></li>
+        <li class="no-separator"><a href="{{ route('register') }}">Register</a></li>
       @else
-        <li>
+        <li class="no-separator">
           <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Logout
           </a>

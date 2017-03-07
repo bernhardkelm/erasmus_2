@@ -35,7 +35,7 @@ class UserService
     {
         return $this->user
                 ->where('type', UserType::PROFESSIONAL)
-                ->get();
+                ->paginate(15);
     }
 
     /**

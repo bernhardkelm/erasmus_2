@@ -40,6 +40,9 @@ class TestSeeder extends Seeder
             'password' => app('hash')->make('devtest'),
         ]);
 
+        factory(App\User::class, 50)->create();
+        factory(App\Company::class, 20)->create();
+
         $user2->roles()->attach(\App\Enumerators\UserRoles::USER);
 
         $post1 = $post->create([

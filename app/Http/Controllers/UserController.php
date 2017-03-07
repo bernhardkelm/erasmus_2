@@ -30,13 +30,9 @@ class UserController extends Controller
     public function show(UserService $userService, PostService $postService, MessageService $messageService,
                          Request $request, $id)
     {
-        $authUser = $request->user();
-        $unreadMessages = $messageService->numberOfUnreadMessages($authUser->id);
         $user = $userService->get($id);
         $posts = $postService->index($id);
         return view('profile', [
-            'authUser' => $authUser,
-            'unreadMessages' => $unreadMessages,
             'user' => $user,
             'posts' => $posts
         ]);
