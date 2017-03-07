@@ -13,9 +13,9 @@ class JobRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UserService $service, Request $request)
+    public function index(UserService $service, $userId)
     {
-        $jobRequests = $service->indexJobRequests($request->user()->id);
+        $jobRequests = $service->indexJobRequests($userId);
         return response()->json($jobRequests, 200);
     }
 

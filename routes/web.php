@@ -45,7 +45,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
 });
 
+
 // Job Requests
+Route::get('/user/{id}/job_requests', 'JobRequestController@index')->name('job_requests.index');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/job_requests', 'JobRequestController@store')->name('job_requests.store');
     Route::put('/job_requests/{id}', 'JobRequestController@update')->name('job_requests.update');
