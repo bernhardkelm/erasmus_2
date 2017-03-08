@@ -22,8 +22,12 @@
                         </div>
                     </div>
                     <div class="forum_body">
-                        <a href="#"><h4>{{ $thread->title }}</h4></a>
-                        <span>Last Reply XXX hours ago by XXX</span>
+                        <a href="/forums/d/{{ $thread->id }}"><h4>{{ $thread->title }}</h4></a>
+                        @if($thread->latestPost)
+                            <span>Last Reply {{ $thread->latestPost->getDiffTimeForHumans() }} hours ago by {{ $thread->user->name }}</span>
+                        @else
+                            <span>No answers yet...be the first one!</span>
+                        @endif
                         <p class="crop">{{ $thread->body }}</p>
                     </div>
                 </div>
