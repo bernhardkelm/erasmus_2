@@ -53,8 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
 // Forum
 Route::get('/forums', 'PagesController@forums')->name('forums');
 Route::get('/forums/t/{id}', 'ForumThreadController@index')->name('forums.threads.index');
-Route::get('/forums/d/{id}', 'ForumPostController@index')->name('forums.threads.show');
 Route::get('/forums/d/create', 'ForumThreadController@create')->name('forums.threads.create');
+Route::get('/forums/d/{id}', 'ForumPostController@index')->name('forums.threads.show');
 Route::get('/forums/d/{id]/reply', 'ForumPostController@create')->name('forums.posts.create');
 Route::get('/forums/d/{id}/edit', 'ForumThreadController@edit')->name('forums.threads.edit');
 Route::post('/forums/d', 'ForumThreadController@store')->name('forums.threads.store');
