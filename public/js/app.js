@@ -136,16 +136,15 @@ $('.back').on('click', function() {
 	preventScroll();
 });
 
-/*Showing a users job requests*/
-$('.tab').on('click', function() {
+function switchProfile(target) {
 	preventScroll();
-	if(!$(this).hasClass('active')) {
+	if(!$(target).hasClass('active')) {
 		$('.tab').removeClass('active');
-		$(this).addClass('active');
-		if($(this).attr('name') == 'requests_tab') {
+		$(target).addClass('active');
+		if($(target).attr('name') == 'requests') {
 			if(!$('.job_wrapper').length) {
 				var user_id = $('meta[name="user_id"]').attr('content');
-				$.getJSON('/users/' + user_id + '/job_requests', function(data) {
+				$.getJSON('/api/users/' + user_id + '/job_requests', function(data) {
 					$('.col_right > div:not(.tab_wrapper)').hide();
 					$('.col_right').append('<div class="job_wrapper has-depth"><h3>Job Requests</h3></div>');
 					for(var i = 0; i < data.length; i++) {
@@ -159,9 +158,19 @@ $('.tab').on('click', function() {
 				$('.profile_wrapper').hide();
 				$('.job_wrapper').show();
 			}
-		} else if($(this).attr('name') == 'profile_tab') {
+		} else if($(target).attr('name') == 'profile') {
 			$('.job_wrapper').hide();
 			$('.profile_wrapper').show();
 		}
 	}
+}
+
+/*Showing a users job requests*/
+$('.tab').on('click', function(e) {
+	switchProfile(e.target);
 });
+
+$(document).ready(function() {
+	switchProfile(document.getElementsByName(GetQueryStringParams('tab')));
+});
+

@@ -78,8 +78,8 @@
     </div>
     <div class="col_right">
         <div class="tab_wrapper">
-            <div name="profile_tab" class="tab active">Feed</div>
-            <div name="requests_tab" class="tab right">Job Requests</div>
+            <div name="profile" class="tab active">Feed</div>
+            <div name="requests" class="tab right">Job Requests</div>
         </div>
 
         <div class="profile_wrapper has-depth">
