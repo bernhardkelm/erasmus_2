@@ -27,7 +27,15 @@ class ForumThreadService
             ->where('topic_id', '=', $topicId)
             ->with(['user'])
             ->orderBy('updated_at', 'DESC')
-            ->simplePaginate(20);
+            ->paginate(20);
+    }
+
+    public function indexAll()
+    {
+        return $this->thread
+            ->with(['user'])
+            ->orderBy('updated_at', 'DESC')
+            ->paginate(20);
     }
 
     /**

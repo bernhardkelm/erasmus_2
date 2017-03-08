@@ -25,7 +25,7 @@ class ForumPostService
             ->where('thread_id', '=', $threadId)
             ->with(['user'])
             ->orderBy('created_at', 'ASC')
-            ->simplePaginate(20);
+            ->paginate(20);
     }
 
     /**

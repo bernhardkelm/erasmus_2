@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ForumPostRequest;
 use App\Services\ForumPostService;
 use App\Services\ForumThreadService;
+use App\Services\ForumTopicService;
 use Illuminate\Http\Request;
 
 class ForumPostController extends Controller
@@ -29,11 +30,13 @@ class ForumPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($threadId, ForumThreadService $service)
+    public function create($threadId, ForumThreadService $service, ForumTopicService $topicService)
     {
+        $topics = $topicService->index();
         $thread = $service->get($threadId);
         return view('forums.posts.create', [
-            'thread' => $thread
+            'thread' => $thread,
+            'topics' => $topics
         ]);
     }
 
@@ -56,13 +59,15 @@ class ForumPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ForumPostService $service, Request $request, $id)
+    public function edit(ForumPostService $service, Request $request, ForumTopicService $topicService, $id)
     {
         $post = $service->get($id);
         if (!$post) abort(404);
         if (!$request->user()->can('update', $post)) abort(403);
+        $topics = $topicService->index();
         return view('forums.posts.edit', [
-            'post' => $post
+            'post' => $post,
+            'topics' => $topics
         ]);
     }
 

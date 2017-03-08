@@ -29,9 +29,12 @@ class ForumThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ForumTopicService $topicService)
     {
-        return view('forums.threads.create');
+        $topics = $topicService->index();
+        return view('forums.threads.create', [
+            'topics' => $topics
+        ]);
     }
 
     /**
@@ -43,7 +46,6 @@ class ForumThreadController extends Controller
     public function store(ForumThreadRequest $request, ForumThreadService $service)
     {
         $thread = $service->store($request->getThread());
-        $thread->posts = [];
         return redirect()->route('forums.thread::show', ['id' => $thread->id]);
     }
 
@@ -66,13 +68,15 @@ class ForumThreadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, ForumThreadService $service, $id)
+    public function edit(Request $request, ForumThreadService $service, ForumTopicService $topicService, $id)
     {
+        $topics = $topicService->index();
         $thread = $service->get($id);
         if (!$thread) abort(404);
         if (!$request->user()->can('update', $thread)) abort(403);
         return view('forums.threads.edit', [
-            'thread' => $thread
+            'thread' => $thread,
+            'topics' => $topics
         ]);
     }
 

@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Services\CompanyService;
 use App\Services\ConversationService;
 use App\Services\CountryService;
+use App\Services\ForumThreadService;
+use App\Services\ForumTopicService;
 use App\Services\MessageService;
 use App\Services\PostService;
 use App\Services\UserService;
@@ -96,6 +98,16 @@ class PagesController extends Controller
         return view('companies.profile', [
             'company' => $company,
             'posts' => $posts
+        ]);
+    }
+
+    public function forums(ForumThreadService $threadService, ForumTopicService $topicService)
+    {
+        $threads = $threadService->indexAll();
+        $topics = $topicService->index();
+        return view('forums.threads.index', [
+            'topics' => $topics,
+            'threads' => $threads
         ]);
     }
 

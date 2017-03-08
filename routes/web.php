@@ -19,11 +19,13 @@ Route::get('/information', 'PagesController@information')->name('information');
 // Private Section
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
+    Route::get('/dashboard/{all}', 'PagesController@dashboard')
+        ->where(['all' => '.*']);
     Route::get('/profile', function() {
         return redirect()->route('users.show', ['id' => Auth::id()]);
     })->name('profile');
     Route::get('/users/{id}', 'PagesController@showUser')->name('users.show');
-    Route::get('/companies/{id]', 'PagesController@showCompany')->name('companies.show');
+    Route::get('/companies/{id}', 'PagesController@showCompany')->name('companies.show');
     Route::get('/users', 'PagesController@users')->name('users.index');
     Route::get('/companies', 'PagesController@companies')->name('companies.index');
 //    Route::get('/dashboard', function() {
@@ -48,7 +50,20 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-
+// Forum
+Route::get('/forums', 'PagesController@forums')->name('forums');
+Route::get('/forums/t/{id}', 'ForumThreadController@index')->name('forums.threads.index');
+Route::get('/forums/d/{id}', 'ForumPostController@index')->name('forums.threads.show');
+Route::get('/forums/d/create', 'ForumThreadController@create')->name('forums.threads.create');
+Route::get('/forums/d/{id]/reply', 'ForumPostController@create')->name('forums.posts.create');
+Route::get('/forums/d/{id}/edit', 'ForumThreadController@edit')->name('forums.threads.edit');
+Route::post('/forums/d', 'ForumThreadController@store')->name('forums.threads.store');
+Route::put('/forums/d/{id}', 'ForumThreadController@update')->name('forums.threads.update');
+Route::delete('/forums/d/{id}', 'ForumThreadController@destroy')->name('forums.threads.destroy');
+Route::post('/forums/d/{id}', 'ForumPostController@store')->name('forums.posts.destroy');
+Route::get('/forums/d/{threadId}/{postId}/edit', 'ForumPostController@edit')->name('forums.posts.edit');
+Route::put('/forums/r/{id}', 'ForumPostController@update')->name('forums.posts.update');
+Route::delete('/forums/r/{id}', 'ForumPostController@destroy')->name('forums.posts.destroy');
 
 // Companies
 Route::group(['middleware' => 'auth'], function () {

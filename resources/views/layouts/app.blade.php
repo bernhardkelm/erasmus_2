@@ -27,19 +27,21 @@
 <body>
 
     @if (Auth::check())
-        @include('modules/navigation-private')
+        @include('modules.navigation-private')
     @else
-        @include('modules/navigation-public')
+        @include('modules.navigation-public')
     @endif
 
     <main>
         @yield('content')
     </main>
 
-    @include('modules/footer')
+    @include('modules.footer')
 
+    @section('scripts')
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/luma.min.js') }}"></script>
+    @show
 </body>
 </html>
