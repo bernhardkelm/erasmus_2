@@ -288,3 +288,4 @@ $factory->define(\App\ForumPost::class, function(\Faker\Generator $faker) {
         'user_id' => $faker->numberBetween(1, 50)
     ];
 });
+
