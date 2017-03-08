@@ -24,7 +24,7 @@ class ConversationService
             ->where('user_one', $user)
             ->orWhere('user_two', $user)
             ->with('userOne', 'userTwo')
-            ->with('latestMessage')
+            ->with('latestMessage.sender')
             ->orderBy('updated_at', 'DESC')
             ->get();
         // @TODO Improve this inefficient shit
