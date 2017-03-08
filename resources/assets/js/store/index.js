@@ -341,8 +341,12 @@ const store = new Vuex.Store({
         },
 
         DELETE_CONVERSATION: (state, id) => {
-            Vue.delete(state.conversations, id);
+          Vue.delete(state.conversations, id);
         },
+
+        SET_LOADING: (state, {val}) => {
+          state.loading = val;
+        }
     },
 
     getters: {

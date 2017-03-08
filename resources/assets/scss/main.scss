@@ -1,4 +1,6 @@
 
+@import 'vendor/materialize/variables';
+@import 'vendor/materialize/spinner';
 @import 'vendor/luma/main';
 @import 'utilities/utilities';
 @import 'modules/footer';
@@ -9,3 +11,4 @@
 @import 'pages/auth';
 @import 'pages/profile';
 @import 'pages/overviews';
+@import 'pages/dashboard';

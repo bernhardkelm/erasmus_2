@@ -25,7 +25,8 @@ class ForumThreadService
     {
         return $this->thread
             ->where('topic_id', '=', $topicId)
-            ->with(['user'])
+            ->with(['user', 'latestPost.user'])
+            ->withCount('posts')
             ->orderBy('updated_at', 'DESC')
             ->paginate(20);
     }
@@ -33,7 +34,8 @@ class ForumThreadService
     public function indexAll()
     {
         return $this->thread
-            ->with(['user'])
+            ->with(['user', 'latestPost.user'])
+            ->withCount('posts')
             ->orderBy('updated_at', 'DESC')
             ->paginate(20);
     }

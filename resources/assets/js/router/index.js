@@ -2,29 +2,22 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-import Overview from '../components/dashboard/layouts/Overview.vue'
-import EditProfile from '../components/dashboard/layouts/EditProfile.vue'
-import AMVsIndex from '../components/dashboard/layouts/AMVsIndex.vue'
-import AMVsCreate from '../components/dashboard/layouts/AMVsCreate.vue'
-import AMVsEdit from '../components/dashboard/layouts/AMVsEdit.vue'
-import AMVsContests from '../components/dashboard/layouts/AMVsContests.vue'
-import Contests from '../components/dashboard/layouts/Contests.vue'
-import ContestUsers from '../components/dashboard/layouts/ContestUsers.vue'
+import Inbox from '../components/Inbox.vue'
 
 export default new Router({
   mode: 'history',
   routes: [
-    { path: '/dashboard/inbox', component: Overview, alias: '/dashboard' },
-    { path: '/dashboard/inbox/:id(\\d+)', component: AMVsIndex },
-    { path: '/dashboard/profile', component: AMVsCreate },
-    { path: '/dashboard/jobrequests', component: AMVsEdit },
-    { path: '/dashboard/jobrequests/create', component: JobRequestsCreate },
-    { path: '/dashboard/jobrequests/:id(\\d+)', component: AMVsContests },
-    { path: '/dashboard/company', component: Contests },
-    { path: '/dashboard/joboffers', component: ContestUsers },
-    { path: '/dashboard/joboffers/create', component: EditProfile },
-    { path: '/dashboard/joboffers/:id(\\d+)', component: EditProfile },
-    { path: '/dashboard/admin', component: EditProfile },
+    { path: '/dashboard/inbox', component: Inbox, alias: '/dashboard' },
+    { path: '/dashboard/inbox/:id(\\d+)', component: Inbox },
+    { path: '/dashboard/profile', component: Inbox },
+    { path: '/dashboard/jobrequests', component: Inbox },
+    { path: '/dashboard/jobrequests/create', component: Inbox },
+    { path: '/dashboard/jobrequests/:id(\\d+)', component: Inbox },
+    { path: '/dashboard/company', component: Inbox },
+    { path: '/dashboard/joboffers', component: Inbox },
+    { path: '/dashboard/joboffers/create', component: Inbox },
+    { path: '/dashboard/joboffers/:id(\\d+)', component: Inbox },
+    { path: '/dashboard/admin', component: Inbox },
     { path: '*', redirect: '/dashboard' }
   ]
 });

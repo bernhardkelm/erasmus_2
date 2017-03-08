@@ -14,6 +14,14 @@ class ForumPost extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function getDiffTimeForHumans()
+    {
+        $date = $this->created_at;
+        $now = $date->now();
+
+        return $date->diffForHumans($now, true);
+    }
+
     public function thread()
     {
         return $this->belongsTo('App\ForumThread', 'thread_id');

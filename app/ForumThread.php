@@ -23,4 +23,9 @@ class ForumThread extends Model
     {
         return $this->hasMany('App\ForumPost', 'thread_id');
     }
+
+    public function latestPost()
+    {
+        return $this->hasOne('App\ForumPost', 'thread_id')->latest();
+    }
 }
