@@ -44,9 +44,9 @@
           	@endforeach
         </div>
         <h3>Reply</h3>
-        <form role="form" id="reply" name="reply" method="POST" action="{{ route('forums.posts.store', ['id' => $thread->id]) }}">
-        	{{ csrf_field }}
-        	<input type="text" name="title" placeholder="Title">
+        <form role="form" id="store_post" name="reply" method="POST" action="{{ route('forums.posts.store') }}">
+        	{{ csrf_field() }}
+        	<input type="hidden" name="thread_id" value="{{ $thread->id }}">
         	<textarea name="body" placeholder="Your text here..."></textarea>
         	<a class="button is-primary"
                href="javascript:{}" onclick="document.getElementById('store_post').submit();">
