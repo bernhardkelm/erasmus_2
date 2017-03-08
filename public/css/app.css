@@ -626,6 +626,7 @@ border: 1px solid #7f94cf;
 	color: #4a4b84;
 	font-weight: 600;
 	display: inline-block;
+	margin-bottom: 40px;
 }
 
 .forum_main > .button {
@@ -695,8 +696,8 @@ p.crop {
 	margin-left: 10px
 }
 
-.forum_main textarea {
-	margin: 10px 0px;
+.forum_main form > * {
+	margin: 5px 0px;
 }
 
 .forum_body > p * {
@@ -709,7 +710,7 @@ p.crop {
 
 .jqte {
 	border-radius: 3px;
-	border: 1px solid #e8e9ea;
+	border: 1px solid rgba(34,36,38,.15);
 }
 
 .jqte_editor {
