@@ -577,3 +577,94 @@ border: 1px solid #7f94cf;
 	font-weight: 400;
 	margin-bottom: 40px;
 }
+
+/*Forums*/
+.forum {
+	padding-top: 40px;
+	padding-bottom: 60px;
+	overflow: hidden;
+}
+
+.forum > .topics {
+	float: left;
+	width: 300px;
+}
+
+.forum > .topics a {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.topics .square {
+	height: 12px;
+	width: 12px;
+	border-radius: 3px;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.forum > .forum_main {
+	float: left;
+	width: calc(100% - 340px);
+	margin-left: 40px;
+	padding: 40px 60px;
+}
+
+.forum_main > h3 {
+	color: #4a4b84;
+	font-weight: 600;
+	display: inline-block;
+}
+
+.forum_main > .button {
+	float: right;
+}
+
+.forum_list {
+	margin-top: 40px;
+}
+
+.forum_wrapper {
+	margin-bottom: 20px;
+}
+
+.forum_head {
+	float: left;
+}
+
+.forum_img {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+.forum_body {
+	display: inline-block;
+	width: calc(100% - 50px);
+	margin-left: 10px;
+}
+
+.forum_body > a > h4 {
+	max-width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	margin-bottom: 0px;
+	color: #494949;
+}
+
+.forum_body > p {
+	margin-top: 5px;
+}
+
+p.crop {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	line-height: 20px;     /* fallback */
+	max-height: 40px;      /* fallback */
+	-webkit-line-clamp: 2; /* number of lines to show */
+}
