@@ -1,7 +1,7 @@
 <template>
     <section class="dashboard__inbox">
-        <h3 class="dashboard__title">Inbox</h3>
         <loading></loading>
+        <h3 v-if="!loading" class="dashboard__title">Inbox</h3>
         <p v-if="!loading">{{ conversations.length }} conversations in total.</p>
         <div class="clearfix"></div>
         <conversation v-for="conversation in conversations" :conversation="conversation"></conversation>

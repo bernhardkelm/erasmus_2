@@ -1,5 +1,5 @@
 <template>
-  <router-link to="'/dashboard/inbox/' + conversation.id + '/'" tag="div">
+  <router-link to="'/dashboard/inbox/' + conversation.id + '/'">
     <div class="conversation__card">
       <img :src="partner.picture">
       <h4>{{ partner.name }}</h4>

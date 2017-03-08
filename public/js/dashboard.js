@@ -1239,8 +1239,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('router-link', {
     attrs: {
-      "to": "'/dashboard/inbox/' + conversation.id + '/'",
-      "tag": "div"
+      "to": "'/dashboard/inbox/' + conversation.id + '/'"
     }
   }, [_c('div', {
     staticClass: "conversation__card"
@@ -1265,9 +1264,9 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
     staticClass: "dashboard__inbox"
-  }, [_c('h3', {
+  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('h3', {
     staticClass: "dashboard__title"
-  }, [_vm._v("Inbox")]), _vm._v(" "), _c('loading'), _vm._v(" "), (!_vm.loading) ? _c('p', [_vm._v(_vm._s(_vm.conversations.length) + " conversations in total.")]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v("Inbox")]) : _vm._e(), _vm._v(" "), (!_vm.loading) ? _c('p', [_vm._v(_vm._s(_vm.conversations.length) + " conversations in total.")]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   }), _vm._v(" "), _vm._l((_vm.conversations), function(conversation) {
     return _c('conversation', {

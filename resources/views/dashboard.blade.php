@@ -29,7 +29,7 @@
       </ul>
     </div>
 	</div>
-  <main class="dashboard__content">
+  <main class="dashboard__content container">
     <div>
       <transition 
         name="fade" 
