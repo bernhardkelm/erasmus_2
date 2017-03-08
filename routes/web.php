@@ -60,7 +60,7 @@ Route::get('/forums/d/{id}/edit', 'ForumThreadController@edit')->name('forums.th
 Route::post('/forums/d', 'ForumThreadController@store')->name('forums.threads.store');
 Route::put('/forums/d/{id}', 'ForumThreadController@update')->name('forums.threads.update');
 Route::delete('/forums/d/{id}', 'ForumThreadController@destroy')->name('forums.threads.destroy');
-Route::post('/forums/d/{id}', 'ForumPostController@store')->name('forums.posts.store');
+Route::post('/forums/r', 'ForumPostController@store')->name('forums.posts.store');
 Route::get('/forums/d/{threadId}/{postId}/edit', 'ForumPostController@edit')->name('forums.posts.edit');
 Route::put('/forums/r/{id}', 'ForumPostController@update')->name('forums.posts.update');
 Route::delete('/forums/r/{id}', 'ForumPostController@destroy')->name('forums.posts.destroy');
