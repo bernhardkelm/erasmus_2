@@ -28,7 +28,7 @@ class ForumThreadRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'body' => 'required',
-            'topic_id' => 'required|exists:forum_topics'
+            'topic_id' => 'required|exists:forum_topics,id'
         ];
     }
 
