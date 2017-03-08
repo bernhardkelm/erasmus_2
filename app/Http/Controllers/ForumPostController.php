@@ -15,11 +15,13 @@ class ForumPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ForumPostService $postService, ForumThreadService $threadService, $threadId)
+    public function index(ForumPostService $postService, ForumThreadService $threadService, ForumTopicService $topicService, $threadId)
     {
+        $topics = $topicService->index();
         $thread = $threadService->get($threadId);
         $posts = $postService->index($threadId);
         return view('forums.threads.show', [
+            'topics' => $topics,
             'thread' => $thread,
             'posts' => $posts
         ]);
