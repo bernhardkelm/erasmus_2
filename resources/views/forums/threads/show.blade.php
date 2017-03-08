@@ -22,7 +22,7 @@
                 		<h3>{{ $thread->title }}</h3>
                     <a href="/users/{{ $post->user->id }}"><h4>{{ $post->user->name }}</h4></a>
                     <i>{{ $post->getDiffTimeForHumans() }} ago</i>
-                    <p>{{ $post->body }}</p>
+                    <p>{!! $post->body !!}</p>
 	                </div>
 	            </div>
 	            <hr>
@@ -36,7 +36,7 @@
 						<div class="forum_body">
 						    <a href="/users/{{ $post->user->id }}"><h4>{{ $post->user->name }}</h4></a>
 						      <i>{{ $post->getDiffTimeForHumans() }} ago</i>
-						    <p>{{ $post->body }}</p>
+						    <p>{!! $post->body !!}</p>
 						</div>
 					</div>
 					<hr>
@@ -47,7 +47,7 @@
         <form role="form" id="store_post" name="reply" method="POST" action="{{ route('forums.posts.store') }}">
         	{{ csrf_field() }}
         	<input type="hidden" name="thread_id" value="{{ $thread->id }}">
-        	<textarea name="body" placeholder="Your text here..."></textarea>
+        	<textarea class="editor" name="body" placeholder="Your text here..."></textarea>
         	<a class="button is-primary"
                href="javascript:{}" onclick="document.getElementById('store_post').submit();">
                 <span>Submit</span>

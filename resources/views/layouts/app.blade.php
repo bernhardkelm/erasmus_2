@@ -42,6 +42,27 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/luma.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.te.js') }}"></script>
+    <script type="text/javascript">
+        //Editor settings
+        $(".editor").jqte({
+            center: false,
+            color: false,
+            fsize: false,
+            format: false,
+            indent: false,
+            outdent: false,
+            left: false,
+            right: false,
+            ol: false,
+            ul: false,
+            p: false,
+            rule: false,
+            source: false,
+            sub: false,
+            sup: false
+        });
+    </script>
     @show
 </body>
 </html>
