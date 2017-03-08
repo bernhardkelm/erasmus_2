@@ -76,7 +76,12 @@ class ConversationService
         try {
             $conversation = $this->conversation
                 ->where('id', $id)
-                ->with(['messages.sender', 'userOne', 'userTwo'])
+                ->with([
+                    'messages' => function ($query) {
+                        $query->orderBy('created_at', 'DESC');
+                    },
+                    'messages.sender'])
+                ->with(['userOne', 'userTwo', 'latestMessage.sender'])
                 ->firstOrFail();
             return $conversation;
         } catch (ModelNotFoundException $e) {

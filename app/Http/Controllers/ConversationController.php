@@ -17,9 +17,7 @@ class ConversationController extends Controller
     public function index(ConversationService $service, MessageService $messageService, Request $request)
     {
         $conversations = $service->index($request->user()->id);
-        return view('dashboard.conversations.index', [
-            'conversations' => $conversations
-        ]);
+        return response()->json($conversations, 200);
     }
 
     /**
@@ -43,18 +41,19 @@ class ConversationController extends Controller
     public function show(ConversationService $conversationService, MessageService $messageService, Request $request, $id)
     {
         $conversation = $conversationService->get($id);
+        $user = $request->user();
         if (!$conversation) return response()->json(['error' => 'Conversation could not be found'], 404);
-        $user = $request->user()->id;
-        $unreadMessages = $conversation->messages->filter(function ($value, $key) use ($user) {
-            return ((!(intval($value->is_seen) === 1)) && ($value->recipient_id === $user));
+        if (!$user->can('view', $conversation)) return response()->json(['error' => 'Unauthorized.'], 403);
+
+        $userId = $user->id;
+        $unreadMessages = $conversation->messages->filter(function ($value, $key) use ($userId) {
+            return (((intval($value->is_seen) === 0)) && ($value->recipient_id === $userId));
         });
 
         foreach($unreadMessages as $message) {
             $messageService->markAsRead($message);
         }
-        return view('dashboard.conversations.show', [
-            'conversation' => $conversation
-        ]);
+        return response()->json($conversation, 200);
     }
 
     /**

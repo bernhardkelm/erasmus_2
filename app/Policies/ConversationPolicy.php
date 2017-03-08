@@ -19,7 +19,7 @@ class ConversationPolicy
      */
     public function view(User $user, Conversation $conversation)
     {
-        //
+        return ($user->id === $conversation->user_one) || ($user->id === $conversation->user_two);
     }
 
     /**

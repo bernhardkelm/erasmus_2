@@ -27,18 +27,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(UserService $userService, PostService $postService, $id)
+    public function show(UserService $userService, $id)
     {
         $user = $userService->get($id);
-        $posts = $postService->index($id);
-        if ($user->isUser()) {
-            return view('user.profile', [
-                'user' => $user,
-                'posts' => $posts
-            ]);
-        } else {
-            return redirect()->route('companies.show', ['id' => $id]);
-        }
+        return $user;
+    }
+
+    public function auth(Request $request)
+    {
+        $user = $request->user();
+        return response()->json($user->makeVisible('email'), 200);
     }
 
     /**

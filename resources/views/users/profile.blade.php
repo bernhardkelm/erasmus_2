@@ -3,7 +3,7 @@
 @section('content')
 <div class="profile">
 <div class="profile__header"
-    style="background-image: url('/images/user_header.jpg')"></div>
+    style="background-image: url('{{ $user->header }}')"></div>
 <div class="container">
     <div class="col_left has-depth">
         <div class="left_head">

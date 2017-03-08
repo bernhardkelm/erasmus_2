@@ -48,21 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-// Job Requests
-Route::get('/users/{id}/job_requests', 'JobRequestController@index')->name('job_requests.index');
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('/job_requests', 'JobRequestController@store')->name('job_requests.store');
-    Route::put('/job_requests/{id}', 'JobRequestController@update')->name('job_requests.update');
-    Route::delete('/job_requests/{id}', 'JobRequestController@destroy')->name('job_requests.destroy');
-});
 
-// Job Offers
-Route::get('/company/{id}/job_offers', 'JobOfferController@index')->name('job_offers.index');
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('/job_offers', 'JobOfferController@store')->name('job_offers.store');
-    Route::put('/job_offers/{id}', 'JobOfferController@update')->name('job_offers.update');
-    Route::delete('/job_offers/{id}', 'JobOfferController@destroy')->name('job_offers.destroy');
-});
 
 // Companies
 Route::group(['middleware' => 'auth'], function () {
@@ -101,11 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
  * User Messages
 ---------------------------------------------------------------*/
 
-// Conversations
-Route::group(['middleware' => 'auth'], function () {
-    Route::delete('/conversations/{id}', 'ConversationController@destroy')->name('conversations.destroy');
-});
-
 // Messages
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/messages', 'MessageController@store')->name('messages.store');
@@ -125,6 +106,43 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+// API Routes
+
+Route::group(['prefix' => 'api'], function () {
+    // Resource: User
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/user', 'UserController@auth');
+        Route::put('/users/{id}', 'UserController@update');
+        Route::delete('/users/{id}', 'UserController@destroy');
+    });
+
+    // Resource: Conversation
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/conversations', 'ConversationController@index')->name('conversations.index');
+        Route::get('/conversations/{id}', 'ConversationController@show')->name('conversations.show');
+        Route::post('/conversations', 'ConversationController@store')->name('conversations.store');
+        Route::delete('/conversations/{id}', 'ConversationController@destroy')->name('conversations.destroy');
+    });
+
+    // Job Requests
+    Route::get('/users/{id}/job_requests', 'JobRequestController@index')->name('job_requests.index');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/job_requests', 'JobRequestController@store')->name('job_requests.store');
+        Route::put('/job_requests/{id}', 'JobRequestController@update')->name('job_requests.update');
+        Route::delete('/job_requests/{id}', 'JobRequestController@destroy')->name('job_requests.destroy');
+    });
+
+    // Job Offers
+    Route::get('/company/{id}/job_offers', 'JobOfferController@index')->name('job_offers.index');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/job_offers', 'JobOfferController@store')->name('job_offers.store');
+        Route::put('/job_offers/{id}', 'JobOfferController@update')->name('job_offers.update');
+        Route::delete('/job_offers/{id}', 'JobOfferController@destroy')->name('job_offers.destroy');
+    });
+
+
+});
 
 
 

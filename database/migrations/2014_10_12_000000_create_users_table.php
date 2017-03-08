@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('type')->default(\App\Enumerators\UserType::PROFESSIONAL);
             $table->string('twitter')->nullable();
             $table->string('facebook')->nullable();
-            $table->string('header')->nullable();
+            $table->string('header')->default('/images/user_header.jpg');
             $table->string('picture')->nullable();
 
             $table->integer('country_id')->unsigned()->nullable();
