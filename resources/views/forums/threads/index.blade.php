@@ -28,7 +28,7 @@
                         @else
                             <span>No answers yet...be the first one!</span>
                         @endif
-                        <p class="crop">{{ $thread->body }}</p>
+                        <p class="crop">{!! $thread->body !!}</p>
                     </div>
                 </div>
             @endforeach
