@@ -149,7 +149,7 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     // Job Offers
-    Route::get('/company/{id}/job_offers', 'JobOfferController@index')->name('job_offers.index');
+    Route::get('/companies/{id}/job_offers', 'JobOfferController@index')->name('job_offers.index');
     Route::group(['middleware' => 'auth'], function () {
         Route::post('/job_offers', 'JobOfferController@store')->name('job_offers.store');
         Route::put('/job_offers/{id}', 'JobOfferController@update')->name('job_offers.update');

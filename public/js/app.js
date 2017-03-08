@@ -158,6 +158,23 @@ function switchProfile(target) {
 				$('.profile_wrapper').hide();
 				$('.job_wrapper').show();
 			}
+		} else if($(target).attr('name') == 'offers') {
+			if(!$('.job_wrapper').length) {
+				var company_id = $('meta[name="company_id"]').attr('content');
+				$.getJSON('/api/companies/' + company_id + '/job_offers', function(data) {
+					$('.col_right > div:not(.tab_wrapper)').hide();
+					$('.col_right').append('<div class="job_wrapper has-depth"><h3>Job Offers</h3></div>');
+					for(var i = 0; i < data.length; i++) {
+						if(i != 0) {
+							$('.job_wrapper').append('<hr>');
+						}
+						$('.job_wrapper').append('<h4>' + data[i].title + '</h4><p>' + data[i].body + '</p>');
+					}
+				});
+			} else {
+				$('.profile_wrapper').hide();
+				$('.job_wrapper').show();
+			}
 		} else if($(target).attr('name') == 'profile') {
 			$('.job_wrapper').hide();
 			$('.profile_wrapper').show();
