@@ -270,3 +270,21 @@ $factory->defineAs(App\User::class, 'company', function (Faker\Generator $faker)
         'location' => $faker->address,
     ];
 });
+
+$factory->define(\App\ForumThread::class, function(\Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence(),
+        'body' => $faker->paragraphs(3, true),
+        'topic_id' => $faker->numberBetween(1, 3),
+        'user_id' => $faker->numberBetween(1, 50)
+    ];
+});
+
+
+$factory->define(\App\ForumPost::class, function(\Faker\Generator $faker) {
+    return [
+        'body' => $faker->paragraphs(2, true),
+        'thread_id' => $faker->numberBetween(1, 10),
+        'user_id' => $faker->numberBetween(1, 50)
+    ];
+});

@@ -105,5 +105,24 @@ class TestSeeder extends Seeder
             'recipient_id' => $user1->id
         ]);
 
+        \App\ForumTopic::create([
+            'name' => 'General',
+            'color' => '#1E90FF'
+        ]);
+        \App\ForumTopic::create([
+            'name' => 'Travel',
+            'color' => '#BA55D3'
+        ]);
+        \App\ForumTopic::create([
+            'name' => 'IT',
+            'color' => '#90EE90'
+        ]);
+        \App\ForumTopic::create([
+            'name' => 'Work',
+            'color' => '#87CEEB'
+        ]);
+
+        factory(\App\ForumThread::class, 20)->create();
+        factory(\App\ForumPost::class, 50)->create();
     }
 }
