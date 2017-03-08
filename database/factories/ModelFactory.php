@@ -289,3 +289,4 @@ $factory->define(\App\ForumPost::class, function(\Faker\Generator $faker) {
     ];
 });
 
+

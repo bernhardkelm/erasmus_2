@@ -124,7 +124,5 @@ class TestSeeder extends Seeder
 
         factory(\App\ForumThread::class, 20)->create();
         factory(\App\ForumPost::class, 50)->create();
-
-        
     }
 }
