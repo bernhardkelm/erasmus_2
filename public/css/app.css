@@ -611,7 +611,7 @@ border: 1px solid #7f94cf;
 	padding: 40px 60px;
 }
 
-.forum_main > h3 {
+.forum_main h3 {
 	color: #4a4b84;
 	font-weight: 600;
 	display: inline-block;
@@ -619,10 +619,6 @@ border: 1px solid #7f94cf;
 
 .forum_main > .button {
 	float: right;
-}
-
-.forum_list {
-	margin-top: 40px;
 }
 
 .forum_wrapper {
@@ -667,4 +663,19 @@ p.crop {
 	line-height: 20px;     /* fallback */
 	max-height: 40px;      /* fallback */
 	-webkit-line-clamp: 2; /* number of lines to show */
+}
+
+.forum_wrapper.parent a {
+	display: inline-block;
+}
+
+.forum_wrapper i {
+	font-size: 12px;
+	vertical-align: super;
+}
+
+.forum_wrapper.parent i {
+	font-size: 12px;
+	vertical-align: super;
+	margin-left: 10px
 }
