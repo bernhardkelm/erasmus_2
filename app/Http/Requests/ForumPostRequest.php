@@ -26,9 +26,8 @@ class ForumPostRequest extends FormRequest
     {
         return [
             'body' => 'required',
-            'thread_id' => 'required|exists:forum_threads'
-        ];
-    }
+            'thread_id' => 'required|exists:forum_threads,id'
+        ]
 
     public function getPost()
     {
