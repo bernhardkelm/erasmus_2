@@ -24,10 +24,10 @@
                     <span>Message</span>
                 </a>
                 @if ($user->twitter)
-                    <a href="#" class="social_button"><i class="mdi mdi-twitter"></i></a>
+                    <a href="{{ $user->twitter }}" class="social_button"><i class="mdi mdi-twitter"></i></a>
                 @endif
                 @if ($user->facebook)
-                    <a href="#" class="social_button"><i class="mdi mdi-facebook"></i></a>
+                    <a href="{{ $user->facebook }}" class="social_button"><i class="mdi mdi-facebook"></i></a>
                 @endif
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="profile_data">
                 <h4>Country</h4>
                 @if ($user->country)
-                    <p>{{ $user->country }}</p>
+                    <p>{{ $user->country->name }}</p>
                 @else 
                     <p>Not disclosed</p>
                 @endif

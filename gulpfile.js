@@ -39,7 +39,7 @@ const config = {
 /**
  * Run all tasks needed for a build.
  */
-gulp.task('build', ['copy-css']);
+gulp.task('build', ['sass']);
 
 /**
  * Default task. Run the watch task
@@ -63,7 +63,7 @@ gulp.task('sass', () => {
     .pipe(postcss([autoprefixer()]))
     .pipe(cleanCSS())
     .pipe(rename(`${config.projectName}.min.css`))
-    .pipe(gulp.dest(paths.build));
+    .pipe(gulp.dest(`${paths.build}/css`));
 });
 
 /**
@@ -71,7 +71,7 @@ gulp.task('sass', () => {
  */
 gulp.task('copy-css', ['sass'], () => {
   return gulp.src(`${paths.build}/${config.projectName}.min.css`)
-    .pipe(gulp.dest(paths.build));
+    .pipe(gulp.dest(`${paths.build}/css`));
 });
 
 /**

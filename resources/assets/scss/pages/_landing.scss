@@ -1,6 +1,7 @@
 .home__wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100%;
   background-image: url('images/landing_bg.jpg');
@@ -8,8 +9,6 @@
 }
 
 .home__teaser {
-  margin-top: 10%;
-
   h1 {
     color: #fff;
     font-size: 7.2rem;

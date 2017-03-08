@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('header')->nullable();
             $table->string('picture')->nullable();
 
-            $table->string('country')->nullable();
+            $table->integer('country_id')->unsigned()->nullable();
             $table->string('major')->nullable();
             $table->string('languages')->nullable();
             $table->text('about')->nullable();
@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->text('description')->nullable();
 
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->rememberToken();
             $table->timestamps();
         });

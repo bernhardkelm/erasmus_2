@@ -1,0 +1,29 @@
+.pagination {
+	display: inline-block;
+	width: 100%;
+	list-style-type: none;
+	margin-bottom: 100px;
+}
+
+.pagination li {
+	display: inline-block;
+}
+
+.pagination li {
+	border: 1px solid #4a4b84;
+	border-radius: 3px;
+}
+
+.pagination li > span,
+.pagination li > a {
+	color: #4a4b84;
+  padding: 0px 10px;
+}
+
+.pagination li.active {
+	background: #4a4b84;
+}
+
+.pagination li.active > span {
+	color: white;
+}

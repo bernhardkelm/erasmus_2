@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CompanyService;
 use App\Services\ConversationService;
+use App\Services\CountryService;
 use App\Services\MessageService;
 use App\Services\PostService;
 use App\Services\UserService;
@@ -44,19 +45,31 @@ class PagesController extends Controller
         ]);
     }
 
-    public function users(UserService $userService)
+    public function users(UserService $userService, CountryService $countryService, Request $request)
     {
-        $users = $userService->indexProfessionals();
+        $country = null;
+        $requests = false;
+        if ($request->has('country')) $country = $request->input('country');
+        if ($request->has('requests')) $requests = true;
+        $countries = $countryService->index();
+        $users = $userService->indexProfessionalsFiltered($country, $requests);
         return view('users.index', [
-            'users' => $users
+            'users' => $users,
+            'countries' => $countries
         ]);
     }
 
-    public function companies(UserService $userService)
+    public function companies(UserService $userService, CountryService $countryService, Request $request)
     {
-        $companies = $userService->indexCompanies();
+        $country = null;
+        $offers = false;
+        if ($request->has('country')) $country = $request->input('country');
+        if ($request->has('offers')) $offers = true;
+        $countries = $countryService->index();
+        $companies = $userService->indexCompaniesFiltered($country, $offers);
         return view('companies.index', [
-            'companies' => $companies
+            'companies' => $companies,
+            'countries' => $countries
         ]);
     }
 

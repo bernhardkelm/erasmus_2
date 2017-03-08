@@ -1,0 +1,57 @@
+.information {
+  
+  &__teaser {
+  background-image: url('images/information_bg_1.png');
+  background-size: cover;
+  display: flex;
+  height: 70vh;
+  min-height: 400px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+    h1 {
+      color: #fff;
+      font-size: 7.2rem;
+      font-weight: 700;
+    }
+
+    p {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-top: -1.5rem;
+    }
+  }
+
+  &__wrapper {
+    flex: 0 0 (8 / 12) * 100%;
+  }
+
+  &__content {
+    padding: 30px 0 40px 0;
+
+    h3 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+  }
+
+  &__hero {
+    background-image: url('images/information_bg_2.png');
+    background-size: cover;
+    height: 400px;
+  }
+}
+
+.content__columns {
+  column-count: 2;
+	column-gap: 60px;
+  font-size: 1.6rem;
+
+  p:not(:first-child) {
+    margin-top: 10px;
+  }
+}

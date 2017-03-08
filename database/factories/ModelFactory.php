@@ -220,7 +220,7 @@ $factory->defineAs(App\User::class, 'user_male', function (Faker\Generator $fake
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'picture' => '/images/'.$avatar,
-        'country' => $faker->country,
+        'country_id' => $faker->numberBetween(1, 32),
         'languages' => $language_codes[$faker->numberBetween(0, 182)]
     ];
 });
@@ -243,7 +243,7 @@ $factory->defineAs(App\User::class, 'user_female', function (Faker\Generator $fa
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'picture' => '/images/'.$avatar,
-        'country' => $faker->country,
+        'country_id' => $faker->numberBetween(1, 32),
         'languages' => $language_codes[$faker->numberBetween(0, 182)]
     ];
 });
@@ -266,6 +266,7 @@ $factory->defineAs(App\User::class, 'company', function (Faker\Generator $faker)
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'picture' => '/images/'.$logo,
+        'country_id' => $faker->numberBetween(1, 32),
         'location' => $faker->address,
     ];
 });

@@ -41,12 +41,55 @@ class UserService
                 ->paginate(15);
     }
 
+    public function indexCompanies()
+    {
+        return $this->user
+            ->where('type', UserType::COMPANY)
+            ->paginate(15);
+    }
+
+    public function indexProfessionalsFiltered($country = null, $requests = false)
+    {
+        $query = $this->user->where('type', UserType::PROFESSIONAL)->with('country');
+        if ($country) {
+            $query = $query->where('country_id', '=', $country);
+        }
+        if ($requests) {
+            $query = $query->with('jobRequests');
+        }
+
+        $users = $query->paginate(15);
+        if ($requests) {
+            $users = $users->filter(function($value, $key) {
+                return $value->jobRequests->count() > 0;
+            });
+        }
+
+        return $users;
+    }
+
     /**
      * Get all users that are company representatives
      * @return mixed
      */
-    public function indexCompanies()
+    public function indexCompaniesFiltered($country = null, $offers = false)
     {
+        $query = $this->user->where('type', UserType::COMPANY)->with('country');
+        if ($country) {
+            $query = $query->where('country_id', '=', $country);
+        }
+        if ($offers) {
+            $query = $query->with('jobOffers');
+        }
+
+        $users = $query->paginate(15);
+        if ($offers) {
+            $users = $users->filter(function($value, $key) {
+                return $value->jobOffers->count() > 0;
+            });
+        }
+
+        return $users;
         return $this->user
                 ->where('type', UserType::COMPANY)
                 ->paginate(15);
@@ -62,6 +105,7 @@ class UserService
         try {
             $user = $this->user
                 ->where('id', $id)
+                ->with('country')
                 ->firstOrFail();
             return $user;
         } catch (ModelNotFoundException $e) {

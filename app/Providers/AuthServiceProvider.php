@@ -4,16 +4,20 @@ namespace App\Providers;
 
 use App\Comment;
 use App\Conversation;
+use App\Country;
 use App\ForumPost;
 use App\ForumThread;
 use App\ForumTopic;
+use App\JobOffer;
 use App\JobRequest;
 use App\Policies\CommentPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\ConversationPolicy;
+use App\Policies\CountryPolicy;
 use App\Policies\ForumPostPolicy;
 use App\Policies\ForumThreadPolicy;
 use App\Policies\ForumTopicPolicy;
+use App\Policies\JobOfferPolicy;
 use App\Policies\JobRequestPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\UserPolicy;
@@ -33,11 +37,13 @@ class AuthServiceProvider extends ServiceProvider
         Comment::class => CommentPolicy::class,
         User::class => UserPolicy::class,
         Conversation::class => ConversationPolicy::class,
+        JobOffer::class => JobOfferPolicy::class,
         JobRequest::class => JobRequestPolicy::class,
         Company::class => CompanyPolicy::class,
         ForumTopic::class => ForumTopicPolicy::class,
         ForumThread::class => ForumThreadPolicy::class,
         ForumPost::class => ForumPostPolicy::class,
+        Country::class => CountryPolicy::class,
     ];
 
     /**

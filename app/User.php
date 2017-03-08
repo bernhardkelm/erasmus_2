@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+
     public function sentMessages()
     {
         return $this->hasMany('App\Message', 'sender_id');
