@@ -35,7 +35,6 @@ class ForumThreadController extends Controller
      */
     public function create(ForumTopicService $topicService)
     {
-        dd('HELLO');
         $topics = $topicService->index();
         return view('forums.threads.create', [
             'topics' => $topics
