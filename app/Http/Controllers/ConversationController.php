@@ -46,13 +46,13 @@ class ConversationController extends Controller
         if (!$user->can('view', $conversation)) return response()->json(['error' => 'Unauthorized.'], 403);
 
         $userId = $user->id;
-        $unreadMessages = $conversation->messages->filter(function ($value, $key) use ($userId) {
-            return (((intval($value->is_seen) === 0)) && ($value->recipient_id === $userId));
-        });
-
-        foreach($unreadMessages as $message) {
-            $messageService->markAsRead($message);
+        foreach($conversation->messages as $message) {
+            if (((intval($message->is_seen) === 0)) && ($message->recipient_id === $userId)) {
+                $messageService->markAsRead($message);
+            }
+            $message->readableCreatedAt = $message->getDiffTimeForHumans();
         }
+
         return response()->json($conversation, 200);
     }
 

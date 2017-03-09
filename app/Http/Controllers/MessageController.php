@@ -38,6 +38,7 @@ class MessageController extends Controller
     public function store(MessageRequest $request, MessageService $service)
     {
         $message = $service->store($request->getMessage());
+        $message->sender = $request->user();
         return response()->json($message, 201);
     }
 

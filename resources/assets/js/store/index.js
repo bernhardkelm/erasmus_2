@@ -168,9 +168,12 @@ const store = new Vuex.Store({
         /**
          * Fetch a list of all conversations, then store.
          */
-        FETCH_CONVERSATIONS: ({commit}) => {
-            commit('SET_LOADING', { val: true });
-            return api.getUserConversations()
+        FETCH_CONVERSATIONS: ({state, commit}) => {
+          const isEmpty = Object.keys(state.conversations).length === 0
+          if (isEmpty) commit('SET_LOADING', { val: true });
+          return !isEmpty
+            ? Promise.resolve(state.conversations)
+            : api.getUserConversations()
                 .then((response) => {
                     commit('SET_LOADING', { val: false });
                     commit('SET_CONVERSATIONS', response)
@@ -186,7 +189,8 @@ const store = new Vuex.Store({
          * if that is the case then simply return it. Otherwise make a call to the API.
          */
         FETCH_CONVERSATION: ({commit, state}, id) => {
-          const exists = id in state.conversations;
+          const exists = (id in state.conversations) && 
+              (state.conversations[id].hasOwnProperty('messages'));
             if (!exists) commit('SET_LOADING', { val: true });
             return exists
               ? Promise.resolve(state.conversations[id])
@@ -212,6 +216,19 @@ const store = new Vuex.Store({
                 })
                 .catch((error) => Promise.reject(error));
         },
+
+        /** 
+         * Store a new message in database and Vuex
+         */
+        STORE_MESSAGE: ({commit}, message) => {
+            return api.storeMessage(message)
+                .then((response) => {
+                    commit('ADD_MESSAGE', response);
+                    return Promise.resolve(response);
+                })
+                .catch((error) => Promise.reject(error));
+        },
+
 
         /**
          * Store a new job request in database and Vuex
@@ -288,6 +305,10 @@ const store = new Vuex.Store({
             if (user[key] === 'null') user[key] = '';
           }
           state.user = user;
+        },
+
+        ADD_MESSAGE: (state, message) => {
+            state.conversations[message.conversation_id].messages.unshift(message);
         },
 
         SET_REQUESTS: (state, requests) => {

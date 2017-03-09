@@ -102,10 +102,6 @@ Route::group(['middleware' => 'auth'], function () {
  * User Messages
 ---------------------------------------------------------------*/
 
-// Messages
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('/messages', 'MessageController@store')->name('messages.store');
-});
 
 
 // Authentication Views
@@ -132,12 +128,15 @@ Route::group(['prefix' => 'api'], function () {
         Route::delete('/users/{id}', 'UserController@destroy');
     });
 
-    // Resource: Conversation
+    Route::get('/countries', 'CountryController@index');
+
+    // Resource: Conversation and Messages
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/conversations', 'ConversationController@index')->name('conversations.index');
         Route::get('/conversations/{id}', 'ConversationController@show')->name('conversations.show');
         Route::post('/conversations', 'ConversationController@store')->name('conversations.store');
         Route::delete('/conversations/{id}', 'ConversationController@destroy')->name('conversations.destroy');
+        Route::post('/messages', 'MessageController@store')->name('messages.store');
     });
 
     // Job Requests

@@ -29,17 +29,17 @@
       </ul>
     </div>
 	</div>
-  <main class="dashboard__content container">
-    <div>
-      <transition 
-        name="fade" 
-        enter-active-class="animated fadeIn" 
-        leave-active-class="animated fadeOut" 
-        mode="out-in">
-        <router-view></router-view>
-      </transition>
+    <div class="dashboard__content">
+      <div>
+        <transition 
+          name="fade" 
+          enter-active-class="animated fadeIn" 
+          leave-active-class="animated fadeOut" 
+          mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </div>
     </div>
-  </main>
 </div>
 @endsection
 

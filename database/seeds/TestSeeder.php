@@ -36,6 +36,7 @@ class TestSeeder extends Seeder
         $user3 = $user->create([
             'name' => 'Fay',
             'email' => 'fay@fay.com',
+            'picture' => '/images/069f.jpg',
             'type' => \App\Enumerators\UserType::PROFESSIONAL,
             'password' => app('hash')->make('devtest'),
         ]);

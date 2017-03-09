@@ -40,7 +40,7 @@ export default {
 
     /**
      * Resource: Conversations
-     * GET, DELETE
+     * GET, DELETE, POST
      */
 
     getUserConversations() {
@@ -57,6 +57,17 @@ export default {
 
     deleteConversation(id) {
       return Vue.http.delete(`/api/conversations/${id}`)
+        .then((response) => Promise.resolve(response.body))
+        .catch((error) => Promise.reject(error));
+    },
+
+    storeMessage(message) {
+      return Vue.http.post(`/api/messages`, message, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        })
         .then((response) => Promise.resolve(response.body))
         .catch((error) => Promise.reject(error));
     },
