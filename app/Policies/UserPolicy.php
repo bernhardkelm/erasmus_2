@@ -39,9 +39,9 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function update(User $user, User $userObject)
+    public function update(User $user, $id)
     {
-        return $user->id === $userObject->id;
+        return $user->id === $id;
     }
 
     /**
@@ -51,8 +51,8 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function delete(User $user, User $userObject)
+    public function delete(User $user, $id)
     {
-        return $user->id === $userObject->id;
+        return $user->id === $id;
     }
 }

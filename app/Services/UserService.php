@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Country;
 use App\Enumerators\UserType;
 use App\JobOffer;
 use App\JobRequest;
@@ -166,7 +167,7 @@ class UserService
             $request->header->move(public_path('images/headers'), $filename);
             $oldheader = public_path() . $user->header;
             if (file_exists($oldheader)) unlink($oldheader);
-            $user->picture = '/images/headers/' . $filename;
+            $user->header = '/images/headers/' . $filename;
         }
 
         // If a resume has been uploaded, store it and link it to user.
@@ -180,7 +181,11 @@ class UserService
         }
         // Update all other properties
         $input = $request->except(['picture', 'resume', 'header', 'password']);
+        foreach ($input as $field) {
+            if ($field === 'null' or $field === '') $field = null;
+        }
         $user->fill($input);
+        $user->country_id = $request->get('country_id');
         // Save new user object to DB
         $user->save();
         return $user;

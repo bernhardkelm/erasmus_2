@@ -12,7 +12,7 @@
     	<h3>New Discussion</h3>
     	<form role="form" id="store_thread" name="reply" method="POST" action="{{ route('forums.threads.store') }}">
         	{{ csrf_field() }}
-        	<select name="topic_id">
+        	<select name="topic_id" class="select">
 					  @foreach($topics as $topic)
 		            <option value="{{ $topic->id }}">{{ $topic->name }}</option>
 		        @endforeach

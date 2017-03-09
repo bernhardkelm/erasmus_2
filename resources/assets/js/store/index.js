@@ -236,6 +236,7 @@ const store = new Vuex.Store({
         STORE_REQUEST: ({commit}, request) => {
             return api.storeJobRequest(request)
                 .then((response) => {
+                    commit('ADD_REQUEST', response);
                     return Promise.resolve(response)
                 })
                 .catch((error) => Promise.reject(error));

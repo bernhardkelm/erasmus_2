@@ -37,12 +37,12 @@ class UserRequest extends FormRequest
                  */
                 return [
                     'name' => 'required|max:255',
-                    'country' => 'max:255',
+                    'country_id' => 'required|integer',
                     'major' => 'max:255',
                     'languages' => 'max:255',
-                    'twitter' => 'url|max:255',
-                    'facebook' => 'url|max:255',
-                    'website' => 'url|max:255',
+                    'twitter' => 'max:255',
+                    'facebook' => 'max:255',
+                    'website' => 'max:255',
                     'location' => 'max:255',
                     'header' => 'image|mimes:jpeg,png,jpg:max:2000',
                     'picture' => 'image|mimes:jpeg,png,jpg|max:300',

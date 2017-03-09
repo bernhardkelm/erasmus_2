@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 51);
+/******/ 	return __webpack_require__(__webpack_require__.s = 32);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -255,31 +255,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 10:
-/***/ (function(module, exports, __webpack_require__) {
-
-window.Vue = __webpack_require__(46);
-__webpack_require__(44);
-
-window.Laravel = {
-    csrfToken: document.querySelector("meta[name='_token']").getAttribute('content')
-};
-
-/**
- * We'll register a HTTP interceptor to attach the "CSRF" header to each of
- * the outgoing requests issued by this application. The CSRF middleware
- * included with Laravel will automatically verify the header's value.
- */
-
-Vue.http.interceptors.push(function (request, next) {
-    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-
-    next();
-});
-
-/***/ }),
-
-/***/ 44:
+/***/ 25:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1360,7 +1336,7 @@ var xhrClient = function (request) {
 
 var nodeClient = function (request) {
 
-    var client = __webpack_require__(49);
+    var client = __webpack_require__(30);
 
     return new PromiseObj(function (resolve) {
 
@@ -1815,7 +1791,7 @@ module.exports = plugin;
 
 /***/ }),
 
-/***/ 46:
+/***/ 27:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10997,11 +10973,11 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(48)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(29)))
 
 /***/ }),
 
-/***/ 48:
+/***/ 29:
 /***/ (function(module, exports) {
 
 var g;
@@ -11029,18 +11005,42 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 49:
+/***/ 30:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 51:
+/***/ 32:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(10);
+module.exports = __webpack_require__(4);
 
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports, __webpack_require__) {
+
+window.Vue = __webpack_require__(27);
+__webpack_require__(25);
+
+window.Laravel = {
+    csrfToken: document.querySelector("meta[name='_token']").getAttribute('content')
+};
+
+/**
+ * We'll register a HTTP interceptor to attach the "CSRF" header to each of
+ * the outgoing requests issued by this application. The CSRF middleware
+ * included with Laravel will automatically verify the header's value.
+ */
+
+Vue.http.interceptors.push(function (request, next) {
+    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+
+    next();
+});
 
 /***/ })
 

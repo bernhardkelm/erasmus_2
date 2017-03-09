@@ -22,6 +22,7 @@ class TestSeeder extends Seeder
             'type' => \App\Enumerators\UserType::PROFESSIONAL,
             'password' => app('hash')->make('devtest'),
             'picture' => '/images/allaire.jpg',
+            'country_id' => 10
         ]);
 
         $user1->roles()->attach(\App\Enumerators\UserRoles::ADMIN);

@@ -2,13 +2,9 @@
     <section class="dashboard__form form--profile">
         <loading></loading>
         <div v-show="!loading">
-          <h3 class="dashboard__title">Edit Profile</h3>
+          <h3 class="dashboard__title">Edit Company</h3>
           <h5 class="form__title">Account Information</h5>
           <div class="row">
-            <div class="column is-6">
-              <label for="name">Name</label>
-              <input id="name" v-model="userObject.name" type="text">
-            </div>
             <div class="column is-6">
               <label for="email">Email</label>
               <input id="email" v-model="userObject.email" type="text">
@@ -25,15 +21,15 @@
             </div>
           </div>
           <hr />
-          <h5 class="form__title">Personal Information</h5>
+          <h5 class="form__title">General Information</h5>
           <div class="row">
             <div class="column is-6">
-              <label for="languages">Languages</label>
-              <input id="languages"  v-model="userObject.languages" type="text">
+              <label for="name">Name</label>
+              <input id="name" v-model="userObject.name" type="text">
             </div>
             <div class="column is-6">
-              <label for="major">Major</label>
-              <input id="major" v-model="userObject.major" type="text">
+              <label for="location">Location</label>
+              <input id="location" v-model="userObject.location" type="text">
             </div>
           </div>
           <div class="row">
@@ -43,6 +39,7 @@
               </select>
             </div>
           </div>
+          
           <hr />
           <h5 class="form__title">Social Information</h5>
           <div class="row">
@@ -57,7 +54,7 @@
           </div>
           <hr />
           <h5 class="form__title">About</h5>
-          <p>Write something about yourself.</p>
+          <p>Write something about your company.</p>
           <textarea v-model="userObject.about"></textarea>
           <hr />
           <h5 class="form__title">Files</h5>
@@ -65,24 +62,12 @@
             <div class="column is-4">
               <div class="file-field">
                 <label for="avatar" class="button is-outline">
-                  <span>Upload Profile Picture</span>
+                  <span>Upload Logo</span>
                   <span class="icon">
                     <i class="mdi mdi-cloud-upload"></i>
                   </span>
                 </label/>
                 <input type="file" id="avatar">
-                <div class="file-path">Please select a file</div>
-              </div>
-            </div>
-            <div class="column is-4">
-              <div class="file-field">
-                <label for="resume" class="button is-outline">
-                  <span>Upload Resume (PDF)</span>
-                  <span class="icon">
-                    <i class="mdi mdi-cloud-upload"></i>
-                  </span>
-                </label/>
-                <input type="file" id="resume">
                 <div class="file-path">Please select a file</div>
               </div>
             </div>
@@ -107,6 +92,7 @@
             <router-link to="/dashboard" class="button is-outline">Back</router-link>
           </div>
         </div>
+        <div>{{ fullError }}</div>
         <div v-if="showErrors">
           <p v-for="error in submitErrors" class="error is-danger">
             {{ error }}
@@ -125,8 +111,7 @@
                     name: '',
                     email: '',
                     country_id: '',
-                    major: '',
-                    languages: '',
+                    location: '',
                     twitter: '',
                     facebook: '',
                     about: ''
@@ -142,13 +127,6 @@
         computed: {
             countries() {
               return this.$store.state.countries;
-            },
-           /**
-            * Get the avatar URL. In case the user doesn't have an avatar, show default one.
-            * @returns {String}
-            */
-            avatar() {
-                return this.userObject.avatar || '/images/default_avatar.jpg'
             },
             /**
              * Current loading status (loading is true if data is being loaded asynchronously)
@@ -199,19 +177,13 @@
                 this.saveButtonDisabled = true;
                 this.saveButtonStatus = 'Saving...';
                 const elAvatar = document.getElementById('avatar');
-                const elResume = document.getElementById('resume');
                 const elHeader = document.getElementById('header');
                 const avFiles = elAvatar.files;
-                const reFiles = elResume.files;
                 const heFiles = elHeader.files;
 
                 const formData = new FormData();
-                
-
-                if (this.userObject.major.length > 0)
-                  formData.append('major', this.userObject.major);
-                if (this.userObject.languages.length > 0)
-                  formData.append('languages', this.userObject.languages);
+                if (this.userObject.location.length > 0)
+                  formData.append('location', this.userObject.location);
                 if (this.userObject.twitter.length > 0)
                   formData.append('twitter', this.userObject.twitter);
                 if (this.userObject.facebook.length > 0)
@@ -258,10 +230,6 @@
                     formData.append('picture', avFiles[0]);
                 }
 
-                if (reFiles.length) {
-                    formData.append('resume', reFiles[0]);
-                }
-
                 if (heFiles.length) {
                     if (!this.validateImage(heFiles[0])) {
                         this.saveButtonStatus = 'Failed';
@@ -278,12 +246,13 @@
                         data: formData
                 })
                 .then((response) => {
-                    this.userObject.picture = response.picture || '/images/default_avatar.jpg';
+                    this.userObject.picture = response.picture || '/images/default_logo.png';
                     this.$store.commit('SET_USER', this.userObject);
                     this.saveButtonStatus = 'Saved';
                     this.saveButtonDisabled = true;
                 })
                 .catch((error) => {
+                  this.fullError = error.body;
                   this.saveButtonStatus = 'Failed';
                     if (typeof error.body === 'object') {
                         for (let key in error.body) {

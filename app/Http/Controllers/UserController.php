@@ -64,7 +64,7 @@ class UserController extends Controller
     {
         $user = $service->get($id);
         if (!$user) return response()->json(['error' => 'User could not be found'], 404);
-        if (!$request->user()->can('update', $user))
+        if (!$request->user()->id === $user->id)
             return response()->json(['error' => 'Unauthorized.'], 401);
         $user = $service->update($user, $request);
         if (!$user) return response()->json(['error' => "Your passwords didn't match."]);
@@ -81,7 +81,7 @@ class UserController extends Controller
     {
         $user = $service->get($id);
         if (!$user) return response()->json(['error' => 'User could not be found'], 404);
-        if (!$request->user()->can('delete', $user))
+        if (!$request->user()->id === $user->id)
             return response()->json(['error' => 'Unauthorized.'], 401);
         $service->destroy($user);
         return response()->json("{}", 200);

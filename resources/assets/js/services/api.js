@@ -92,7 +92,7 @@ export default {
     storeJobRequest(data) {
       return Vue.http.post(`/api/job_requests`, data, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         })
@@ -103,7 +103,7 @@ export default {
     updateJobRequest(id, data) {
       return Vue.http.put(`/api/job_requests/${id}`, data, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         })
@@ -112,7 +112,7 @@ export default {
     },
 
     deleteJobRequest(id) {
-      return Vue.http.delete(`/api/job_offers/${id}`)
+      return Vue.http.delete(`/api/job_requests/${id}`)
         .then((response) => Promise.resolve(response.body))
         .catch((error) => Promise.reject(error));
     },
@@ -137,7 +137,7 @@ export default {
     storeJobOffer(data) {
       return Vue.http.post(`/api/job_offers`, data, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         })
@@ -148,7 +148,7 @@ export default {
     updateJobOffer(id, data) {
       return Vue.http.put(`/api/job_offers/${id}`, data, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         })

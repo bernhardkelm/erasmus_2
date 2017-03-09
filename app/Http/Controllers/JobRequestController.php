@@ -50,10 +50,8 @@ class JobRequestController extends Controller
     public function show(UserService $service, $id)
     {
         $jobRequest = $service->getJobRequest($id);
-        if (!$jobRequest) abort(404);
-        return view('dashboard.job_requests.show', [
-            'jobRequest' => $jobRequest
-        ]);
+        if (!$jobRequest) return response()->json(['error' => 'Job Request not found.']);
+        return response()->json($jobRequest, 200);
     }
 
     /**

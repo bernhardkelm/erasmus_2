@@ -9,7 +9,7 @@
         <form action="{{ route('users.index') }}" method="GET">
           <div class="row">
             <div class="column is-3">
-              <select name="country" id="country">
+              <select name="country" class="select" id="country">
                 <option selected>Select a Country</option>
                 @foreach($countries as $country)
                   <option value="{{ $country->id }}"
