@@ -10,7 +10,7 @@
 
     <ul class="navigation__right">
       @if($unreadMessages > 0)
-        <li class="no-separator"><a href="#"><i class="mdi mdi-email-open"></i></a></li>
+        <li class="no-separator"><a href="/dashboard/inbox"><i class="mdi mdi-email-open"></i></a></li>
         <li class="no-separator"><span class="label is-primary">{{ $unreadMessages }}</span></li>
       @else
         <li class="no-separator"><a href="#"><i class="mdi mdi-email"></i></a></li>

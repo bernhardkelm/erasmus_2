@@ -401,6 +401,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -2327,7 +2329,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "message": message
       }
     })
-  })], 2)
+  }), _vm._v(" "), _c('router-link', {
+    staticClass: "button is-outline",
+    attrs: {
+      "to": "/dashboard/inbox"
+    }
+  }, [_vm._v("Back")])], 2)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "icon"

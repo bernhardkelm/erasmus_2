@@ -7,8 +7,12 @@
       <div class="nav__image">
         @if ($user->picture)
           <img class="img" src="{{ $user->picture }}">
-        @else 
-          <img class="img" src="{{ asset('images/default_avatar.jpg') }}">
+        @else
+          @if ($user->isUser())
+            <img class="img" src="{{ asset('images/default_avatar.jpg') }}">
+          @else
+            <img class="img" src="{{ asset('images/default_logo.png') }}">
+          @endif
         @endif
       </div>
       <h2 id="profile_name">{{ $user->name }}</h2>

@@ -11,6 +11,8 @@
           </span>
         </a>
         <message v-for="message in conversation.messages" :message="message"></message>
+
+        <router-link to="/dashboard/inbox" class="button is-outline">Back</router-link>
     </section>
 </template>
 

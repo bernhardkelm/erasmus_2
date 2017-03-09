@@ -12,7 +12,7 @@
                 @if ($company->picture)
                     <img class="img" src="{{ $company->picture }}">
                 @else 
-                    <img class="img" src="{{ asset('src/plug_blue.png') }}">
+                    <img class="img" src="/images/default_logo.png">
                 @endif
             </div>
             <h2 id="profile_name">{{ $company->name }}</h2>
