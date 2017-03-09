@@ -9,7 +9,11 @@
         @endforeach
     </div><!-- div.col_left -->
     <div class="forum_main has-depth">
-        <h3>{{ $topic->name }}</h3>
+        @if (isset($currentTopic))
+            <h3>{{ $currentTopic->name }}</h3>
+        @else
+            <h3>All discussions</h3>
+        @endif
         <a href="/forums/d/create" class="button is-primary">
             <span>Create Discussion</span>
         </a>
