@@ -164,7 +164,7 @@
                     // would cascade down to the store object as well.
                     // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
                     // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
-                    this.userObject = JSON.parse(JSON.stringify(response));
+                    this.userObject = response;
                 });
         },
         methods: {
