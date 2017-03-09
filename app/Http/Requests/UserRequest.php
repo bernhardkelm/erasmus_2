@@ -37,7 +37,6 @@ class UserRequest extends FormRequest
                  */
                 return [
                     'name' => 'required|max:255',
-                    'country_id' => 'required|integer',
                     'major' => 'max:255',
                     'languages' => 'max:255',
                     'twitter' => 'max:255',

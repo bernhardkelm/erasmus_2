@@ -582,7 +582,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (this.userObject.facebook && this.userObject.facebook.length > 0) formData.append('facebook', this.userObject.facebook);
             if (this.userObject.about && this.userObject.about.length > 0) formData.append('about', this.userObject.about);
 
-            if (this.userObject.country_id && this.userObject.country_id.length > 0) formData.append('country_id', this.userObject.country_id);
+            if (this.userObject.country_id && this.userObject.country_id.length > 0) {
+                formData.append('country_id', this.userObject.country_id);
+            }
 
             // Check whether name field is empty
             if (this.userObject.name.length === 0) {
