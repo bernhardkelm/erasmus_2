@@ -10,7 +10,7 @@
     </div><!-- div.col_left -->
     <div class="forum_main has-depth">
         <h3>{{ $topic->name }}</h3>
-        <a href="#" class="button is-primary">
+        <a href="/forums/d/create" class="button is-primary">
             <span>Create Discussion</span>
         </a>
         <div class="forum_list">
