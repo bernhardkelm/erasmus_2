@@ -178,6 +178,7 @@
   font-size: 1.6rem;
   color: #313131;
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .dashboard__form {
@@ -218,5 +219,13 @@
 
   button.destroy {
     margin-left: auto;
+  }
+
+  label {
+    font-weight: 300;
+  }
+
+  textarea {
+    margin-top: 10px;
   }
 }

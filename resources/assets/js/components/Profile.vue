@@ -38,7 +38,7 @@
           </div>
           <div class="row">
             <div class="column is-6">
-              <select id="country" v-model="userObject.country_id">
+              <select id="country" v-model="country_id">
                 <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
               </select>
             </div>
@@ -131,6 +131,7 @@
                     facebook: '',
                     about: ''
                 },
+                country_id: '',
                 submitErrors: [],
                 password: '',
                 confirmPassword: '',
@@ -186,7 +187,8 @@
                     // would cascade down to the store object as well.
                     // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
                     // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
-                    this.userObject = response;
+                    this.userObject = JSON.parse(JSON.stringify(response));
+                    this.country_id = response.country.id || null;
                 });
         },
         methods: {
@@ -208,18 +210,18 @@
                 const formData = new FormData();
                 
 
-                if (this.userObject.major.length > 0)
+                if (this.userObject.major && this.userObject.major.length > 0)
                   formData.append('major', this.userObject.major);
-                if (this.userObject.languages.length > 0)
+                if (this.userObject.languages && this.userObject.languages.length > 0)
                   formData.append('languages', this.userObject.languages);
-                if (this.userObject.twitter.length > 0)
+                if (this.userObject.twitter && this.userObject.twitter.length > 0)
                   formData.append('twitter', this.userObject.twitter);
-                if (this.userObject.facebook.length > 0)
+                if (this.userObject.facebook && this.userObject.facebook.length > 0)
                 formData.append('facebook', this.userObject.facebook);
-                if (this.userObject.about.length > 0)
+                if (this.userObject.about && this.userObject.about.length > 0)
                   formData.append('about', this.userObject.about);
                 
-                if (this.userObject.country_id.length > 0)
+                if (this.userObject.country_id && this.userObject.country_id.length > 0)
                   formData.append('country_id', this.userObject.country_id);
                 
                 // Check whether name field is empty

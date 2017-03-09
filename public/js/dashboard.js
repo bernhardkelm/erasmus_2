@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 31);
+/******/ 	return __webpack_require__(__webpack_require__.s = 52);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -121,6 +121,40 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(15),
+  /* template */
+  __webpack_require__(34),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/LoadingSpinner.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] LoadingSpinner.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-21fc359e", Component.options)
+  } else {
+    hotAPI.reload("data-v-21fc359e", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -306,47 +340,13 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(8),
-  /* template */
-  __webpack_require__(19),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/LoadingSpinner.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] LoadingSpinner.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-21fc359e", Component.options)
-  } else {
-    hotAPI.reload("data-v-21fc359e", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(18);
 /**
  * Dashboard
  */
@@ -381,9 +381,305 @@ var vm = new Vue({
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MessageCard_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function data() {
+        return {
+            userObject: {
+                name: '',
+                email: '',
+                country_id: '',
+                location: '',
+                twitter: '',
+                facebook: '',
+                about: ''
+            },
+            countries: [],
+            submitErrors: [],
+            password: '',
+            confirmPassword: '',
+            fullError: '',
+            saveButtonDisabled: false,
+            saveButtonStatus: 'Save'
+        };
+    },
+
+    computed: {
+        /**
+         * Current loading status (loading is true if data is being loaded asynchronously)
+         * @returns {Boolean}
+         */
+        loading: function loading() {
+            return this.$store.state.loading;
+        },
+
+        /**
+         * Only show errors when the attempt to save just failed.
+         * @returns {Boolean}
+         */
+        showErrors: function showErrors() {
+            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
+        },
+
+        saveButtonClasses: function saveButtonClasses() {
+            return {
+                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
+                'is-loading': this.saveButtonStatus === 'Saving...',
+                'is-success': this.saveButtonStatus === 'Saved',
+                'is-error': this.saveButtonStatus === 'Failed'
+            };
+        }
+    },
+    components: {
+        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        // Fetch current user from Vuex or API
+        this.$store.dispatch('FETCH_COUNTRIES').then(function (response) {
+            response.forEach(function (country) {
+                country[value] = country[id];
+                country[text] = country[name];
+            });
+            _this.countries = response;
+        });
+        this.$store.dispatch('FETCH_USER').then(function (response) {
+            // this.userObject = response would create a copy by reference! All changes to userObject
+            // would cascade down to the store object as well.
+            // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
+            // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
+            _this.userObject = JSON.parse(JSON.stringify(response));
+        });
+    },
+    methods: {
+        /**
+         * Submit the form and update the user
+         */
+        submit: function submit() {
+            var _this2 = this;
+
+            // Reset errors
+            this.submitErrors = [];
+            this.saveButtonDisabled = true;
+            this.saveButtonStatus = 'Saving...';
+            var elAvatar = document.getElementById('avatar');
+            var elHeader = document.getElementById('header');
+            var avFiles = elAvatar.files;
+            var heFiles = elHeader.files;
+
+            var formData = new FormData();
+            if (this.userObject.location && this.userObject.location.length > 0) formData.append('location', this.userObject.location);
+            if (this.userObject.twitter && this.userObject.twitter.length > 0) formData.append('twitter', this.userObject.twitter);
+            if (this.userObject.facebook && this.userObject.facebook.length > 0) formData.append('facebook', this.userObject.facebook);
+            if (this.userObject.about && this.userObject.about.length > 0) formData.append('about', this.userObject.about);
+
+            if (this.userObject.country_id && this.userObject.country_id.length > 0) formData.append('country_id', this.userObject.country_id);
+
+            // Check whether name field is empty
+            if (this.userObject.name.length === 0) {
+                this.saveButtonStatus = 'Failed';
+                this.pushError("You must specify a name.");
+                return;
+            }
+            formData.append('name', this.userObject.name);
+
+            // Check whether email field is empty
+            if (this.userObject.email.length === 0) {
+                this.saveButtonStatus = 'Failed';
+                this.pushError("You must specify an email address.");
+                return;
+            }
+
+            formData.append('email', this.userObject.email);
+
+            // Check whether a new password has been entered and if they match
+            if (this.password.length > 0) {
+                if (this.password !== this.confirmPassword) {
+                    this.saveButtonStatus = 'Failed';
+                    this.pushError("Your passwords didn't match.");
+                    return;
+                }
+                formData.append('password', this.password);
+            }
+
+            // Check if avatar file has been selected
+            if (avFiles.length) {
+                if (!this.validateImage(avFiles[0])) {
+                    this.saveButtonStatus = 'Failed';
+                    return;
+                }
+                formData.append('picture', avFiles[0]);
+            }
+
+            if (heFiles.length) {
+                if (!this.validateImage(heFiles[0])) {
+                    this.saveButtonStatus = 'Failed';
+                    return;
+                }
+                formData.append('header', heFiles[0]);
+            }
+
+            // Laravel bug: multipart/form-data needs to be POST. Specify custom method PUT.
+            formData.append('_method', 'PUT');
+            this.$store.dispatch('PATCH_USER', {
+                id: this.userObject.id,
+                data: formData
+            }).then(function (response) {
+                _this2.userObject.picture = response.picture || '/images/default_logo.png';
+                _this2.$store.commit('SET_USER', _this2.userObject);
+                _this2.saveButtonStatus = 'Saved';
+                _this2.saveButtonDisabled = true;
+            }).catch(function (error) {
+                _this2.fullError = error.body;
+                _this2.saveButtonStatus = 'Failed';
+                if (_typeof(error.body) === 'object') {
+                    for (var key in error.body) {
+                        _this2.submitErrors.push(error.body[key]);
+                    }
+                } else {
+                    _this2.submitErrors.push(error.status + ": Server Error. Please try again later.");
+                }
+            });
+        },
+        validateImage: function validateImage(file) {
+            if (!/\.(png|jpeg|jpg)$/i.test(file.name)) {
+                this.pushError("Must be a valid image file (.PNG, .JPG or .JPEG allowed).");
+                return false;
+            }
+            if (!(file.size / 1024 < 2000)) {
+                this.pushError("Image must be smaller than 2MB.");
+                return false;
+            }
+            return true;
+        },
+
+
+        pushError: function pushError(error) {
+            if (this.submitErrors.indexOf(error) === -1) {
+                this.submitErrors.push(error);
+            }
+        }
+    }
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MessageCard_vue__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MessageCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__MessageCard_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue__);
 //
 //
@@ -481,7 +777,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -524,14 +820,568 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConversationCard_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function data() {
+        return {
+            jobOffer: {
+                title: '',
+                body: ''
+            },
+            submitErrors: [],
+            saveButtonDisabled: false,
+            saveButtonStatus: 'Save'
+        };
+    },
+
+    computed: {
+        /**
+         * Current loading status (loading is true if data is being loaded asynchronously)
+         * @returns {Boolean}
+         */
+        loading: function loading() {
+            return this.$store.state.loading;
+        },
+
+        /**
+         * Only show errors when the attempt to save just failed.
+         * @returns {Boolean}
+         */
+        showErrors: function showErrors() {
+            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
+        },
+
+        saveButtonClasses: function saveButtonClasses() {
+            return {
+                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
+                'is-loading': this.saveButtonStatus === 'Saving...',
+                'is-success': this.saveButtonStatus === 'Saved',
+                'is-error': this.saveButtonStatus === 'Failed'
+            };
+        }
+    },
+    components: {
+        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
+    },
+    methods: {
+        /**
+         * Submit the form and update the user
+         */
+        submit: function submit() {
+            var _this = this;
+
+            // Reset errors
+            this.submitErrors = [];
+            this.saveButtonDisabled = true;
+            this.saveButtonStatus = 'Saving...';
+            this.$store.dispatch('STORE_OFFER', this.jobOffer).then(function (response) {
+                _this.saveButtonStatus = 'Saved';
+                _this.saveButtonDisabled = true;
+            }).catch(function (error) {
+                _this.saveButtonStatus = 'Failed';
+                if (_typeof(error.body) === 'object') {
+                    for (var key in error.body) {
+                        _this.submitErrors.push(error.body[key]);
+                    }
+                } else {
+                    _this.submitErrors.push(error.status + ": Server Error. Please try again later.");
+                }
+            });
+        },
+
+
+        pushError: function pushError(error) {
+            if (this.submitErrors.indexOf(error) === -1) {
+                this.submitErrors.push(error);
+            }
+        }
+    }
+};
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function data() {
+        return {
+            jobRequest: {
+                title: '',
+                body: ''
+            },
+            submitErrors: [],
+            saveButtonDisabled: false,
+            saveButtonStatus: 'Save'
+        };
+    },
+
+    computed: {
+        /**
+         * Current loading status (loading is true if data is being loaded asynchronously)
+         * @returns {Boolean}
+         */
+        loading: function loading() {
+            return this.$store.state.loading;
+        },
+
+        /**
+         * Only show errors when the attempt to save just failed.
+         * @returns {Boolean}
+         */
+        showErrors: function showErrors() {
+            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
+        },
+
+        saveButtonClasses: function saveButtonClasses() {
+            return {
+                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
+                'is-loading': this.saveButtonStatus === 'Saving...',
+                'is-success': this.saveButtonStatus === 'Saved',
+                'is-error': this.saveButtonStatus === 'Failed'
+            };
+        }
+    },
+    components: {
+        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
+    },
+    methods: {
+        /**
+         * Submit the form and update the user
+         */
+        submit: function submit() {
+            var _this = this;
+
+            // Reset errors
+            this.submitErrors = [];
+            this.saveButtonDisabled = true;
+            this.saveButtonStatus = 'Saving...';
+            this.$store.dispatch('STORE_REQUEST', this.jobRequest).then(function (response) {
+                _this.saveButtonStatus = 'Saved';
+                _this.saveButtonDisabled = true;
+            }).catch(function (error) {
+                _this.saveButtonStatus = 'Failed';
+                if (_typeof(error.body) === 'object') {
+                    for (var key in error.body) {
+                        _this.submitErrors.push(error.body[key]);
+                    }
+                } else {
+                    _this.submitErrors.push(error.status + ": Server Error. Please try again later.");
+                }
+            });
+        },
+
+
+        pushError: function pushError(error) {
+            if (this.submitErrors.indexOf(error) === -1) {
+                this.submitErrors.push(error);
+            }
+        }
+    }
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function data() {
+        return {
+            jobOffer: {
+                title: '',
+                body: ''
+            },
+            submitErrors: [],
+            saveButtonDisabled: false,
+            saveButtonStatus: 'Save',
+            deleteButtonStatus: 'Delete'
+        };
+    },
+
+    computed: {
+        /**
+         * Current loading status (loading is true if data is being loaded asynchronously)
+         * @returns {Boolean}
+         */
+        loading: function loading() {
+            return this.$store.state.loading;
+        },
+
+        /**
+         * Only show errors when the attempt to save just failed.
+         * @returns {Boolean}
+         */
+        showErrors: function showErrors() {
+            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
+        },
+
+        saveButtonClasses: function saveButtonClasses() {
+            return {
+                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
+                'is-loading': this.saveButtonStatus === 'Saving...',
+                'is-success': this.saveButtonStatus === 'Saved',
+                'is-error': this.saveButtonStatus === 'Failed'
+            };
+        }
+    },
+    components: {
+        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        // Fetch current user from Vuex or API
+        this.$store.dispatch('FETCH_OFFER', this.$route.params.id).then(function (response) {
+            _this.jobOffer = JSON.parse(JSON.stringify(response));
+        });
+    },
+    methods: {
+        /**
+         * Submit the form and update the user
+         */
+        submit: function submit() {
+            var _this2 = this;
+
+            // Reset errors
+            this.submitErrors = [];
+            this.saveButtonDisabled = true;
+            this.saveButtonStatus = 'Saving...';
+            this.$store.dispatch('PATCH_OFFER', {
+                id: this.jobOffer.id,
+                data: this.jobOffer
+            }).then(function (response) {
+                _this2.saveButtonStatus = 'Saved';
+                _this2.saveButtonDisabled = true;
+            }).catch(function (error) {
+                _this2.saveButtonStatus = 'Failed';
+                if (_typeof(error.body) === 'object') {
+                    for (var key in error.body) {
+                        _this2.submitErrors.push(error.body[key]);
+                    }
+                } else {
+                    _this2.submitErrors.push(error.status + ": Server Error. Please try again later.");
+                }
+            });
+        },
+        destroy: function destroy() {
+            var _this3 = this;
+
+            this.deleteButtonStatus = 'Deleting...';
+            this.$store.dispatch('DESTROY_OFFER', this.jobOffer.id).then(function () {
+                _this3.deleteButtonStatus = 'Deleted';
+            }).catch(function (error) {
+                _this3.deleteButtonStatus = 'Failed';
+                if (_typeof(error.body) === 'object') {
+                    for (var key in error.body) {
+                        _this3.submitErrors.push(error.body[key]);
+                    }
+                } else {
+                    _this3.submitErrors.push(error.status + ": Server Error. Please try again later.");
+                }
+            });
+        },
+
+
+        pushError: function pushError(error) {
+            if (this.submitErrors.indexOf(error) === -1) {
+                this.submitErrors.push(error);
+            }
+        }
+    }
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function data() {
+        return {
+            jobRequest: {
+                title: '',
+                body: ''
+            },
+            submitErrors: [],
+            saveButtonDisabled: false,
+            saveButtonStatus: 'Save',
+            deleteButtonStatus: 'Delete'
+        };
+    },
+
+    computed: {
+        /**
+         * Current loading status (loading is true if data is being loaded asynchronously)
+         * @returns {Boolean}
+         */
+        loading: function loading() {
+            return this.$store.state.loading;
+        },
+
+        /**
+         * Only show errors when the attempt to save just failed.
+         * @returns {Boolean}
+         */
+        showErrors: function showErrors() {
+            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
+        },
+
+        saveButtonClasses: function saveButtonClasses() {
+            return {
+                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
+                'is-loading': this.saveButtonStatus === 'Saving...',
+                'is-success': this.saveButtonStatus === 'Saved',
+                'is-error': this.saveButtonStatus === 'Failed'
+            };
+        }
+    },
+    components: {
+        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        // Fetch current user from Vuex or API
+        this.$store.dispatch('FETCH_REQUEST', this.$route.params.id).then(function (response) {
+            _this.jobRequest = JSON.parse(JSON.stringify(response));
+        });
+    },
+    methods: {
+        /**
+         * Submit the form and update the user
+         */
+        submit: function submit() {
+            var _this2 = this;
+
+            // Reset errors
+            this.submitErrors = [];
+            this.saveButtonDisabled = true;
+            this.saveButtonStatus = 'Saving...';
+            this.$store.dispatch('PATCH_REQUEST', {
+                id: this.jobRequest.id,
+                data: this.jobRequest
+            }).then(function (response) {
+                _this2.saveButtonStatus = 'Saved';
+                _this2.saveButtonDisabled = true;
+            }).catch(function (error) {
+                _this2.saveButtonStatus = 'Failed';
+                if (_typeof(error.body) === 'object') {
+                    for (var key in error.body) {
+                        _this2.submitErrors.push(error.body[key]);
+                    }
+                } else {
+                    _this2.submitErrors.push(error.status + ": Server Error. Please try again later.");
+                }
+            });
+        },
+        destroy: function destroy() {
+            var _this3 = this;
+
+            this.deleteButtonStatus = 'Deleting...';
+            this.$store.dispatch('DESTROY_REQUEST', this.jobRequest.id).then(function () {
+                _this3.deleteButtonStatus = 'Deleted';
+            }).catch(function (error) {
+                _this3.deleteButtonStatus = 'Failed';
+                if (_typeof(error.body) === 'object') {
+                    for (var key in error.body) {
+                        _this3.submitErrors.push(error.body[key]);
+                    }
+                } else {
+                    _this3.submitErrors.push(error.status + ": Server Error. Please try again later.");
+                }
+            });
+        },
+
+
+        pushError: function pushError(error) {
+            if (this.submitErrors.indexOf(error) === -1) {
+                this.submitErrors.push(error);
+            }
+        }
+    }
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConversationCard_vue__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConversationCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ConversationCard_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__LoadingSpinner_vue__);
 //
 //
@@ -571,7 +1421,131 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 8 */
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    components: {
+        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
+    },
+    computed: {
+        /**
+         * List of all conversations by this user.
+         * @returns {Array}
+         */
+        offers: function offers() {
+            return this.$store.getters.offers;
+        },
+
+        /**
+         * Current loading status (loading is true if data is being loaded asynchronously)
+         * @returns {Boolean}
+         */
+        loading: function loading() {
+            return this.$store.state.loading;
+        }
+    },
+
+    mounted: function mounted() {
+        var _this = this;
+
+        // Fetch current user from Vuex or API
+        this.$store.dispatch('FETCH_USER').then(function (response) {
+            _this.$store.dispatch('FETCH_OFFERS', response);
+        });
+    }
+};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    components: {
+        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
+    },
+    computed: {
+        /**
+         * List of all conversations by this user.
+         * @returns {Array}
+         */
+        requests: function requests() {
+            return this.$store.getters.requests;
+        },
+
+        /**
+         * Current loading status (loading is true if data is being loaded asynchronously)
+         * @returns {Boolean}
+         */
+        loading: function loading() {
+            return this.$store.state.loading;
+        }
+    },
+
+    mounted: function mounted() {
+        var _this = this;
+
+        // Fetch current user from Vuex or API
+        this.$store.dispatch('FETCH_USER').then(function (response) {
+            _this.$store.dispatch('FETCH_REQUESTS', response);
+        });
+    }
+};
+
+/***/ }),
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -597,7 +1571,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 9 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -629,12 +1603,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 10 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -771,6 +1745,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 facebook: '',
                 about: ''
             },
+            country_id: '',
             submitErrors: [],
             password: '',
             confirmPassword: '',
@@ -831,7 +1806,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             // would cascade down to the store object as well.
             // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
             // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
-            _this.userObject = response;
+            _this.userObject = JSON.parse(JSON.stringify(response));
+            _this.country_id = response.country.id || null;
         });
     },
     methods: {
@@ -854,13 +1830,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var formData = new FormData();
 
-            if (this.userObject.major.length > 0) formData.append('major', this.userObject.major);
-            if (this.userObject.languages.length > 0) formData.append('languages', this.userObject.languages);
-            if (this.userObject.twitter.length > 0) formData.append('twitter', this.userObject.twitter);
-            if (this.userObject.facebook.length > 0) formData.append('facebook', this.userObject.facebook);
-            if (this.userObject.about.length > 0) formData.append('about', this.userObject.about);
+            if (this.userObject.major && this.userObject.major.length > 0) formData.append('major', this.userObject.major);
+            if (this.userObject.languages && this.userObject.languages.length > 0) formData.append('languages', this.userObject.languages);
+            if (this.userObject.twitter && this.userObject.twitter.length > 0) formData.append('twitter', this.userObject.twitter);
+            if (this.userObject.facebook && this.userObject.facebook.length > 0) formData.append('facebook', this.userObject.facebook);
+            if (this.userObject.about && this.userObject.about.length > 0) formData.append('about', this.userObject.about);
 
-            if (this.userObject.country_id.length > 0) formData.append('country_id', this.userObject.country_id);
+            if (this.userObject.country_id && this.userObject.country_id.length > 0) formData.append('country_id', this.userObject.country_id);
 
             // Check whether name field is empty
             if (this.userObject.name.length === 0) {
@@ -953,30 +1929,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 };
 
 /***/ }),
-/* 11 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Inbox_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Inbox_vue__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Inbox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Inbox_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Conversation_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Conversation_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Conversation_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Conversation_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Profile_vue__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Profile_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Profile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Profile_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_JobRequests_vue__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_JobRequests_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_JobRequests_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_JobRequests_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CreateJobRequest__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CreateJobRequest__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_CreateJobRequest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_CreateJobRequest__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_EditJobRequest__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_EditJobRequest__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_EditJobRequest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_EditJobRequest__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Company__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Company__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Company___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Company__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_JobOffers_vue__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_JobOffers_vue__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_JobOffers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_JobOffers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_CreateJobOffer_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_CreateJobOffer_vue__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_CreateJobOffer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_CreateJobOffer_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_EditJobOffer_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_EditJobOffer_vue__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_EditJobOffer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_EditJobOffer_vue__);
 
 
@@ -999,7 +1975,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 });
 
 /***/ }),
-/* 12 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1196,12 +2172,12 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 };
 
 /***/ }),
-/* 13 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api__ = __webpack_require__(19);
 
 
 
@@ -1624,14 +2600,48 @@ var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
 /* harmony default export */ __webpack_exports__["a"] = store;
 
 /***/ }),
-/* 14 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(5),
   /* template */
-  __webpack_require__(24),
+  __webpack_require__(38),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/Company.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Company.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-533e7c39", Component.options)
+  } else {
+    hotAPI.reload("data-v-533e7c39", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(6),
+  /* template */
+  __webpack_require__(45),
   /* scopeId */
   null,
   /* cssModules */
@@ -1658,14 +2668,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 15 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(6),
+  __webpack_require__(7),
   /* template */
-  __webpack_require__(20),
+  __webpack_require__(40),
   /* scopeId */
   null,
   /* cssModules */
@@ -1692,14 +2702,150 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 16 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(7),
+  __webpack_require__(8),
   /* template */
-  __webpack_require__(22),
+  __webpack_require__(37),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/CreateJobOffer.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] CreateJobOffer.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-499d62a2", Component.options)
+  } else {
+    hotAPI.reload("data-v-499d62a2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(9),
+  /* template */
+  __webpack_require__(36),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/CreateJobRequest.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] CreateJobRequest.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4151d2a2", Component.options)
+  } else {
+    hotAPI.reload("data-v-4151d2a2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(10),
+  /* template */
+  __webpack_require__(44),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/EditJobOffer.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] EditJobOffer.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d8198486", Component.options)
+  } else {
+    hotAPI.reload("data-v-d8198486", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(11),
+  /* template */
+  __webpack_require__(39),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/EditJobRequest.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] EditJobRequest.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5d5793a0", Component.options)
+  } else {
+    hotAPI.reload("data-v-5d5793a0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(12),
+  /* template */
+  __webpack_require__(42),
   /* scopeId */
   null,
   /* cssModules */
@@ -1726,14 +2872,82 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 17 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(9),
+  __webpack_require__(13),
   /* template */
-  __webpack_require__(23),
+  __webpack_require__(33),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/JobOffers.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] JobOffers.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-17e9aaf0", Component.options)
+  } else {
+    hotAPI.reload("data-v-17e9aaf0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(14),
+  /* template */
+  __webpack_require__(35),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/JobRequests.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] JobRequests.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3a836e5d", Component.options)
+  } else {
+    hotAPI.reload("data-v-3a836e5d", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(16),
+  /* template */
+  __webpack_require__(43),
   /* scopeId */
   null,
   /* cssModules */
@@ -1760,14 +2974,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 18 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(10),
+  __webpack_require__(17),
   /* template */
-  __webpack_require__(21),
+  __webpack_require__(41),
   /* scopeId */
   null,
   /* cssModules */
@@ -1794,7 +3008,44 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 19 */
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "dashboard__requests"
+  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
+    staticClass: "dashboard__title"
+  }, [_vm._v("Job Offers")]), _vm._v(" "), _c('router-link', {
+    staticClass: "button create is-info",
+    attrs: {
+      "to": "/dashboard/jobrequests/create"
+    }
+  }, [_vm._v("New Job Offer")]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  }), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.offers.length) + " job offers in total.")]), _vm._v(" "), _vm._l((_vm.offers), function(offer) {
+    return _c('div', {
+      staticClass: "dashboard__request"
+    }, [_c('h4', [_vm._v(_vm._s(offer.title))]), _vm._v(" "), _c('div', {
+      staticClass: "request__body"
+    }, [_vm._v("\n          " + _vm._s(offer.body) + "\n        ")]), _vm._v(" "), _c('router-link', {
+      staticClass: "button is-outline",
+      attrs: {
+        "to": '/dashboard/jobrequests/' + offer.id
+      }
+    }, [_vm._v("Edit")])], 1)
+  })], 2) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-17e9aaf0", module.exports)
+  }
+}
+
+/***/ }),
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1821,7 +3072,657 @@ if (false) {
 }
 
 /***/ }),
-/* 20 */
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "dashboard__requests"
+  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
+    staticClass: "dashboard__title"
+  }, [_vm._v("Job Requests")]), _vm._v(" "), _c('router-link', {
+    staticClass: "button create is-info",
+    attrs: {
+      "to": "/dashboard/jobrequests/create"
+    }
+  }, [_vm._v("New Job Request")]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  }), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.requests.length) + " job requests in total.")]), _vm._v(" "), _vm._l((_vm.requests), function(request) {
+    return _c('div', {
+      staticClass: "dashboard__request"
+    }, [_c('h4', [_vm._v(_vm._s(request.title))]), _vm._v(" "), _c('div', {
+      staticClass: "request__body"
+    }, [_vm._v("\n          " + _vm._s(request.body) + "\n        ")]), _vm._v(" "), _c('router-link', {
+      staticClass: "button is-outline",
+      attrs: {
+        "to": '/dashboard/jobrequests/' + request.id
+      }
+    }, [_vm._v("Edit")])], 1)
+  })], 2) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3a836e5d", module.exports)
+  }
+}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "dashboard__requests"
+  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
+    staticClass: "dashboard__title"
+  }, [_vm._v("Create Job Request")]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobRequest.title),
+      expression: "jobRequest.title"
+    }],
+    attrs: {
+      "type": "text",
+      "id": "title"
+    },
+    domProps: {
+      "value": (_vm.jobRequest.title)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobRequest.title = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "body"
+    }
+  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobRequest.body),
+      expression: "jobRequest.body"
+    }],
+    attrs: {
+      "id": "body"
+    },
+    domProps: {
+      "value": (_vm.jobRequest.body)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobRequest.body = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "button-group"
+  }, [_c('button', {
+    staticClass: "button is-info",
+    class: _vm.saveButtonClasses,
+    attrs: {
+      "disabled": _vm.saveButtonDisabled
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
+    staticClass: "button is-outline",
+    attrs: {
+      "to": "/dashboard/jobrequests"
+    }
+  }, [_vm._v("Back")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
+    return _c('p', {
+      staticClass: "error is-danger"
+    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
+  })) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4151d2a2", module.exports)
+  }
+}
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "dashboard__requests"
+  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
+    staticClass: "dashboard__title"
+  }, [_vm._v("Create Job Offer")]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobOffer.title),
+      expression: "jobOffer.title"
+    }],
+    attrs: {
+      "type": "text",
+      "id": "title"
+    },
+    domProps: {
+      "value": (_vm.jobOffer.title)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobOffer.title = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "body"
+    }
+  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobOfffer.body),
+      expression: "jobOfffer.body"
+    }],
+    attrs: {
+      "id": "body"
+    },
+    domProps: {
+      "value": (_vm.jobOfffer.body)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobOfffer.body = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "button-group"
+  }, [_c('button', {
+    staticClass: "button is-info",
+    class: _vm.saveButtonClasses,
+    attrs: {
+      "disabled": _vm.saveButtonDisabled
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
+    staticClass: "button is-outline",
+    attrs: {
+      "to": "/dashboard/joboffers"
+    }
+  }, [_vm._v("Back")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
+    return _c('p', {
+      staticClass: "error is-danger"
+    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
+  })) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-499d62a2", module.exports)
+  }
+}
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "dashboard__form form--profile"
+  }, [_c('loading'), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (!_vm.loading),
+      expression: "!loading"
+    }]
+  }, [_c('h3', {
+    staticClass: "dashboard__title"
+  }, [_vm._v("Edit Company")]), _vm._v(" "), _c('h5', {
+    staticClass: "form__title"
+  }, [_vm._v("Account Information")]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "column is-6"
+  }, [_c('label', {
+    attrs: {
+      "for": "email"
+    }
+  }, [_vm._v("Email")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.userObject.email),
+      expression: "userObject.email"
+    }],
+    attrs: {
+      "id": "email",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.userObject.email)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.userObject.email = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "column is-6"
+  }, [_c('label', {
+    attrs: {
+      "for": "password"
+    }
+  }, [_vm._v("New Password")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.password),
+      expression: "password"
+    }],
+    attrs: {
+      "id": "password",
+      "type": "password"
+    },
+    domProps: {
+      "value": (_vm.password)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.password = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "column is-6"
+  }, [_c('label', {
+    attrs: {
+      "for": "confirm"
+    }
+  }, [_vm._v("Repeat Password")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.confirmPassword),
+      expression: "confirmPassword"
+    }],
+    attrs: {
+      "id": "confirm",
+      "type": "password"
+    },
+    domProps: {
+      "value": (_vm.confirmPassword)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.confirmPassword = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
+    staticClass: "form__title"
+  }, [_vm._v("General Information")]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "column is-6"
+  }, [_c('label', {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Name")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.userObject.name),
+      expression: "userObject.name"
+    }],
+    attrs: {
+      "id": "name",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.userObject.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.userObject.name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "column is-6"
+  }, [_c('label', {
+    attrs: {
+      "for": "location"
+    }
+  }, [_vm._v("Location")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.userObject.location),
+      expression: "userObject.location"
+    }],
+    attrs: {
+      "id": "location",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.userObject.location)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.userObject.location = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "column is-6"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.userObject.country_id),
+      expression: "userObject.country_id"
+    }],
+    attrs: {
+      "id": "country",
+      "options": "countries"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.userObject.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  })])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
+    staticClass: "form__title"
+  }, [_vm._v("Social Information")]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "column is-6"
+  }, [_c('label', {
+    attrs: {
+      "for": "twitter"
+    }
+  }, [_vm._v("Twitter")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.userObject.twitter),
+      expression: "userObject.twitter"
+    }],
+    attrs: {
+      "id": "twitter",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.userObject.twitter)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.userObject.twitter = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "column is-6"
+  }, [_c('label', {
+    attrs: {
+      "for": "facebook"
+    }
+  }, [_vm._v("Facebook")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.userObject.facebook),
+      expression: "userObject.facebook"
+    }],
+    attrs: {
+      "id": "facebook",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.userObject.facebook)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.userObject.facebook = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
+    staticClass: "form__title"
+  }, [_vm._v("About")]), _vm._v(" "), _c('p', [_vm._v("Write something about your company.")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.userObject.about),
+      expression: "userObject.about"
+    }],
+    domProps: {
+      "value": (_vm.userObject.about)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.userObject.about = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
+    staticClass: "form__title"
+  }, [_vm._v("Files")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "button-group"
+  }, [_c('button', {
+    staticClass: "button is-info",
+    class: _vm.saveButtonClasses,
+    attrs: {
+      "disabled": _vm.saveButtonDisabled
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
+    staticClass: "button is-outline",
+    attrs: {
+      "to": "/dashboard"
+    }
+  }, [_vm._v("Back")])], 1)]), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.fullError))]), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
+    return _c('p', {
+      staticClass: "error is-danger"
+    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
+  })) : _vm._e()], 1)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "column is-4"
+  }, [_c('div', {
+    staticClass: "file-field"
+  }, [_c('label', {
+    staticClass: "button is-outline",
+    attrs: {
+      "for": "avatar"
+    }
+  }, [_c('span', [_vm._v("Upload Logo")]), _vm._v(" "), _c('span', {
+    staticClass: "icon"
+  }, [_c('i', {
+    staticClass: "mdi mdi-cloud-upload"
+  })])]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "file",
+      "id": "avatar"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "file-path"
+  }, [_vm._v("Please select a file")])])]), _vm._v(" "), _c('div', {
+    staticClass: "column is-4"
+  }, [_c('div', {
+    staticClass: "file-field"
+  }, [_c('label', {
+    staticClass: "button is-outline",
+    attrs: {
+      "for": "header"
+    }
+  }, [_c('span', [_vm._v("Upload Profile Header")]), _vm._v(" "), _c('span', {
+    staticClass: "icon"
+  }, [_c('i', {
+    staticClass: "mdi mdi-cloud-upload"
+  })])]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "file",
+      "id": "header"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "file-path"
+  }, [_vm._v("Please select a file")])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-533e7c39", module.exports)
+  }
+}
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "dashboard__requests"
+  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
+    staticClass: "dashboard__title"
+  }, [_vm._v("Edit Job Request")]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobRequest.title),
+      expression: "jobRequest.title"
+    }],
+    attrs: {
+      "type": "text",
+      "id": "title"
+    },
+    domProps: {
+      "value": (_vm.jobRequest.title)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobRequest.title = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "body"
+    }
+  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobRequest.body),
+      expression: "jobRequest.body"
+    }],
+    attrs: {
+      "id": "body"
+    },
+    domProps: {
+      "value": (_vm.jobRequest.body)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobRequest.body = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "button-group"
+  }, [_c('button', {
+    staticClass: "button is-info",
+    class: _vm.saveButtonClasses,
+    attrs: {
+      "disabled": _vm.saveButtonDisabled
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
+    staticClass: "button is-outline",
+    attrs: {
+      "to": "/dashboard/jobrequests"
+    }
+  }, [_vm._v("Back")]), _vm._v(" "), _c('button', {
+    staticClass: "destroy button is-danger",
+    on: {
+      "click": _vm.destroy
+    }
+  }, [_vm._v(_vm._s(_vm.deleteButtonStatus))])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
+    return _c('p', {
+      staticClass: "error is-danger"
+    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
+  })) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5d5793a0", module.exports)
+  }
+}
+
+/***/ }),
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1850,7 +3751,7 @@ if (false) {
 }
 
 /***/ }),
-/* 21 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2039,8 +3940,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.userObject.country_id),
-      expression: "userObject.country_id"
+      value: (_vm.country_id),
+      expression: "country_id"
     }],
     attrs: {
       "id": "country"
@@ -2053,7 +3954,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.userObject.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
   }, _vm._l((_vm.countries), function(country) {
@@ -2233,7 +4134,7 @@ if (false) {
 }
 
 /***/ }),
-/* 22 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2260,7 +4161,7 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2287,7 +4188,104 @@ if (false) {
 }
 
 /***/ }),
-/* 24 */
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "dashboard__requests"
+  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
+    staticClass: "dashboard__title"
+  }, [_vm._v("Edit Job Offer")]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobOffer.title),
+      expression: "jobOffer.title"
+    }],
+    attrs: {
+      "type": "text",
+      "id": "title"
+    },
+    domProps: {
+      "value": (_vm.jobOffer.title)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobOffer.title = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "body"
+    }
+  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.jobOffer.body),
+      expression: "jobOffer.body"
+    }],
+    attrs: {
+      "id": "body"
+    },
+    domProps: {
+      "value": (_vm.jobOffer.body)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.jobOffer.body = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "button-group"
+  }, [_c('button', {
+    staticClass: "button is-info",
+    class: _vm.saveButtonClasses,
+    attrs: {
+      "disabled": _vm.saveButtonDisabled
+    },
+    on: {
+      "click": _vm.submit
+    }
+  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
+    staticClass: "button is-outline",
+    attrs: {
+      "to": "/dashboard/joboffers"
+    }
+  }, [_vm._v("Back")]), _vm._v(" "), _c('button', {
+    staticClass: "destroy button is-danger",
+    on: {
+      "click": _vm.destroy
+    }
+  }, [_vm._v(_vm._s(_vm.deleteButtonStatus))])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
+    return _c('p', {
+      staticClass: "error is-danger"
+    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
+  })) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-d8198486", module.exports)
+  }
+}
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2351,8 +4349,8 @@ if (false) {
 }
 
 /***/ }),
-/* 25 */,
-/* 26 */
+/* 46 */,
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4634,11 +6632,11 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["a"] = VueRouter;
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
-/* 27 */,
-/* 28 */
+/* 48 */,
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5453,2013 +7451,13 @@ var index_esm = {
 
 
 /***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */
+/* 50 */,
+/* 51 */,
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(3);
 
-
-/***/ }),
-/* 32 */,
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    components: {
-        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
-    },
-    computed: {
-        /**
-         * List of all conversations by this user.
-         * @returns {Array}
-         */
-        requests: function requests() {
-            return this.$store.getters.requests;
-        },
-
-        /**
-         * Current loading status (loading is true if data is being loaded asynchronously)
-         * @returns {Boolean}
-         */
-        loading: function loading() {
-            return this.$store.state.loading;
-        }
-    },
-
-    mounted: function mounted() {
-        var _this = this;
-
-        // Fetch current user from Vuex or API
-        this.$store.dispatch('FETCH_USER').then(function (response) {
-            _this.$store.dispatch('FETCH_REQUESTS', response);
-        });
-    }
-};
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(33),
-  /* template */
-  __webpack_require__(35),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/JobRequests.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] JobRequests.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3a836e5d", Component.options)
-  } else {
-    hotAPI.reload("data-v-3a836e5d", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "dashboard__requests"
-  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
-    staticClass: "dashboard__title"
-  }, [_vm._v("Job Requests")]), _vm._v(" "), _c('router-link', {
-    staticClass: "button create is-info",
-    attrs: {
-      "to": "/dashboard/jobrequests/create"
-    }
-  }, [_vm._v("New Job Request")]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  }), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.requests.length) + " job requests in total.")]), _vm._v(" "), _vm._l((_vm.requests), function(request) {
-    return _c('div', {
-      staticClass: "dashboard__request"
-    }, [_c('h4', [_vm._v(_vm._s(request.title))]), _vm._v(" "), _c('div', {
-      staticClass: "request__body"
-    }, [_vm._v("\n          " + _vm._s(request.body) + "\n        ")]), _vm._v(" "), _c('router-link', {
-      staticClass: "button is-outline",
-      attrs: {
-        "to": '/dashboard/jobrequests/' + request.id
-      }
-    }, [_vm._v("Edit")])], 1)
-  })], 2) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-3a836e5d", module.exports)
-  }
-}
-
-/***/ }),
-/* 36 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function data() {
-        return {
-            jobRequest: {
-                title: '',
-                body: ''
-            },
-            submitErrors: [],
-            saveButtonDisabled: false,
-            saveButtonStatus: 'Save'
-        };
-    },
-
-    computed: {
-        /**
-         * Current loading status (loading is true if data is being loaded asynchronously)
-         * @returns {Boolean}
-         */
-        loading: function loading() {
-            return this.$store.state.loading;
-        },
-
-        /**
-         * Only show errors when the attempt to save just failed.
-         * @returns {Boolean}
-         */
-        showErrors: function showErrors() {
-            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
-        },
-
-        saveButtonClasses: function saveButtonClasses() {
-            return {
-                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
-                'is-loading': this.saveButtonStatus === 'Saving...',
-                'is-success': this.saveButtonStatus === 'Saved',
-                'is-error': this.saveButtonStatus === 'Failed'
-            };
-        }
-    },
-    components: {
-        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
-    },
-    methods: {
-        /**
-         * Submit the form and update the user
-         */
-        submit: function submit() {
-            var _this = this;
-
-            // Reset errors
-            this.submitErrors = [];
-            this.saveButtonDisabled = true;
-            this.saveButtonStatus = 'Saving...';
-            this.$store.dispatch('STORE_REQUEST', this.jobRequest).then(function (response) {
-                _this.saveButtonStatus = 'Saved';
-                _this.saveButtonDisabled = true;
-            }).catch(function (error) {
-                _this.saveButtonStatus = 'Failed';
-                if (_typeof(error.body) === 'object') {
-                    for (var key in error.body) {
-                        _this.submitErrors.push(error.body[key]);
-                    }
-                } else {
-                    _this.submitErrors.push(error.status + ": Server Error. Please try again later.");
-                }
-            });
-        },
-
-
-        pushError: function pushError(error) {
-            if (this.submitErrors.indexOf(error) === -1) {
-                this.submitErrors.push(error);
-            }
-        }
-    }
-};
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(36),
-  /* template */
-  __webpack_require__(38),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/CreateJobRequest.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] CreateJobRequest.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4151d2a2", Component.options)
-  } else {
-    hotAPI.reload("data-v-4151d2a2", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "dashboard__requests"
-  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
-    staticClass: "dashboard__title"
-  }, [_vm._v("Create Job Request")]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "title"
-    }
-  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobRequest.title),
-      expression: "jobRequest.title"
-    }],
-    attrs: {
-      "type": "text",
-      "id": "title"
-    },
-    domProps: {
-      "value": (_vm.jobRequest.title)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobRequest.title = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "body"
-    }
-  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobRequest.body),
-      expression: "jobRequest.body"
-    }],
-    attrs: {
-      "id": "body"
-    },
-    domProps: {
-      "value": (_vm.jobRequest.body)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobRequest.body = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "button-group"
-  }, [_c('button', {
-    staticClass: "button is-info",
-    class: _vm.saveButtonClasses,
-    attrs: {
-      "disabled": _vm.saveButtonDisabled
-    },
-    on: {
-      "click": _vm.submit
-    }
-  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
-    staticClass: "button is-outline",
-    attrs: {
-      "to": "/dashboard/jobrequests"
-    }
-  }, [_vm._v("Back")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
-    return _c('p', {
-      staticClass: "error is-danger"
-    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
-  })) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4151d2a2", module.exports)
-  }
-}
-
-/***/ }),
-/* 39 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function data() {
-        return {
-            jobRequest: {
-                title: '',
-                body: ''
-            },
-            submitErrors: [],
-            saveButtonDisabled: false,
-            saveButtonStatus: 'Save',
-            deleteButtonStatus: 'Delete'
-        };
-    },
-
-    computed: {
-        /**
-         * Current loading status (loading is true if data is being loaded asynchronously)
-         * @returns {Boolean}
-         */
-        loading: function loading() {
-            return this.$store.state.loading;
-        },
-
-        /**
-         * Only show errors when the attempt to save just failed.
-         * @returns {Boolean}
-         */
-        showErrors: function showErrors() {
-            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
-        },
-
-        saveButtonClasses: function saveButtonClasses() {
-            return {
-                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
-                'is-loading': this.saveButtonStatus === 'Saving...',
-                'is-success': this.saveButtonStatus === 'Saved',
-                'is-error': this.saveButtonStatus === 'Failed'
-            };
-        }
-    },
-    components: {
-        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        // Fetch current user from Vuex or API
-        this.$store.dispatch('FETCH_REQUEST', this.$route.params.id).then(function (response) {
-            _this.jobRequest = JSON.parse(JSON.stringify(response));
-        });
-    },
-    methods: {
-        /**
-         * Submit the form and update the user
-         */
-        submit: function submit() {
-            var _this2 = this;
-
-            // Reset errors
-            this.submitErrors = [];
-            this.saveButtonDisabled = true;
-            this.saveButtonStatus = 'Saving...';
-            this.$store.dispatch('PATCH_REQUEST', {
-                id: this.jobRequest.id,
-                data: this.jobRequest
-            }).then(function (response) {
-                _this2.saveButtonStatus = 'Saved';
-                _this2.saveButtonDisabled = true;
-            }).catch(function (error) {
-                _this2.saveButtonStatus = 'Failed';
-                if (_typeof(error.body) === 'object') {
-                    for (var key in error.body) {
-                        _this2.submitErrors.push(error.body[key]);
-                    }
-                } else {
-                    _this2.submitErrors.push(error.status + ": Server Error. Please try again later.");
-                }
-            });
-        },
-        destroy: function destroy() {
-            var _this3 = this;
-
-            this.deleteButtonStatus = 'Deleting...';
-            this.$store.dispatch('DESTROY_REQUEST', this.jobRequest.id).then(function () {
-                _this3.deleteButtonStatus = 'Deleted';
-            }).catch(function (error) {
-                _this3.deleteButtonStatus = 'Failed';
-                if (_typeof(error.body) === 'object') {
-                    for (var key in error.body) {
-                        _this3.submitErrors.push(error.body[key]);
-                    }
-                } else {
-                    _this3.submitErrors.push(error.status + ": Server Error. Please try again later.");
-                }
-            });
-        },
-
-
-        pushError: function pushError(error) {
-            if (this.submitErrors.indexOf(error) === -1) {
-                this.submitErrors.push(error);
-            }
-        }
-    }
-};
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(39),
-  /* template */
-  __webpack_require__(41),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/EditJobRequest.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] EditJobRequest.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5d5793a0", Component.options)
-  } else {
-    hotAPI.reload("data-v-5d5793a0", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "dashboard__requests"
-  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
-    staticClass: "dashboard__title"
-  }, [_vm._v("Edit Job Request")]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "title"
-    }
-  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobRequest.title),
-      expression: "jobRequest.title"
-    }],
-    attrs: {
-      "type": "text",
-      "id": "title"
-    },
-    domProps: {
-      "value": (_vm.jobRequest.title)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobRequest.title = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "body"
-    }
-  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobRequest.body),
-      expression: "jobRequest.body"
-    }],
-    attrs: {
-      "id": "body"
-    },
-    domProps: {
-      "value": (_vm.jobRequest.body)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobRequest.body = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "button-group"
-  }, [_c('button', {
-    staticClass: "button is-info",
-    class: _vm.saveButtonClasses,
-    attrs: {
-      "disabled": _vm.saveButtonDisabled
-    },
-    on: {
-      "click": _vm.submit
-    }
-  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
-    staticClass: "button is-outline",
-    attrs: {
-      "to": "/dashboard/jobrequests"
-    }
-  }, [_vm._v("Back")]), _vm._v(" "), _c('button', {
-    staticClass: "destroy button is-danger",
-    on: {
-      "click": _vm.destroy
-    }
-  }, [_vm._v(_vm._s(_vm.deleteButtonStatus))])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
-    return _c('p', {
-      staticClass: "error is-danger"
-    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
-  })) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5d5793a0", module.exports)
-  }
-}
-
-/***/ }),
-/* 42 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function data() {
-        return {
-            userObject: {
-                name: '',
-                email: '',
-                country_id: '',
-                location: '',
-                twitter: '',
-                facebook: '',
-                about: ''
-            },
-            submitErrors: [],
-            password: '',
-            confirmPassword: '',
-            fullError: '',
-            saveButtonDisabled: false,
-            saveButtonStatus: 'Save'
-        };
-    },
-
-    computed: {
-        countries: function countries() {
-            return this.$store.state.countries;
-        },
-
-        /**
-         * Current loading status (loading is true if data is being loaded asynchronously)
-         * @returns {Boolean}
-         */
-        loading: function loading() {
-            return this.$store.state.loading;
-        },
-
-        /**
-         * Only show errors when the attempt to save just failed.
-         * @returns {Boolean}
-         */
-        showErrors: function showErrors() {
-            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
-        },
-
-        saveButtonClasses: function saveButtonClasses() {
-            return {
-                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
-                'is-loading': this.saveButtonStatus === 'Saving...',
-                'is-success': this.saveButtonStatus === 'Saved',
-                'is-error': this.saveButtonStatus === 'Failed'
-            };
-        }
-    },
-    components: {
-        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        // Fetch current user from Vuex or API
-        this.$store.dispatch('FETCH_COUNTRIES');
-        this.$store.dispatch('FETCH_USER').then(function (response) {
-            // this.userObject = response would create a copy by reference! All changes to userObject
-            // would cascade down to the store object as well.
-            // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
-            // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
-            _this.userObject = response;
-        });
-    },
-    methods: {
-        /**
-         * Submit the form and update the user
-         */
-        submit: function submit() {
-            var _this2 = this;
-
-            // Reset errors
-            this.submitErrors = [];
-            this.saveButtonDisabled = true;
-            this.saveButtonStatus = 'Saving...';
-            var elAvatar = document.getElementById('avatar');
-            var elHeader = document.getElementById('header');
-            var avFiles = elAvatar.files;
-            var heFiles = elHeader.files;
-
-            var formData = new FormData();
-            if (this.userObject.location.length > 0) formData.append('location', this.userObject.location);
-            if (this.userObject.twitter.length > 0) formData.append('twitter', this.userObject.twitter);
-            if (this.userObject.facebook.length > 0) formData.append('facebook', this.userObject.facebook);
-            if (this.userObject.about.length > 0) formData.append('about', this.userObject.about);
-
-            if (this.userObject.country_id.length > 0) formData.append('country_id', this.userObject.country_id);
-
-            // Check whether name field is empty
-            if (this.userObject.name.length === 0) {
-                this.saveButtonStatus = 'Failed';
-                this.pushError("You must specify a name.");
-                return;
-            }
-            formData.append('name', this.userObject.name);
-
-            // Check whether email field is empty
-            if (this.userObject.email.length === 0) {
-                this.saveButtonStatus = 'Failed';
-                this.pushError("You must specify an email address.");
-                return;
-            }
-
-            formData.append('email', this.userObject.email);
-
-            // Check whether a new password has been entered and if they match
-            if (this.password.length > 0) {
-                if (this.password !== this.confirmPassword) {
-                    this.saveButtonStatus = 'Failed';
-                    this.pushError("Your passwords didn't match.");
-                    return;
-                }
-                formData.append('password', this.password);
-            }
-
-            // Check if avatar file has been selected
-            if (avFiles.length) {
-                if (!this.validateImage(avFiles[0])) {
-                    this.saveButtonStatus = 'Failed';
-                    return;
-                }
-                formData.append('picture', avFiles[0]);
-            }
-
-            if (heFiles.length) {
-                if (!this.validateImage(heFiles[0])) {
-                    this.saveButtonStatus = 'Failed';
-                    return;
-                }
-                formData.append('header', heFiles[0]);
-            }
-
-            // Laravel bug: multipart/form-data needs to be POST. Specify custom method PUT.
-            formData.append('_method', 'PUT');
-            this.$store.dispatch('PATCH_USER', {
-                id: this.userObject.id,
-                data: formData
-            }).then(function (response) {
-                _this2.userObject.picture = response.picture || '/images/default_logo.png';
-                _this2.$store.commit('SET_USER', _this2.userObject);
-                _this2.saveButtonStatus = 'Saved';
-                _this2.saveButtonDisabled = true;
-            }).catch(function (error) {
-                _this2.fullError = error.body;
-                _this2.saveButtonStatus = 'Failed';
-                if (_typeof(error.body) === 'object') {
-                    for (var key in error.body) {
-                        _this2.submitErrors.push(error.body[key]);
-                    }
-                } else {
-                    _this2.submitErrors.push(error.status + ": Server Error. Please try again later.");
-                }
-            });
-        },
-        validateImage: function validateImage(file) {
-            if (!/\.(png|jpeg|jpg)$/i.test(file.name)) {
-                this.pushError("Must be a valid image file (.PNG, .JPG or .JPEG allowed).");
-                return false;
-            }
-            if (!(file.size / 1024 < 2000)) {
-                this.pushError("Image must be smaller than 2MB.");
-                return false;
-            }
-            return true;
-        },
-
-
-        pushError: function pushError(error) {
-            if (this.submitErrors.indexOf(error) === -1) {
-                this.submitErrors.push(error);
-            }
-        }
-    }
-};
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(42),
-  /* template */
-  __webpack_require__(44),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/Company.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Company.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-533e7c39", Component.options)
-  } else {
-    hotAPI.reload("data-v-533e7c39", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "dashboard__form form--profile"
-  }, [_c('loading'), _vm._v(" "), _c('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (!_vm.loading),
-      expression: "!loading"
-    }]
-  }, [_c('h3', {
-    staticClass: "dashboard__title"
-  }, [_vm._v("Edit Company")]), _vm._v(" "), _c('h5', {
-    staticClass: "form__title"
-  }, [_vm._v("Account Information")]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "column is-6"
-  }, [_c('label', {
-    attrs: {
-      "for": "email"
-    }
-  }, [_vm._v("Email")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.userObject.email),
-      expression: "userObject.email"
-    }],
-    attrs: {
-      "id": "email",
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.userObject.email)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.userObject.email = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "column is-6"
-  }, [_c('label', {
-    attrs: {
-      "for": "password"
-    }
-  }, [_vm._v("New Password")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.password),
-      expression: "password"
-    }],
-    attrs: {
-      "id": "password",
-      "type": "password"
-    },
-    domProps: {
-      "value": (_vm.password)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.password = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "column is-6"
-  }, [_c('label', {
-    attrs: {
-      "for": "confirm"
-    }
-  }, [_vm._v("Repeat Password")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.confirmPassword),
-      expression: "confirmPassword"
-    }],
-    attrs: {
-      "id": "confirm",
-      "type": "password"
-    },
-    domProps: {
-      "value": (_vm.confirmPassword)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.confirmPassword = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
-    staticClass: "form__title"
-  }, [_vm._v("General Information")]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "column is-6"
-  }, [_c('label', {
-    attrs: {
-      "for": "name"
-    }
-  }, [_vm._v("Name")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.userObject.name),
-      expression: "userObject.name"
-    }],
-    attrs: {
-      "id": "name",
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.userObject.name)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.userObject.name = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "column is-6"
-  }, [_c('label', {
-    attrs: {
-      "for": "location"
-    }
-  }, [_vm._v("Location")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.userObject.location),
-      expression: "userObject.location"
-    }],
-    attrs: {
-      "id": "location",
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.userObject.location)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.userObject.location = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "column is-6"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.userObject.country_id),
-      expression: "userObject.country_id"
-    }],
-    attrs: {
-      "id": "country"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.userObject.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.countries), function(country) {
-    return _c('option', {
-      domProps: {
-        "value": country.id
-      }
-    }, [_vm._v(_vm._s(country.name))])
-  }))])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
-    staticClass: "form__title"
-  }, [_vm._v("Social Information")]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "column is-6"
-  }, [_c('label', {
-    attrs: {
-      "for": "twitter"
-    }
-  }, [_vm._v("Twitter")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.userObject.twitter),
-      expression: "userObject.twitter"
-    }],
-    attrs: {
-      "id": "twitter",
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.userObject.twitter)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.userObject.twitter = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "column is-6"
-  }, [_c('label', {
-    attrs: {
-      "for": "facebook"
-    }
-  }, [_vm._v("Facebook")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.userObject.facebook),
-      expression: "userObject.facebook"
-    }],
-    attrs: {
-      "id": "facebook",
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.userObject.facebook)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.userObject.facebook = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
-    staticClass: "form__title"
-  }, [_vm._v("About")]), _vm._v(" "), _c('p', [_vm._v("Write something about your company.")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.userObject.about),
-      expression: "userObject.about"
-    }],
-    domProps: {
-      "value": (_vm.userObject.about)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.userObject.about = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
-    staticClass: "form__title"
-  }, [_vm._v("Files")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "button-group"
-  }, [_c('button', {
-    staticClass: "button is-info",
-    class: _vm.saveButtonClasses,
-    attrs: {
-      "disabled": _vm.saveButtonDisabled
-    },
-    on: {
-      "click": _vm.submit
-    }
-  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
-    staticClass: "button is-outline",
-    attrs: {
-      "to": "/dashboard"
-    }
-  }, [_vm._v("Back")])], 1)]), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.fullError))]), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
-    return _c('p', {
-      staticClass: "error is-danger"
-    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
-  })) : _vm._e()], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "column is-4"
-  }, [_c('div', {
-    staticClass: "file-field"
-  }, [_c('label', {
-    staticClass: "button is-outline",
-    attrs: {
-      "for": "avatar"
-    }
-  }, [_c('span', [_vm._v("Upload Logo")]), _vm._v(" "), _c('span', {
-    staticClass: "icon"
-  }, [_c('i', {
-    staticClass: "mdi mdi-cloud-upload"
-  })])]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "file",
-      "id": "avatar"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "file-path"
-  }, [_vm._v("Please select a file")])])]), _vm._v(" "), _c('div', {
-    staticClass: "column is-4"
-  }, [_c('div', {
-    staticClass: "file-field"
-  }, [_c('label', {
-    staticClass: "button is-outline",
-    attrs: {
-      "for": "header"
-    }
-  }, [_c('span', [_vm._v("Upload Profile Header")]), _vm._v(" "), _c('span', {
-    staticClass: "icon"
-  }, [_c('i', {
-    staticClass: "mdi mdi-cloud-upload"
-  })])]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "file",
-      "id": "header"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "file-path"
-  }, [_vm._v("Please select a file")])])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-533e7c39", module.exports)
-  }
-}
-
-/***/ }),
-/* 45 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    components: {
-        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
-    },
-    computed: {
-        /**
-         * List of all conversations by this user.
-         * @returns {Array}
-         */
-        offers: function offers() {
-            return this.$store.getters.offers;
-        },
-
-        /**
-         * Current loading status (loading is true if data is being loaded asynchronously)
-         * @returns {Boolean}
-         */
-        loading: function loading() {
-            return this.$store.state.loading;
-        }
-    },
-
-    mounted: function mounted() {
-        var _this = this;
-
-        // Fetch current user from Vuex or API
-        this.$store.dispatch('FETCH_USER').then(function (response) {
-            _this.$store.dispatch('FETCH_OFFERS', response);
-        });
-    }
-};
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(45),
-  /* template */
-  __webpack_require__(47),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/JobOffers.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] JobOffers.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-17e9aaf0", Component.options)
-  } else {
-    hotAPI.reload("data-v-17e9aaf0", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "dashboard__requests"
-  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
-    staticClass: "dashboard__title"
-  }, [_vm._v("Job Offers")]), _vm._v(" "), _c('router-link', {
-    staticClass: "button create is-info",
-    attrs: {
-      "to": "/dashboard/jobrequests/create"
-    }
-  }, [_vm._v("New Job Offer")]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  }), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.offers.length) + " job offers in total.")]), _vm._v(" "), _vm._l((_vm.offers), function(offer) {
-    return _c('div', {
-      staticClass: "dashboard__request"
-    }, [_c('h4', [_vm._v(_vm._s(offer.title))]), _vm._v(" "), _c('div', {
-      staticClass: "request__body"
-    }, [_vm._v("\n          " + _vm._s(offer.body) + "\n        ")]), _vm._v(" "), _c('router-link', {
-      staticClass: "button is-outline",
-      attrs: {
-        "to": '/dashboard/jobrequests/' + offer.id
-      }
-    }, [_vm._v("Edit")])], 1)
-  })], 2) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-17e9aaf0", module.exports)
-  }
-}
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function data() {
-        return {
-            jobOffer: {
-                title: '',
-                body: ''
-            },
-            submitErrors: [],
-            saveButtonDisabled: false,
-            saveButtonStatus: 'Save'
-        };
-    },
-
-    computed: {
-        /**
-         * Current loading status (loading is true if data is being loaded asynchronously)
-         * @returns {Boolean}
-         */
-        loading: function loading() {
-            return this.$store.state.loading;
-        },
-
-        /**
-         * Only show errors when the attempt to save just failed.
-         * @returns {Boolean}
-         */
-        showErrors: function showErrors() {
-            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
-        },
-
-        saveButtonClasses: function saveButtonClasses() {
-            return {
-                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
-                'is-loading': this.saveButtonStatus === 'Saving...',
-                'is-success': this.saveButtonStatus === 'Saved',
-                'is-error': this.saveButtonStatus === 'Failed'
-            };
-        }
-    },
-    components: {
-        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
-    },
-    methods: {
-        /**
-         * Submit the form and update the user
-         */
-        submit: function submit() {
-            var _this = this;
-
-            // Reset errors
-            this.submitErrors = [];
-            this.saveButtonDisabled = true;
-            this.saveButtonStatus = 'Saving...';
-            this.$store.dispatch('STORE_OFFER', this.jobOffer).then(function (response) {
-                _this.saveButtonStatus = 'Saved';
-                _this.saveButtonDisabled = true;
-            }).catch(function (error) {
-                _this.saveButtonStatus = 'Failed';
-                if (_typeof(error.body) === 'object') {
-                    for (var key in error.body) {
-                        _this.submitErrors.push(error.body[key]);
-                    }
-                } else {
-                    _this.submitErrors.push(error.status + ": Server Error. Please try again later.");
-                }
-            });
-        },
-
-
-        pushError: function pushError(error) {
-            if (this.submitErrors.indexOf(error) === -1) {
-                this.submitErrors.push(error);
-            }
-        }
-    }
-};
-
-/***/ }),
-/* 49 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function data() {
-        return {
-            jobOffer: {
-                title: '',
-                body: ''
-            },
-            submitErrors: [],
-            saveButtonDisabled: false,
-            saveButtonStatus: 'Save',
-            deleteButtonStatus: 'Delete'
-        };
-    },
-
-    computed: {
-        /**
-         * Current loading status (loading is true if data is being loaded asynchronously)
-         * @returns {Boolean}
-         */
-        loading: function loading() {
-            return this.$store.state.loading;
-        },
-
-        /**
-         * Only show errors when the attempt to save just failed.
-         * @returns {Boolean}
-         */
-        showErrors: function showErrors() {
-            return this.submitErrors.length > 0 && this.saveButtonStatus === 'Failed';
-        },
-
-        saveButtonClasses: function saveButtonClasses() {
-            return {
-                'is-info': this.saveButtonStatus === 'Save' || this.saveButtonStatus === 'Saving...',
-                'is-loading': this.saveButtonStatus === 'Saving...',
-                'is-success': this.saveButtonStatus === 'Saved',
-                'is-error': this.saveButtonStatus === 'Failed'
-            };
-        }
-    },
-    components: {
-        loading: __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default.a
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        // Fetch current user from Vuex or API
-        this.$store.dispatch('FETCH_OFFER', this.$route.params.id).then(function (response) {
-            _this.jobOffer = JSON.parse(JSON.stringify(response));
-        });
-    },
-    methods: {
-        /**
-         * Submit the form and update the user
-         */
-        submit: function submit() {
-            var _this2 = this;
-
-            // Reset errors
-            this.submitErrors = [];
-            this.saveButtonDisabled = true;
-            this.saveButtonStatus = 'Saving...';
-            this.$store.dispatch('PATCH_OFFER', {
-                id: this.jobOffer.id,
-                data: this.jobOffer
-            }).then(function (response) {
-                _this2.saveButtonStatus = 'Saved';
-                _this2.saveButtonDisabled = true;
-            }).catch(function (error) {
-                _this2.saveButtonStatus = 'Failed';
-                if (_typeof(error.body) === 'object') {
-                    for (var key in error.body) {
-                        _this2.submitErrors.push(error.body[key]);
-                    }
-                } else {
-                    _this2.submitErrors.push(error.status + ": Server Error. Please try again later.");
-                }
-            });
-        },
-        destroy: function destroy() {
-            var _this3 = this;
-
-            this.deleteButtonStatus = 'Deleting...';
-            this.$store.dispatch('DESTROY_OFFER', this.jobOffer.id).then(function () {
-                _this3.deleteButtonStatus = 'Deleted';
-            }).catch(function (error) {
-                _this3.deleteButtonStatus = 'Failed';
-                if (_typeof(error.body) === 'object') {
-                    for (var key in error.body) {
-                        _this3.submitErrors.push(error.body[key]);
-                    }
-                } else {
-                    _this3.submitErrors.push(error.status + ": Server Error. Please try again later.");
-                }
-            });
-        },
-
-
-        pushError: function pushError(error) {
-            if (this.submitErrors.indexOf(error) === -1) {
-                this.submitErrors.push(error);
-            }
-        }
-    }
-};
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(48),
-  /* template */
-  __webpack_require__(52),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/CreateJobOffer.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] CreateJobOffer.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-499d62a2", Component.options)
-  } else {
-    hotAPI.reload("data-v-499d62a2", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(49),
-  /* template */
-  __webpack_require__(53),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/allaire/Documents/dev/erasmus/resources/assets/js/components/EditJobOffer.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] EditJobOffer.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d8198486", Component.options)
-  } else {
-    hotAPI.reload("data-v-d8198486", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "dashboard__requests"
-  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
-    staticClass: "dashboard__title"
-  }, [_vm._v("Create Job Offer")]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "title"
-    }
-  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobOffer.title),
-      expression: "jobOffer.title"
-    }],
-    attrs: {
-      "type": "text",
-      "id": "title"
-    },
-    domProps: {
-      "value": (_vm.jobOffer.title)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobOffer.title = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "body"
-    }
-  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobOfffer.body),
-      expression: "jobOfffer.body"
-    }],
-    attrs: {
-      "id": "body"
-    },
-    domProps: {
-      "value": (_vm.jobOfffer.body)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobOfffer.body = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "button-group"
-  }, [_c('button', {
-    staticClass: "button is-info",
-    class: _vm.saveButtonClasses,
-    attrs: {
-      "disabled": _vm.saveButtonDisabled
-    },
-    on: {
-      "click": _vm.submit
-    }
-  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
-    staticClass: "button is-outline",
-    attrs: {
-      "to": "/dashboard/joboffers"
-    }
-  }, [_vm._v("Back")])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
-    return _c('p', {
-      staticClass: "error is-danger"
-    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
-  })) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-499d62a2", module.exports)
-  }
-}
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "dashboard__requests"
-  }, [_c('loading'), _vm._v(" "), (!_vm.loading) ? _c('div', [_c('h3', {
-    staticClass: "dashboard__title"
-  }, [_vm._v("Edit Job Offer")]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "title"
-    }
-  }, [_vm._v("Titel")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobOffer.title),
-      expression: "jobOffer.title"
-    }],
-    attrs: {
-      "type": "text",
-      "id": "title"
-    },
-    domProps: {
-      "value": (_vm.jobOffer.title)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobOffer.title = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "body"
-    }
-  }, [_vm._v("Description")]), _vm._v(" "), _c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.jobOffer.body),
-      expression: "jobOffer.body"
-    }],
-    attrs: {
-      "id": "body"
-    },
-    domProps: {
-      "value": (_vm.jobOffer.body)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.jobOffer.body = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "button-group"
-  }, [_c('button', {
-    staticClass: "button is-info",
-    class: _vm.saveButtonClasses,
-    attrs: {
-      "disabled": _vm.saveButtonDisabled
-    },
-    on: {
-      "click": _vm.submit
-    }
-  }, [_vm._v(_vm._s(_vm.saveButtonStatus))]), _vm._v(" "), _c('router-link', {
-    staticClass: "button is-outline",
-    attrs: {
-      "to": "/dashboard/joboffers"
-    }
-  }, [_vm._v("Back")]), _vm._v(" "), _c('button', {
-    staticClass: "destroy button is-danger",
-    on: {
-      "click": _vm.destroy
-    }
-  }, [_vm._v(_vm._s(_vm.deleteButtonStatus))])], 1)]) : _vm._e(), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
-    return _c('p', {
-      staticClass: "error is-danger"
-    }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])
-  })) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-d8198486", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

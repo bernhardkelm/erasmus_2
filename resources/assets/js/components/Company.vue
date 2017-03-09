@@ -34,8 +34,7 @@
           </div>
           <div class="row">
             <div class="column is-6">
-              <select id="country" v-model="userObject.country_id">
-                <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
+              <select id="country" v-model="userObject.country_id" options="countries">
               </select>
             </div>
           </div>
@@ -116,6 +115,7 @@
                     facebook: '',
                     about: ''
                 },
+                countries: [],
                 submitErrors: [],
                 password: '',
                 confirmPassword: '',
@@ -125,9 +125,6 @@
             }
         },
         computed: {
-            countries() {
-              return this.$store.state.countries;
-            },
             /**
              * Current loading status (loading is true if data is being loaded asynchronously)
              * @returns {Boolean}
@@ -157,14 +154,21 @@
         },
         mounted: function() {
             // Fetch current user from Vuex or API
-            this.$store.dispatch('FETCH_COUNTRIES');
+            this.$store.dispatch('FETCH_COUNTRIES')
+              .then((response) => {
+                  response.forEach((country) => {
+                    country[value] = country[id];
+                    country[text] = country[name];
+                  });
+                  this.countries = response;
+              });
             this.$store.dispatch('FETCH_USER')
                 .then((response) => {
                     // this.userObject = response would create a copy by reference! All changes to userObject
                     // would cascade down to the store object as well.
                     // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
                     // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
-                    this.userObject = response;
+                    this.userObject = JSON.parse(JSON.stringify(response));
                 });
         },
         methods: {
@@ -182,16 +186,16 @@
                 const heFiles = elHeader.files;
 
                 const formData = new FormData();
-                if (this.userObject.location.length > 0)
+                if (this.userObject.location && this.userObject.location.length > 0)
                   formData.append('location', this.userObject.location);
-                if (this.userObject.twitter.length > 0)
+                if (this.userObject.twitter && this.userObject.twitter.length > 0)
                   formData.append('twitter', this.userObject.twitter);
-                if (this.userObject.facebook.length > 0)
+                if (this.userObject.facebook && this.userObject.facebook.length > 0)
                 formData.append('facebook', this.userObject.facebook);
-                if (this.userObject.about.length > 0)
+                if (this.userObject.about && this.userObject.about.length > 0)
                   formData.append('about', this.userObject.about);
                 
-                if (this.userObject.country_id.length > 0)
+                if (this.userObject.country_id && this.userObject.country_id.length > 0)
                   formData.append('country_id', this.userObject.country_id);
                 
                 // Check whether name field is empty

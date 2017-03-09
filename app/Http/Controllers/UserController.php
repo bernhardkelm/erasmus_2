@@ -33,9 +33,9 @@ class UserController extends Controller
         return $user;
     }
 
-    public function auth(Request $request)
+    public function auth(UserService $service, Request $request)
     {
-        $user = $request->user();
+        $user = $service->get($request->user()->id);
         return response()->json($user->makeVisible('email'), 200);
     }
 
