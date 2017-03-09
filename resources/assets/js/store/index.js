@@ -149,6 +149,7 @@ const store = new Vuex.Store({
                 .then((response) => {
                     commit('SET_LOADING', { val: false });
                     commit('SET_COUNTRIES', response)
+                    return Promise.resolve(response);
                 })
                 .catch((error) => {
                     commit('SET_LOADING', { val: false });

@@ -34,7 +34,7 @@
           </div>
           <div class="row">
             <div class="column is-6">
-              <select id="country" v-model="userObject.country_id" options="countries">
+              <select id="country" v-model="country_id" options="countries">
               </select>
             </div>
           </div>
@@ -195,8 +195,8 @@
                 if (this.userObject.about && this.userObject.about.length > 0)
                   formData.append('about', this.userObject.about);
                 
-                if (this.userObject.country_id && this.userObject.country_id.length > 0) {
-                  formData.append('country_id', this.userObject.country_id);
+                if (this.country_id && this.country_id.length > 0) {
+                  formData.append('country_id', this.country_id);
                 }
                 
                 // Check whether name field is empty

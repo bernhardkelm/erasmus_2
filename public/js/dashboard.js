@@ -582,8 +582,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (this.userObject.facebook && this.userObject.facebook.length > 0) formData.append('facebook', this.userObject.facebook);
             if (this.userObject.about && this.userObject.about.length > 0) formData.append('about', this.userObject.about);
 
-            if (this.userObject.country_id && this.userObject.country_id.length > 0) {
-                formData.append('country_id', this.userObject.country_id);
+            if (this.country_id && this.country_id.length > 0) {
+                formData.append('country_id', this.country_id);
             }
 
             // Check whether name field is empty
@@ -1614,6 +1614,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LoadingSpinner_vue__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
 //
 //
 //
@@ -1736,7 +1741,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
-        return {
+        var _ref;
+
+        return _ref = {
             userObject: {
                 name: '',
                 email: '',
@@ -1747,19 +1754,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 facebook: '',
                 about: ''
             },
-            country_id: '',
+            countries: [],
             submitErrors: [],
-            password: '',
-            confirmPassword: '',
             fullError: '',
-            saveButtonDisabled: false,
-            saveButtonStatus: 'Save'
-        };
+            password: '',
+            confirmPassword: ''
+        }, _defineProperty(_ref, 'fullError', ''), _defineProperty(_ref, 'saveButtonDisabled', false), _defineProperty(_ref, 'saveButtonStatus', 'Save'), _ref;
     },
 
     computed: {
-        countries: function countries() {
-            return this.$store.state.countries;
+        userObject: function userObject() {
+            return this.$store.state.user;
         },
 
         /**
@@ -1802,15 +1807,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var _this = this;
 
         // Fetch current user from Vuex or API
-        this.$store.dispatch('FETCH_COUNTRIES');
-        this.$store.dispatch('FETCH_USER').then(function (response) {
-            // this.userObject = response would create a copy by reference! All changes to userObject
-            // would cascade down to the store object as well.
-            // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
-            // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
-            _this.userObject = JSON.parse(JSON.stringify(response));
-            _this.country_id = response.country.id || null;
+        this.$store.dispatch('FETCH_COUNTRIES').then(function (response) {
+            response.forEach(function (country) {
+                country['value'] = country['id'];
+                country['text'] = country['name'];
+            });
+            _this.countries = response;
         });
+        this.$store.dispatch('FETCH_USER');
     },
     methods: {
         /**
@@ -1838,7 +1842,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (this.userObject.facebook && this.userObject.facebook.length > 0) formData.append('facebook', this.userObject.facebook);
             if (this.userObject.about && this.userObject.about.length > 0) formData.append('about', this.userObject.about);
 
-            if (this.userObject.country_id && this.userObject.country_id.length > 0) formData.append('country_id', this.userObject.country_id);
+            if (this.userObject.country_id && this.userObject.country_id > 0) formData.append('country_id', this.userObject.country_id);
 
             // Check whether name field is empty
             if (this.userObject.name.length === 0) {
@@ -1899,6 +1903,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 _this2.saveButtonStatus = 'Saved';
                 _this2.saveButtonDisabled = true;
             }).catch(function (error) {
+                _this2.fullError = error.body;
                 _this2.saveButtonStatus = 'Failed';
                 if (_typeof(error.body) === 'object') {
                     for (var key in error.body) {
@@ -2328,6 +2333,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
             return __WEBPACK_IMPORTED_MODULE_1__services_api__["a" /* default */].getCountries().then(function (response) {
                 commit('SET_LOADING', { val: false });
                 commit('SET_COUNTRIES', response);
+                return Promise.resolve(response);
             }).catch(function (error) {
                 commit('SET_LOADING', { val: false });
                 commit('FAILURE', error);
@@ -3458,8 +3464,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.userObject.country_id),
-      expression: "userObject.country_id"
+      value: (_vm.country_id),
+      expression: "country_id"
     }],
     attrs: {
       "id": "country",
@@ -3473,7 +3479,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.userObject.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
   })])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
@@ -3942,8 +3948,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.country_id),
-      expression: "country_id"
+      value: (_vm.userObject.country_id),
+      expression: "userObject.country_id"
     }],
     attrs: {
       "id": "country"
@@ -3956,15 +3962,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.userObject.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
   }, _vm._l((_vm.countries), function(country) {
     return _c('option', {
       domProps: {
-        "value": country.id
+        "value": country.value
       }
-    }, [_vm._v(_vm._s(country.name))])
+    }, [_vm._v("\n              " + _vm._s(country.text) + "\n            ")])
   }))])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h5', {
     staticClass: "form__title"
   }, [_vm._v("Social Information")]), _vm._v(" "), _c('div', {
@@ -4057,7 +4063,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "to": "/dashboard"
     }
-  }, [_vm._v("Back")])], 1)]), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
+  }, [_vm._v("Back")])], 1)]), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.fullError))]), _vm._v(" "), (_vm.showErrors) ? _c('div', _vm._l((_vm.submitErrors), function(error) {
     return _c('p', {
       staticClass: "error is-danger"
     }, [_vm._v("\n        " + _vm._s(error) + "\n      ")])

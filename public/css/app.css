@@ -719,3 +719,9 @@ p.crop {
 	font-family: 'Lato', sans-serif;
 	font-size: 15px;
 }
+
+@media screen and (min-width: 1600px){
+  .container {
+    max-width: 1300px;
+  }
+}

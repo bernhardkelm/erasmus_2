@@ -38,8 +38,10 @@
           </div>
           <div class="row">
             <div class="column is-6">
-              <select id="country" v-model="country_id">
-                <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
+              <select id="country" v-model="userObject.country_id">
+                 <option v-for="country in countries" v-bind:value="country.value">
+                  {{ country.text }}
+                </option>
               </select>
             </div>
           </div>
@@ -107,6 +109,7 @@
             <router-link to="/dashboard" class="button is-outline">Back</router-link>
           </div>
         </div>
+        <div>{{ fullError }}</div>
         <div v-if="showErrors">
           <p v-for="error in submitErrors" class="error is-danger">
             {{ error }}
@@ -131,8 +134,9 @@
                     facebook: '',
                     about: ''
                 },
-                country_id: '',
+                countries: [],
                 submitErrors: [],
+                fullError: '',
                 password: '',
                 confirmPassword: '',
                 fullError: '',
@@ -141,8 +145,9 @@
             }
         },
         computed: {
-            countries() {
-              return this.$store.state.countries;
+
+            userObject() {
+              return this.$store.state.user;
             },
            /**
             * Get the avatar URL. In case the user doesn't have an avatar, show default one.
@@ -180,16 +185,15 @@
         },
         mounted: function() {
             // Fetch current user from Vuex or API
-            this.$store.dispatch('FETCH_COUNTRIES');
-            this.$store.dispatch('FETCH_USER')
-                .then((response) => {
-                    // this.userObject = response would create a copy by reference! All changes to userObject
-                    // would cascade down to the store object as well.
-                    // JSON.parse(JSON.stringify) in order to create a new copy of the user, not by reference.
-                    // Needs to be done so that the user changes can be disregarded once he clicks 'Cancel'
-                    this.userObject = JSON.parse(JSON.stringify(response));
-                    this.country_id = response.country.id || null;
-                });
+            this.$store.dispatch('FETCH_COUNTRIES')
+              .then((response) => {
+                  response.forEach((country) => {
+                    country['value'] = country['id'];
+                    country['text'] = country['name'];
+                  });
+                  this.countries = response;
+              });
+            this.$store.dispatch('FETCH_USER');
         },
         methods: {
             /**
@@ -221,7 +225,7 @@
                 if (this.userObject.about && this.userObject.about.length > 0)
                   formData.append('about', this.userObject.about);
                 
-                if (this.userObject.country_id && this.userObject.country_id.length > 0)
+                if (this.userObject.country_id && this.userObject.country_id > 0)
                   formData.append('country_id', this.userObject.country_id);
                 
                 // Check whether name field is empty
@@ -286,6 +290,7 @@
                     this.saveButtonDisabled = true;
                 })
                 .catch((error) => {
+                  this.fullError = error.body;
                   this.saveButtonStatus = 'Failed';
                     if (typeof error.body === 'object') {
                         for (let key in error.body) {

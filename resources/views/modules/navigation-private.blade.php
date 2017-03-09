@@ -5,7 +5,7 @@
       <li><a href="{{ route('information') }}">Information</a></li>
       <li><a href="{{ route('users.index') }}">Users</a></li>
       <li><a href="{{ route('companies.index') }}">Companies</a></li>
-      <li><a href="#">Forums</a></li>
+      <li><a href="{{ route('forums') }}">Forums</a></li>
     </ul>
 
     <ul class="navigation__right">
