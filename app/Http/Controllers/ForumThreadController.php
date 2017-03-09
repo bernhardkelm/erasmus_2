@@ -19,8 +19,7 @@ class ForumThreadController extends Controller
         $threads = $threadService->index($topicId);
         $topics = $topicService->index();
         $topic = $topicService->get($topicId);
-
-        dd($threads);
+        
         return view('forums.threads.index', [
             'currentTopic' => $topic,
             'topics' => $topics,
